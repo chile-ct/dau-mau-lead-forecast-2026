@@ -417,8 +417,8 @@
 </table>
 </div>
 
-<h3>2d. Direct <span class="tag tag-draft">YoY seasonal (2025) trên nền TB Jun-Aug 2026 + uplift seeding Q4</span></h3>
-<p class="note">Baseline không còn flat-hold TB 3 tháng — dùng <b>seasonal ratio Sep-Dec/TB Jun-Aug của 2025</b> (cùng kỳ năm ngoái, nguồn thật từ BQ) áp lên mức TB Jun-Aug 2026 (222,819 DAU). 2025 cho thấy Direct giảm thật ~8-9% từ hè xuống Oct-Dec (không phải noise — R² fit trực tiếp trên riêng 8 tháng 2026 chỉ 0.08, đã test và loại bỏ). <b>Total Lead cộng thêm uplift seeding</b> theo đúng ngân sách dòng "Creative outreach (media boost, booking, seeding)" của <b>PTY + JOB</b> trong file FC2.5 Budget (112.5tr Sep, 102.5tr Oct-Dec — 2 vertical duy nhất đã có case study đo hiệu suất) × 2,606đ/lead (xem tab Problem Reframe) → +39-43k lead/tháng. File FC2.5 còn có thêm dòng seeding/mascot cho GDS, VEH, và 1 dòng PARENT "mascot/merchandise" chung — <b>không tính vào uplift này</b> vì hiệu suất 2,606đ/lead chỉ được đo từ case study PTY, áp cho vertical/hạng mục chưa từng test là rủi ro overstate.</p>
+<h3>2d. Direct <span class="tag tag-draft">YoY seasonal (2025) + uplift seeding Q4</span></h3>
+<p class="note">Baseline = seasonal ratio YoY 2025 trên nền TB Jun-Aug 2026, cộng uplift seeding PTY+JOB theo ngân sách FC2.5. Đầy đủ logic/nguồn số → tab <b>Problem Reframe, mục "Driver logic theo từng source" → Direct</b>.</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -434,8 +434,8 @@
 </table>
 </div>
 
-<h3>2e. Others (Others + Referral + Social) <span class="tag tag-draft">YoY seasonal (2025) trên nền tháng 6/2026</span></h3>
-<p class="note">Không còn giữ flat ở baseline tháng 6 — dùng <b>seasonal ratio Sep-Dec/tháng 6 của 2025</b> (cùng bucket Others+Referral+Social, tránh literal 'Others' có bug data-quality — xem 📎). 2025 cho thấy Sep là đáy sâu thật (~47% mức tháng 6), rồi phục hồi dần Oct-Dec — không phải flat. Vẫn không cộng uplift seeding (đã chuyển hẳn sang Direct 2d).</p>
+<h3>2e. Others (Others + Referral + Social) <span class="tag tag-draft">YoY seasonal (2025)</span></h3>
+<p class="note">Baseline = seasonal ratio YoY 2025 trên nền tháng 6/2026, không cộng uplift (đã rà budget FC2.5, không có khoản nào phù hợp — xem lý do). Đầy đủ logic/nguồn số → tab <b>Problem Reframe, mục "Driver logic theo từng source" → Others</b>.</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -585,7 +585,10 @@
 <li><b>Oct-Dec:</b> PTY 20tr/tháng + JOB 82.45tr/tháng = 102.45tr/tháng → +39,314 lead/tháng — <span style="color:var(--warn)">độ tin cậy trung bình cho phần JOB</span> (kế hoạch chủ động, không còn thuần suy đoán, nhưng JOB chưa từng chạy thật nên hiệu suất thực tế có thể khác 2,606đ/lead). JOB đang giảm tự nhiên cuối năm (Oct −6.6%, Nov −19.4%, Dec −29.2%) — hiểu là "đỡ đà giảm", không phải cộng thêm lên nền cũ.</li>
 </ul>
 <p class="note">📎 File FC2.5 còn có dòng seeding/creative-outreach riêng cho <b>GDS (15tr/tháng)</b> và <b>VEH (15tr→5tr/tháng, giảm dần)</b>, cộng thêm 1 dòng PARENT "brand gifts, mascot, merchandise" chung 30tr/tháng — tức <b>cả 4 vertical đều có seeding Q4, không chỉ riêng PTY+JOB</b>. Không tính các dòng này vào uplift Direct vì hiệu suất 2,606đ/lead chỉ đo được từ case study PTY — áp cho GDS/VEH/mascot (chưa từng test) là rủi ro overstate. Nếu có case study riêng cho GDS/VEH sau này, cần cập nhật lại.</p>
-<p class="note">Muốn lấp <b>hết</b> gap PTY (riêng phần seeding, giữ nguyên phần còn lại) cần seeding Oct ~700tr (x35 so với 20tr đang có), Nov ~907tr (x45) — số tham khảo cho budget-ask, không phải đề xuất thực tế (mức tăng quá lớn so với ngân sách hiện tại). Số ra → tab Forecast, mục 2d. Others (2e) dùng seasonal ratio YoY 2025, không cộng uplift.</p>
+<p class="note">Muốn lấp <b>hết</b> gap PTY (riêng phần seeding, giữ nguyên phần còn lại) cần seeding Oct ~700tr (x35 so với 20tr đang có), Nov ~907tr (x45) — số tham khảo cho budget-ask, không phải đề xuất thực tế (mức tăng quá lớn so với ngân sách hiện tại). Số ra → tab Forecast, mục 2d.</p>
+
+<h3>Others <span class="tag tag-draft">seasonal-naive, đã kiểm tra không có budget/plan bổ sung</span></h3>
+<p class="note">Baseline tháng 6/2026 × seasonal ratio YoY 2025 (xem bảng Driver logic ở trên), <b>không cộng thêm uplift</b> — đã rà lại toàn bộ file FC2.5 Budget để kiểm tra có khoản nào nên overlay thêm cho Others hay không: (1) các dòng "Integrated MKT campaigns"/"GTM key features" (nguồn gây spike Jul-Aug thực tế) <b>không có forecast Sep-Dec</b> trong file — nghĩa là spike đó không lặp lại theo kế hoạch hiện tại, phù hợp với việc dùng ratio 2025 (năm không có campaign tương tự) thay vì giữ mức Jul-Aug; (2) các dòng seeding GDS/VEH/PARENT-mascot — theo xác nhận của Growth, cơ chế seeding social đẩy traffic vào channel <b>Direct</b> (typed/branded search), không phải channel Social/Others — nên không overlay vào đây để tránh double-count hoặc gán sai channel. Kết luận: hiện không có căn cứ ngân sách/plan nào để cộng thêm cho Others ngoài seasonal — nếu Growth có thêm kế hoạch cụ thể tác động Referral/Social sau này, cần bổ sung lại.</p>
 
 <h2>Forecast theo Vertical: PTY cần bao nhiêu, MKT đang hụt bao nhiêu?</h2>
 <p class="note" style="margin-top:0">PTY = Digital theo đúng số Growth forecast riêng cho vertical (file FC3) + phần còn lại theo tỷ trọng lịch sử ~24.6% (số forecast xem tab Forecast T9-T12, mục 3-4).</p>
