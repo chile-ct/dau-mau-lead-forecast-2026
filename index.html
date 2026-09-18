@@ -165,7 +165,7 @@
 <div class="topbar">
   <div>
     <h1>DAU / MAU / Lead Forecast 2026 — theo Channel Source</h1>
-    <p class="sub">Actual Jan–Aug lấy trực tiếp từ BigQuery. Forecast Sep–Dec: SEO giữ nguyên; Digital tính theo công thức "chi càng nhiều, hiệu quả mỗi đồng giảm dần" trên ngân sách đã dàn lại; Others sửa lại Oct–Dec theo hiệu ứng mùa vụ/campaign (2026-09-11).</p>
+    <p class="sub">Actual Jan–Aug lấy trực tiếp từ BigQuery. Forecast Sep–Dec: SEO cố định · Digital &amp; CRM dùng thẳng forecast của Growth (file FC3) · Direct &amp; Others dùng seasonal ratio cùng kỳ 2025, Direct cộng thêm uplift ngân sách seeding PTY+JOB thật (file FC2.5) (2026-09-18).</p>
   </div>
   <div class="theme-chip" id="theme-chip">
     <button data-theme="light">☀️ Light</button>
@@ -254,7 +254,6 @@
 </tbody>
 </table>
 </div>
-<p class="note" style="color:var(--bad)">⚠ Model Digital ở tab Forecast chưa refit theo số actual này — số Sep-Dec hiện tại có thể không đúng.</p>
 
 <h3>2c. CRM (Growth — push/email/ZNS/Braze) <span class="tag tag-fixed">nguồn thống nhất</span></h3>
 <p class="note">Gồm cả 1 phần in-app (Braze/journeys) — không thuần out-app. Chi tiết logic channel: xem 📎.</p>
@@ -351,7 +350,7 @@
 </div>
 
 <h2>1. Tổng công ty (ALL sources)</h2>
-<p class="note">5 nguồn (SEO + Digital + CRM + Direct + Others). Digital & CRM dùng số Growth tự forecast trực tiếp (file FC3, 2026-09-18). <b>Direct/Others (2026-09-18, v10)</b> giờ dùng seasonal ratio YoY 2025 thay vì flat-hold TB gần nhất — xem 2d/2e. Xem 📎 tab Problem Reframe cho từng giả định.</p>
+<p class="note">5 nguồn (SEO + Digital + CRM + Direct + Others). Digital & CRM dùng số Growth tự forecast trực tiếp (file FC3, 2026-09-18); Direct/Others dùng seasonal ratio YoY 2025 — xem 2d/2e (📎 Problem Reframe cho từng giả định).</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -386,7 +385,7 @@
 </div>
 
 <h3>2b. Paid Search / Digital (Growth) <span class="tag tag-fixed">Growth tự forecast (FC3)</span></h3>
-<p class="note">Không dùng model power-law tự fit nữa — dùng thẳng forecast bottom-up của Growth (file "FC2 H2 - Growth - FC3", App+Web combined, 2026-09-18). Thấp hơn nhiều so với model tự fit trước đó, phản ánh đúng regime CP mới (xem tab Problem Reframe).</p>
+<p class="note">Không dùng model power-law tự fit nữa — dùng thẳng forecast bottom-up của Growth (file "FC2 H2 - Growth - FC3", App+Web combined, 2026-09-18). Thấp hơn nhiều so với model tự fit trước đó, phản ánh đúng regime CP mới (📎 Problem Reframe).</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -418,7 +417,7 @@
 </div>
 
 <h3>2d. Direct <span class="tag tag-draft">YoY seasonal (2025) + uplift seeding Q4</span></h3>
-<p class="note">Baseline = seasonal ratio YoY 2025 trên nền TB Jun-Aug 2026, cộng uplift seeding PTY+JOB theo ngân sách FC2.5. Đầy đủ logic/nguồn số → tab <b>Problem Reframe, mục "Driver logic theo từng source" → Direct</b>.</p>
+<p class="note">Baseline = seasonal ratio YoY 2025 trên nền TB Jun-Aug 2026, cộng uplift seeding PTY+JOB theo ngân sách FC2.5 (chi tiết 📎 Problem Reframe).</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -435,7 +434,7 @@
 </div>
 
 <h3>2e. Others (Others + Referral + Social) <span class="tag tag-draft">YoY seasonal (2025)</span></h3>
-<p class="note">Baseline = seasonal ratio YoY 2025 trên nền tháng 6/2026, không cộng uplift (đã rà budget FC2.5, không có khoản nào phù hợp — xem lý do). Đầy đủ logic/nguồn số → tab <b>Problem Reframe, mục "Driver logic theo từng source" → Others</b>.</p>
+<p class="note">Baseline = seasonal ratio YoY 2025 trên nền tháng 6/2026, không cộng uplift — đã rà budget FC2.5, không có khoản phù hợp (chi tiết 📎 Problem Reframe).</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -464,7 +463,7 @@
 </tbody>
 </table>
 </div>
-<p class="note">Chỉ PTY có model/validation sâu hơn (xem tab Problem Reframe); GDS/VEH/JOB vẫn chủ yếu là ước tính theo tỷ trọng (trừ phần Digital đã dùng số thật).</p>
+<p class="note">Chỉ PTY có model/validation sâu hơn (📎 Problem Reframe); GDS/VEH/JOB vẫn chủ yếu là ước tính theo tỷ trọng (trừ phần Digital đã dùng số thật).</p>
 
 <h2>4. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
 <p class="note">PTY ở đây = Digital theo đúng số Growth forecast riêng cho PTY (file FC3) + phần SEO/CRM/Direct/Others theo tỷ trọng lịch sử — chính xác hơn mục 3 (vốn áp tỷ trọng đều cho cả Digital). Chia theo tỷ lệ let/sell của vertical. <span class="target">Chữ nghiêng xám</span> = mức vertical team cần (target), không phải forecast.</p>
@@ -482,7 +481,7 @@
 </tbody>
 </table>
 </div>
-<p class="note"><b>Gap PTY lớn hơn mọi lần tính trước đó trong dự án này</b> — hụt 19.9-33.6% mỗi tháng, cộng dồn <b>−25.3%</b> (so với −21.9% bản trước dùng flat-hold Direct/Others, −13.0% bản dùng model tự fit Digital, −7.2% bản có CRM chưa refit Digital, −17.6% bản gốc chưa có CRM). 2 lý do cộng dồn: (1) Growth tự báo Digital thấp hơn hẳn model tự fit của deck (phản ánh đúng CP tăng thật đang xảy ra), (2) Direct/Others giờ dùng seasonal ratio YoY 2025 thay vì flat-hold, uplift seeding tính đúng theo ngân sách PTY+JOB Creative outreach (file FC2.5) thay vì ước lượng — 2025 cho thấy cả 2 nguồn Direct/Others đều giảm/dao động thật qua Sep-Dec, không giữ nguyên mức hè. <b>Đây là số đáng tin nhất tới hiện tại</b> — Digital/CRM dùng thẳng forecast gốc Growth, Direct/Others dùng bằng chứng mùa vụ thật (cùng kỳ năm ngoái) + ngân sách seeding thật thay vì giả định flat. Chi tiết → tab Problem Reframe.</p>
+<p class="note"><b>Gap PTY lớn hơn mọi lần tính trước đó trong dự án này</b> — hụt 19.9-33.6% mỗi tháng, cộng dồn <b>−25.3%</b> (so với −21.9% bản trước dùng flat-hold Direct/Others, −13.0% bản dùng model tự fit Digital, −7.2% bản có CRM chưa refit Digital, −17.6% bản gốc chưa có CRM). 2 lý do cộng dồn: (1) Growth tự báo Digital thấp hơn hẳn model tự fit của deck (phản ánh đúng CP tăng thật đang xảy ra), (2) Direct/Others giờ dùng seasonal ratio YoY 2025 thay vì flat-hold, uplift seeding tính đúng theo ngân sách PTY+JOB Creative outreach (file FC2.5) thay vì ước lượng — 2025 cho thấy cả 2 nguồn Direct/Others đều giảm/dao động thật qua Sep-Dec, không giữ nguyên mức hè. <b>Đây là số đáng tin nhất tới hiện tại</b> — Digital/CRM dùng thẳng forecast gốc Growth, Direct/Others dùng bằng chứng mùa vụ thật (cùng kỳ năm ngoái) + ngân sách seeding thật thay vì giả định flat (📎 Problem Reframe).</p>
 
 </div>
 
@@ -593,8 +592,8 @@
 <h2>Forecast theo Vertical: PTY cần bao nhiêu, MKT đang hụt bao nhiêu?</h2>
 <p class="note" style="margin-top:0">PTY = Digital theo đúng số Growth forecast riêng cho vertical (file FC3) + phần còn lại theo tỷ trọng lịch sử ~24.6% (số forecast xem tab Forecast T9-T12, mục 3-4).</p>
 <div class="callout bad">
-<b>⚠ Gap lớn hơn mọi lần tính trước — Digital giờ dùng thẳng số Growth tự forecast, không qua ước tính</b>
-<p class="note" style="margin-top:6px">Lịch sử các bản trước trong dự án này đều dùng model tự fit hoặc tự ước tính cho Digital, ra kết luận khác nhau (gap từ "gần đóng" tới "~13%"). Bản này dùng thẳng forecast bottom-up của Growth (file FC3) — không qua ước tính nào — nên đáng tin nhất. Gap PTY thật sự lớn hơn mọi con số trước đó, phản ánh đúng việc CP Digital đang tăng (xem callout "Digital" bên trên).</p>
+<b>⚠ Gap lớn hơn mọi lần tính trước — 2 nguồn đều giờ dùng số thật thay vì ước tính</b>
+<p class="note" style="margin-top:6px">Lịch sử các bản trước trong dự án này đều dùng model tự fit/ước tính cho cả Digital lẫn Direct/Others, ra kết luận khác nhau (gap từ "gần đóng" tới "~13%" tới "21.9%"). Bản này: Digital dùng thẳng forecast bottom-up của Growth (file FC3, phản ánh đúng CP tăng thật); Direct/Others dùng seasonal ratio cùng kỳ 2025 + ngân sách seeding thật (file FC2.5) thay vì flat-hold. Không còn khoản nào qua ước tính chủ quan — gap PTY (−25.3%) là số đáng tin nhất tới hiện tại.</p>
 </div>
 <div class="gap-tracker" id="gap-tracker">
   <div class="gap-card">
@@ -679,7 +678,7 @@
 </div>
 
 <div class="foot">
-Built 2026-09-18 (v11: uplift seeding Direct tính đúng theo dòng ngân sách "Creative outreach" PTY+JOB trong file FC2.5 (thay vì số nhớ lại từ trước) + note rõ GDS/VEH cũng có seeding riêng (không tính vào uplift); v10: Direct/Others forecast chuyển từ flat-hold sang seasonal ratio YoY 2025 (BQ thật, cùng kỳ năm ngoái) + tính lại Tổng công ty/Vertical/Gap Tracker theo số mới; v9: rebuild toàn bộ Actual tab từ BQ + đồng bộ cấu trúc 5-nguồn SEO/Digital/CRM/Direct/Others cho cả 2 tab + Digital &amp; CRM dùng thẳng forecast Growth (file FC3) thay vì model tự fit + tính lại vertical share + Gap Tracker) · Nguồn: BigQuery <code>daumaulead_mkt_rp</code> + file "2026 MKT Plan &amp; Budget - FC2.5" + "PTY Est DAU w Lead break by ad type" + "FC2 H2 - Growth - FC3" (Growth, 2026-09-18), confidential.
+Built 2026-09-18 (v12: review toàn bộ 3 tab cho mạch lạc — cắt gọn note dài dòng, xoá subtitle/cảnh báo lỗi thời (model Digital cũ, ngày 09-11), đồng bộ lại callout Gap Tracker để phản ánh đúng cả 2 lý do (Digital + Direct/Others); v11: uplift seeding Direct tính đúng theo dòng ngân sách "Creative outreach" PTY+JOB trong file FC2.5 (thay vì số nhớ lại từ trước) + note rõ GDS/VEH cũng có seeding riêng (không tính vào uplift); v10: Direct/Others forecast chuyển từ flat-hold sang seasonal ratio YoY 2025 (BQ thật, cùng kỳ năm ngoái) + tính lại Tổng công ty/Vertical/Gap Tracker theo số mới; v9: rebuild toàn bộ Actual tab từ BQ + đồng bộ cấu trúc 5-nguồn SEO/Digital/CRM/Direct/Others cho cả 2 tab + Digital &amp; CRM dùng thẳng forecast Growth (file FC3) thay vì model tự fit + tính lại vertical share + Gap Tracker) · Nguồn: BigQuery <code>daumaulead_mkt_rp</code> + file "2026 MKT Plan &amp; Budget - FC2.5" + "PTY Est DAU w Lead break by ad type" + "FC2 H2 - Growth - FC3" (Growth, 2026-09-18), confidential.
 </div>
 
 </div>
