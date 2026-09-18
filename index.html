@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>DAU/MAU/Lead Forecast 2026 theo Source</title>
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#12181f; --panel2:#161d26; --panel3:#1b2330; --border:#232c37;
+    --text:#e7edf3; --muted:#93a3b3; --accent:#5eb1ff; --accent2:#a78bfa;
+    --good:#4fd1a5; --good-bg:rgba(79,209,165,.14); --good-bd:rgba(79,209,165,.4);
+    --bad:#ff7a7a; --bad-bg:rgba(255,122,122,.12); --bad-bd:rgba(255,122,122,.4);
+    --warn:#f5c26b; --warn-bg:rgba(245,194,107,.16); --warn-bd:rgba(245,194,107,.45);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){ --bg:#f6f8fa; --panel:#ffffff; --panel2:#f0f3f6; --panel3:#eef1f5; --border:#e1e6ec;
+      --text:#1a2430; --muted:#5b6b7b; --accent:#0969da; --accent2:#7c4dff;
+      --good:#1a7f5a; --good-bg:rgba(26,127,90,.08); --good-bd:rgba(26,127,90,.3);
+      --bad:#c53030; --bad-bg:rgba(197,48,48,.07); --bad-bd:rgba(197,48,48,.3);
+      --warn:#a1650a; --warn-bg:rgba(161,101,10,.1); --warn-bd:rgba(161,101,10,.35); }
+  }
+  :root[data-theme="light"]{ --bg:#f6f8fa; --panel:#ffffff; --panel2:#f0f3f6; --panel3:#eef1f5; --border:#e1e6ec;
+    --text:#1a2430; --muted:#5b6b7b; --accent:#0969da; --accent2:#7c4dff;
+    --good:#1a7f5a; --good-bg:rgba(26,127,90,.08); --good-bd:rgba(26,127,90,.3);
+    --bad:#c53030; --bad-bg:rgba(197,48,48,.07); --bad-bd:rgba(197,48,48,.3);
+    --warn:#a1650a; --warn-bg:rgba(161,101,10,.1); --warn-bd:rgba(161,101,10,.35); }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;padding:32px 20px 80px}
+  .wrap{max-width:1280px;margin:0 auto}
+  h1{font-size:23px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 20px}
+  h2{font-size:16px;margin:36px 0 6px;border-bottom:1px solid var(--border);padding-bottom:8px}
+  h3{font-size:14px;margin:22px 0 8px;color:var(--accent)}
+  p.note{color:var(--muted);font-size:12.5px;margin:4px 0 14px}
+  .tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:20px;font-weight:700;margin-left:6px;vertical-align:middle;letter-spacing:.02em}
+  .tag-fixed{background:var(--good-bg);color:var(--good);border:1px solid var(--good-bd)}
+  .tag-draft{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-bd)}
+  .tag-flag{background:var(--bad-bg);color:var(--bad);border:1px solid var(--bad-bd)}
+
+  /* Theme chip */
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:20px}
+  .theme-chip{display:inline-flex;background:var(--panel2);border:1px solid var(--border);border-radius:999px;padding:3px;flex-shrink:0}
+  .theme-chip button{appearance:none;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:700;
+    padding:6px 12px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .15s,color .15s}
+  .theme-chip button:hover{color:var(--text)}
+  .theme-chip button.active{background:var(--panel);color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+
+  /* Tabs */
+  .tabs{display:flex;gap:4px;border-bottom:2px solid var(--border);margin-bottom:24px}
+  .tab-btn{appearance:none;border:none;background:transparent;color:var(--muted);font-size:14px;font-weight:700;
+    padding:11px 18px;cursor:pointer;border-radius:8px 8px 0 0;position:relative;top:2px;transition:color .15s}
+  .tab-btn:hover{color:var(--text)}
+  .tab-btn.active{color:var(--accent);border-bottom:2px solid var(--accent)}
+  .tab-btn .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle}
+  .tab-btn[data-tab="actual"] .dot{background:var(--good)}
+  .tab-btn[data-tab="forecast"] .dot{background:var(--warn)}
+  .tab-btn[data-tab="reframe"] .dot{background:var(--accent2)}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+
+  /* Stat cards */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 24px}
+  .stat{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px;position:relative;overflow:hidden}
+  .stat.hl{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+  .stat.warnhl{border-color:var(--warn-bd);background:var(--warn-bg)}
+  .stat.badhl{border-color:var(--bad-bd);background:var(--bad-bg)}
+  .stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700;margin-bottom:6px}
+  .stat-value{font-size:24px;font-weight:800;letter-spacing:-.01em}
+  .stat-delta{font-size:12px;font-weight:700;margin-top:4px}
+  .stat-delta.up{color:var(--good)}
+  .stat-delta.down{color:var(--bad)}
+  .stat-delta.flat{color:var(--muted)}
+  .stat-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+  .scroll{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:820px}
+  th,td{padding:7px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--border)}
+  th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--panel);z-index:1;font-weight:600}
+  thead th{background:var(--panel2);color:var(--muted);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.02em}
+  tbody tr:hover td{background:rgba(94,177,255,.06)}
+  tbody tr.key td{background:var(--panel3)}
+  tbody tr.key td:first-child{color:var(--accent);font-weight:800}
+  td.actual{color:var(--text)}
+  td.forecast{color:var(--warn);font-weight:600}
+  td.hero{font-weight:800;font-size:13.5px}
+  .target{color:var(--muted);font-style:italic;font-weight:500}
+  .cell-range{display:block;font-size:10px;font-weight:400;color:var(--muted);white-space:normal;margin-top:2px}
+
+  .callout{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px}
+  .callout.warn{border-left-color:var(--warn)}
+  .callout.bad{border-left-color:var(--bad)}
+  .callout.good{border-left-color:var(--good)}
+  .callout b{color:var(--accent)}
+  .callout.warn b{color:var(--warn)}
+  .callout.bad b{color:var(--bad)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+  ul{margin:6px 0;padding-left:20px;font-size:13px}
+  li{margin:4px 0}
+  .foot{color:var(--muted);font-size:11.5px;margin-top:50px;border-top:1px solid var(--border);padding-top:14px}
+  code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:11.5px}
+
+  /* Key takeaways strip */
+  .kt-box{background:linear-gradient(135deg,var(--panel2),var(--panel));border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:16px 0 22px}
+  .kt-title{font-size:13px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+  .kt-list{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+  .kt-list li{font-size:13.5px;padding-left:22px;position:relative;line-height:1.55}
+  .kt-list li::before{content:"▸";position:absolute;left:0;color:var(--accent);font-weight:800}
+  .kt-list li.risk::before{content:"⚠";color:var(--bad)}
+  .kt-list li.good::before{content:"✓";color:var(--good)}
+  .kt-num{font-weight:800;color:var(--text);background:var(--panel3);padding:1px 7px;border-radius:5px;font-size:13px}
+  .kt-num.bad{color:var(--bad);background:var(--bad-bg)}
+  .kt-num.good{color:var(--good);background:var(--good-bg)}
+  .kt-num.warn{color:var(--warn);background:var(--warn-bg)}
+
+  /* Gap tracker */
+  .gap-tracker{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 20px}
+  .gap-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+  .gap-card .gm{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+  .pill{display:inline-block;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.02em}
+  .pill.ok{background:var(--good-bg);color:var(--good);border:1px solid var(--good-bd)}
+  .pill.watch{background:var(--warn-bg);color:var(--warn);border:1px solid var(--warn-bd)}
+  .pill.risk{background:var(--bad-bg);color:var(--bad);border:1px solid var(--bad-bd)}
+  .gap-pct{font-size:22px;font-weight:800;margin-bottom:7px}
+  .gap-pct.ok{color:var(--good)}
+  .gap-pct.watch{color:var(--warn)}
+  .gap-pct.risk{color:var(--bad)}
+  .bar-track{height:7px;border-radius:5px;background:var(--panel3);overflow:hidden}
+  .bar-fill{height:100%;border-radius:5px}
+  .bar-fill.ok{background:var(--good)}
+  .bar-fill.watch{background:var(--warn)}
+  .bar-fill.risk{background:var(--bad)}
+  .gap-sub{font-size:11px;color:var(--muted);margin-top:6px}
+
+  /* Lever comparison cards */
+  .lever-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+  @media(max-width:700px){.lever-grid{grid-template-columns:1fr}}
+  .lever-card{border-radius:12px;padding:16px 18px;border:1px solid var(--border);background:var(--panel)}
+  .lever-card.reject{opacity:.72}
+  .lever-label{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
+  .lever-value{font-size:26px;font-weight:800}
+  .lever-sub{font-size:12px;color:var(--muted);margin-top:2px}
+  .lever-card:not(.reject){border-color:var(--good-bd);background:var(--good-bg);box-shadow:0 0 0 1px var(--good-bd) inset}
+  .lever-card:not(.reject) .lever-label{color:var(--good)}
+  .lever-card:not(.reject) .lever-value{color:var(--good)}
+  .lever-card:not(.reject)::before{content:"✓ KHUYẾN NGHỊ";display:inline-block;font-size:10px;font-weight:800;letter-spacing:.03em;background:var(--good);color:var(--panel);padding:2px 8px;border-radius:20px;margin-bottom:8px}
+  .lever-card.reject .lever-value{color:var(--bad)}
+
+  /* Validation note (click-to-expand) */
+  details.vnote{background:var(--panel);border:1px dashed var(--border);border-radius:8px;margin:10px 0;font-size:12.5px}
+  details.vnote summary{cursor:pointer;padding:9px 14px;color:var(--muted);font-weight:700;list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+  details.vnote summary::-webkit-details-marker{display:none}
+  details.vnote summary::before{content:"▸";display:inline-block;transition:transform .15s;color:var(--accent)}
+  details.vnote[open] summary::before{transform:rotate(90deg)}
+  details.vnote summary:hover{color:var(--text)}
+  details.vnote .vnote-body{padding:0 16px 14px;color:var(--text)}
+  details.vnote .vnote-body table{min-width:0;font-size:11.5px}
+  details.vnote .vnote-body th,details.vnote .vnote-body td{padding:5px 8px}
+  details.vnote .vnote-body h4{font-size:12px;margin:12px 0 4px;color:var(--accent)}
+  details.vnote .vnote-body p{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <div>
+    <h1>DAU / MAU / Lead Forecast 2026 — theo Channel Source</h1>
+    <p class="sub">Actual Jan–Aug lấy trực tiếp từ BigQuery. Forecast Sep–Dec: SEO giữ nguyên; Digital tính theo công thức "chi càng nhiều, hiệu quả mỗi đồng giảm dần" trên ngân sách đã dàn lại; Others sửa lại Oct–Dec theo hiệu ứng mùa vụ/campaign (2026-09-11).</p>
+  </div>
+  <div class="theme-chip" id="theme-chip">
+    <button data-theme="light">☀️ Light</button>
+    <button data-theme="dark">🌙 Dark</button>
+    <button data-theme="system">🖥️ Auto</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="actual"><span class="dot"></span>Actual (Jan–Aug)</button>
+  <button class="tab-btn" data-tab="forecast"><span class="dot"></span>Forecast (Sep–Dec)</button>
+  <button class="tab-btn" data-tab="reframe"><span class="dot"></span>Problem Reframe &amp; Logic tính toán</button>
+</div>
+
+<!-- ================= TAB: ACTUAL ================= -->
+<div id="tab-actual" class="tab-panel active">
+
+<div class="stats">
+  <div class="stat hl">
+    <div class="stat-label">DAU trung bình T1–T8</div>
+    <div class="stat-value">401,131</div>
+    <div class="stat-sub">dao động 329k (Feb) – 461k (Mar)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">MAU trung bình T1–T8</div>
+    <div class="stat-value">6,217,979</div>
+    <div class="stat-sub">dao động 4.69M (Feb) – 7.32M (Mar)</div>
+  </div>
+  <div class="stat hl">
+    <div class="stat-label">Total Lead — cộng dồn T1–T8</div>
+    <div class="stat-value">39,010,312</div>
+    <div class="stat-sub">trung bình 4.88M/tháng</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">% DAU w/ Lead trung bình T1–T8</div>
+    <div class="stat-value">13.01%</div>
+    <div class="stat-sub">tăng dần từ Q2 → Q3, đỉnh 14.79% (Aug) — phần lớn do uplift Others T7-8, xem callout bên dưới</div>
+  </div>
+</div>
+
+<h2>1. Tổng công ty (ALL sources)</h2>
+<p class="note">Đã gồm đủ 5 nguồn (SEO + Digital + CRM + Direct + Others), tất cả từ 1 bảng duy nhất <code>daumaulead_mkt_rp</code> — cộng khớp tuyệt đối với breakdown mục 2 (xem 📎 cách tính).</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody>
+<tr class="key"><td>DAU</td><td class="actual">389,995</td><td class="actual">329,434</td><td class="actual">460,586</td><td class="actual">408,708</td><td class="actual">398,795</td><td class="actual">407,659</td><td class="actual">409,429</td><td class="actual hero">404,441</td></tr>
+<tr><td># DAU w/ Lead</td><td class="actual">47,011</td><td class="actual">39,822</td><td class="actual">59,856</td><td class="actual">54,136</td><td class="actual">52,653</td><td class="actual">51,099</td><td class="actual">54,061</td><td class="actual">59,825</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="actual">12.05%</td><td class="actual">12.09%</td><td class="actual">13.00%</td><td class="actual">13.25%</td><td class="actual">13.20%</td><td class="actual">12.53%</td><td class="actual">13.20%</td><td class="actual">14.79%</td></tr>
+<tr class="key"><td>MAU</td><td class="actual">6,143,445</td><td class="actual">4,692,818</td><td class="actual">7,315,876</td><td class="actual">6,004,217</td><td class="actual">6,090,773</td><td class="actual">6,388,279</td><td class="actual">6,560,960</td><td class="actual hero">6,547,466</td></tr>
+<tr><td>MAU w/ Lead</td><td class="actual">764,786</td><td class="actual">638,604</td><td class="actual">1,007,299</td><td class="actual">863,363</td><td class="actual">877,431</td><td class="actual">835,631</td><td class="actual">933,076</td><td class="actual">1,127,096</td></tr>
+<tr class="key"><td>Total Lead</td><td class="actual">4,302,573</td><td class="actual">3,164,336</td><td class="actual">6,006,973</td><td class="actual">5,552,367</td><td class="actual">5,389,420</td><td class="actual">4,715,156</td><td class="actual">4,832,924</td><td class="actual hero">5,046,563</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>2. Breakdown theo Source</h2>
+<p class="note">5 nhóm, 1 nguồn duy nhất (<code>daumaulead_mkt_rp</code>): SEO, Digital, CRM, Direct, Others — cộng khớp Tổng công ty (mục 1). Direct tách riêng khỏi Others (chiếm ~50-65% company Lead).</p>
+
+<h3>2a. SEO / Organic Search</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="actual">77,448</td><td class="actual">71,693</td><td class="actual">92,640</td><td class="actual">88,276</td><td class="actual">85,582</td><td class="actual">85,442</td><td class="actual">89,600</td><td class="actual">89,098</td></tr>
+<tr><td># DAU w/ Lead</td><td class="actual">7,168</td><td class="actual">6,502</td><td class="actual">9,308</td><td class="actual">8,181</td><td class="actual">8,124</td><td class="actual">8,046</td><td class="actual">8,347</td><td class="actual">8,401</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="actual">9.26%</td><td class="actual">9.07%</td><td class="actual">10.05%</td><td class="actual">9.27%</td><td class="actual">9.49%</td><td class="actual">9.42%</td><td class="actual">9.32%</td><td class="actual">9.43%</td></tr>
+<tr><td>MAU</td><td class="actual">1,548,137</td><td class="actual">1,359,549</td><td class="actual">1,888,051</td><td class="actual">1,768,506</td><td class="actual">1,771,710</td><td class="actual">1,737,691</td><td class="actual">1,883,184</td><td class="actual">1,893,279</td></tr>
+<tr><td>MAU w/ Lead</td><td class="actual">156,886</td><td class="actual">136,143</td><td class="actual">204,053</td><td class="actual">176,052</td><td class="actual">181,377</td><td class="actual">175,729</td><td class="actual">190,364</td><td class="actual">197,021</td></tr>
+<tr><td>Total Lead</td><td class="actual">683,486</td><td class="actual">539,950</td><td class="actual">882,109</td><td class="actual">739,694</td><td class="actual">755,063</td><td class="actual">734,622</td><td class="actual">764,948</td><td class="actual">747,720</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2b. Paid Search / Digital (Growth)</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="actual">22,977</td><td class="actual">22,721</td><td class="actual">57,690</td><td class="actual">57,651</td><td class="actual">55,854</td><td class="actual">56,520</td><td class="actual">67,622</td><td class="actual">59,531</td></tr>
+<tr><td># DAU w/ Lead</td><td class="actual">2,970</td><td class="actual">2,581</td><td class="actual">6,309</td><td class="actual">5,577</td><td class="actual">5,554</td><td class="actual">5,523</td><td class="actual">6,003</td><td class="actual">5,419</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="actual">12.93%</td><td class="actual">11.36%</td><td class="actual">10.94%</td><td class="actual">9.67%</td><td class="actual">9.94%</td><td class="actual">9.77%</td><td class="actual">8.88%</td><td class="actual">9.10%</td></tr>
+<tr><td>MAU</td><td class="actual">473,070</td><td class="actual">440,521</td><td class="actual">1,163,037</td><td class="actual">1,133,374</td><td class="actual">1,103,434</td><td class="actual">1,118,313</td><td class="actual">1,399,761</td><td class="actual">1,251,772</td></tr>
+<tr><td>MAU w/ Lead</td><td class="actual">65,292</td><td class="actual">54,472</td><td class="actual">135,602</td><td class="actual">116,287</td><td class="actual">119,991</td><td class="actual">117,351</td><td class="actual">131,184</td><td class="actual">121,305</td></tr>
+<tr><td>Total Lead</td><td class="actual">296,031</td><td class="actual">222,225</td><td class="actual">688,735</td><td class="actual">698,441</td><td class="actual">724,143</td><td class="actual">531,915</td><td class="actual">566,605</td><td class="actual">508,472</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note" style="color:var(--bad)">⚠ Model Digital ở tab Forecast chưa refit theo số actual này — số Sep-Dec hiện tại có thể không đúng.</p>
+
+<h3>2c. CRM (Growth — push/email/ZNS/Braze) <span class="tag tag-fixed">nguồn thống nhất</span></h3>
+<p class="note">Gồm cả 1 phần in-app (Braze/journeys) — không thuần out-app. Chi tiết logic channel: xem 📎.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="actual">23,636</td><td class="actual">16,263</td><td class="actual">20,374</td><td class="actual">16,632</td><td class="actual">16,566</td><td class="actual">12,260</td><td class="actual">11,262</td><td class="actual">26,674</td></tr>
+<tr><td># DAU w/ Lead</td><td class="actual">4,185</td><td class="actual">2,855</td><td class="actual">3,965</td><td class="actual">3,215</td><td class="actual">3,025</td><td class="actual">2,162</td><td class="actual">1,890</td><td class="actual">5,187</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="actual">17.71%</td><td class="actual">17.56%</td><td class="actual">19.46%</td><td class="actual">19.33%</td><td class="actual">18.26%</td><td class="actual">17.64%</td><td class="actual">16.78%</td><td class="actual">19.44%</td></tr>
+<tr><td>MAU</td><td class="actual">226,664</td><td class="actual">148,061</td><td class="actual">200,211</td><td class="actual">150,490</td><td class="actual">152,168</td><td class="actual">113,267</td><td class="actual">120,855</td><td class="actual">267,145</td></tr>
+<tr><td>MAU w/ Lead</td><td class="actual">57,310</td><td class="actual">38,650</td><td class="actual">54,349</td><td class="actual">41,404</td><td class="actual">40,437</td><td class="actual">28,389</td><td class="actual">26,900</td><td class="actual">71,019</td></tr>
+<tr><td>Total Lead</td><td class="actual">371,231</td><td class="actual">223,354</td><td class="actual">406,026</td><td class="actual">341,265</td><td class="actual">301,349</td><td class="actual">197,464</td><td class="actual">183,065</td><td class="actual">493,100</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2d. Direct</h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="actual">243,932</td><td class="actual">199,182</td><td class="actual">258,026</td><td class="actual">224,006</td><td class="actual">217,291</td><td class="actual">233,508</td><td class="actual">221,470</td><td class="actual">213,478</td></tr>
+<tr><td># DAU w/ Lead</td><td class="actual">28,407</td><td class="actual">24,397</td><td class="actual">34,207</td><td class="actual">32,125</td><td class="actual">30,485</td><td class="actual">30,092</td><td class="actual">29,873</td><td class="actual">28,853</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="actual">11.65%</td><td class="actual">12.25%</td><td class="actual">13.26%</td><td class="actual">14.34%</td><td class="actual">14.03%</td><td class="actual">12.89%</td><td class="actual">13.49%</td><td class="actual">13.52%</td></tr>
+<tr><td>MAU</td><td class="actual">3,626,376</td><td class="actual">2,505,135</td><td class="actual">3,639,013</td><td class="actual">2,665,934</td><td class="actual">2,746,489</td><td class="actual">3,163,214</td><td class="actual">2,891,521</td><td class="actual">2,864,407</td></tr>
+<tr><td>MAU w/ Lead</td><td class="actual">421,528</td><td class="actual">357,691</td><td class="actual">521,097</td><td class="actual">451,494</td><td class="actual">447,397</td><td class="actual">428,351</td><td class="actual">421,988</td><td class="actual">433,664</td></tr>
+<tr><td>Total Lead</td><td class="actual">2,530,945</td><td class="actual">1,870,200</td><td class="actual">3,339,206</td><td class="actual">3,195,041</td><td class="actual">3,038,701</td><td class="actual">2,747,117</td><td class="actual">2,694,597</td><td class="actual">2,566,508</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2e. Others (Others + Referral + Social) <span class="tag tag-fixed">nguồn thống nhất</span></h3>
+<p class="note">Phần còn lại sau khi trừ SEO/Digital/CRM/Direct — xem 📎.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="actual">22,002</td><td class="actual">19,574</td><td class="actual">31,856</td><td class="actual">22,144</td><td class="actual">23,503</td><td class="actual">19,927</td><td class="actual">19,475</td><td class="actual">15,660</td></tr>
+<tr><td># DAU w/ Lead</td><td class="actual">4,279</td><td class="actual">3,487</td><td class="actual">6,066</td><td class="actual">5,037</td><td class="actual">5,465</td><td class="actual">5,276</td><td class="actual">7,947</td><td class="actual">11,966</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="actual">19.45%</td><td class="actual">17.81%</td><td class="actual">19.04%</td><td class="actual">22.75%</td><td class="actual">23.25%</td><td class="actual">26.48%</td><td class="actual" style="color:var(--warn);font-weight:700">40.81%*</td><td class="actual" style="color:var(--warn);font-weight:700">76.41%*</td></tr>
+<tr><td>MAU</td><td class="actual">269,198</td><td class="actual">239,552</td><td class="actual">425,564</td><td class="actual">285,913</td><td class="actual">316,972</td><td class="actual">255,794</td><td class="actual">265,639</td><td class="actual">270,863</td></tr>
+<tr><td>MAU w/ Lead</td><td class="actual">63,770</td><td class="actual">51,648</td><td class="actual">92,198</td><td class="actual">78,126</td><td class="actual">88,229</td><td class="actual">85,811</td><td class="actual">162,640</td><td class="actual">304,087</td></tr>
+<tr><td>Total Lead</td><td class="actual">420,880</td><td class="actual">308,607</td><td class="actual">690,897</td><td class="actual">577,926</td><td class="actual">570,164</td><td class="actual">504,038</td><td class="actual">623,709</td><td class="actual">730,763</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">*%DAU w/Lead T7-8 (40.81%/76.41%) có thể bị thổi phồng bởi bug data quality của literal channel <code>'Others'</code> (DwL/DAU tăng bất thường 20%→82%, chưa confirm với owner bảng) — Total Lead vẫn đáng tin, xem [[reference_daumaulead_bq_table]].</p>
+
+<div class="callout warn">
+<b>Others T7-8 tăng — trùng giai đoạn 2 campaign PTY, chưa validate đầy đủ cho đúng tổ hợp channel hiện tại</b>
+<p class="note" style="margin-top:6px">Trùng giai đoạn campaign <b>"Thổ Địa"</b> và <b>"Back to school"</b> (ngân sách "PTY Seasonal campaigns" 180M→913M, Jul→Aug). Case study DiD gốc validate trên Direct+Referral+Social — khác tổ hợp với bảng Others hiện tại (Referral+Social+literal Others, không có Direct). Coi đây là suy luận hợp lý theo thời điểm, chưa phải bằng chứng validate trực tiếp.</p>
+</div>
+
+<details class="vnote">
+<summary>📎 Nguồn dữ liệu &amp; công thức (click để xem)</summary>
+<div class="vnote-body">
+<ul>
+<li>Bảng: <code>chotot-dwh.ct_product_analytics.daumaulead_mkt_rp</code> (grain: date × platform × vertical × channel).</li>
+<li>DAU / DAU w/ Lead / % DAU w/ Lead: SUM theo platform mỗi ngày → AVG theo tháng. % DAU w/Lead luôn tự tính = DwL÷DAU, không lấy trực tiếp từ field nào.</li>
+<li>Total Lead: SUM theo ngày → SUM theo tháng (field <code>lead_daily</code>, cộng dồn đúng ở mọi cách group).</li>
+<li><b>MAU / MAU w/ Lead:</b> field <code>mau_total</code>/<code>mau_w_lead_total</code> lặp giá trị giống hệt qua mọi channel trong cùng 1 ngày/platform/vertical — nhưng vì mỗi channel thực sự có mặt ở số ngày khác nhau trong tháng, công thức đúng (SUM theo vertical mỗi ngày → SUM qua channel cùng ngày → AVG theo ngày trong tháng, giữ nguyên chiều vertical khi SUM) cho ra MAU thật, khác nhau rõ theo channel — không phải artifact. Verify khớp dashboard demand tham khảo ≤0.2% (6.14M vs 6.16M, T1).</li>
+<li><b>CRM channel:</b> logic build channel <code>Growth (CRM)</code> trong <code>daumaulead_mkt_rp</code> (theo pipeline Dataform gốc, table owner xác nhận): <code>medium IN ('push_note','push_noti','pushnote','noti','journeys','braze','growth_social')</code> HOẶC <code>channelGrouping='Growth'</code>. Braze/journeys gửi cả push lẫn in-app nên bucket này không thuần out-app — xem note ở mục 2c.</li>
+</ul>
+</div>
+</details>
+
+</div>
+
+<!-- ================= TAB: FORECAST (T9-T12) ================= -->
+<div id="tab-forecast" class="tab-panel">
+
+<div class="stats">
+  <div class="stat hl">
+    <div class="stat-label">DAU trung bình T9–T12</div>
+    <div class="stat-value">392,006</div>
+    <div class="stat-sub">dao động 367k (Dec) – 404k (Oct)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">MAU trung bình T9–T12</div>
+    <div class="stat-value">6,000,551</div>
+    <div class="stat-sub">dao động 5.53M (Dec) – 6.23M (Sep)</div>
+  </div>
+  <div class="stat hl">
+    <div class="stat-label">Total Lead — cộng dồn T9–T12</div>
+    <div class="stat-value">18,876,614</div>
+    <div class="stat-sub">trung bình 4.72M/tháng · Digital dùng số Growth tự forecast (FC3)</div>
+  </div>
+  <div class="stat">
+    <div class="stat-label">% DAU w/ Lead trung bình T9–T12</div>
+    <div class="stat-value">12.93%</div>
+    <div class="stat-sub">tăng nhẹ Sep→Dec</div>
+  </div>
+</div>
+
+<h2>1. Tổng công ty (ALL sources)</h2>
+<p class="note">5 nguồn (SEO + Digital + CRM + Direct + Others). Digital & CRM giờ đều dùng số Growth tự forecast trực tiếp (file FC3, 2026-09-18) — không qua model tự fit của deck nữa. Xem 📎 tab Problem Reframe cho từng giả định.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr class="key"><td>DAU</td><td class="forecast hero">403,847</td><td class="forecast hero">404,269</td><td class="forecast hero">392,545</td><td class="forecast hero">367,363</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">51,427</td><td class="forecast">51,530</td><td class="forecast">50,608</td><td class="forecast">49,085</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="forecast">12.73%</td><td class="forecast">12.75%</td><td class="forecast">12.89%</td><td class="forecast">13.36%</td></tr>
+<tr class="key"><td>MAU</td><td class="forecast hero">6,230,373</td><td class="forecast hero">6,228,710</td><td class="forecast hero">6,009,293</td><td class="forecast hero">5,533,828</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">829,628</td><td class="forecast">830,841</td><td class="forecast">813,242</td><td class="forecast">781,500</td></tr>
+<tr class="key"><td>Total Lead</td><td class="forecast hero">4,792,028</td><td class="forecast hero">4,806,484</td><td class="forecast hero">4,715,699</td><td class="forecast hero">4,562,403</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Đầy đủ giả định, validation và lý do các con số này được tính như vậy → xem tab <b>"Problem Reframe &amp; Logic tính toán"</b>.</p>
+
+<h2>2. Breakdown theo Source</h2>
+<p class="note">5 nhóm, cùng cấu trúc tab Actual: SEO, Digital, CRM, Direct, Others — cộng khớp Tổng công ty (mục 1).</p>
+
+<h3>2a. SEO / Organic Search <span class="tag tag-fixed">FIXED</span></h3>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="forecast">90,318</td><td class="forecast">91,951</td><td class="forecast">87,454</td><td class="forecast">81,721</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">8,045</td><td class="forecast">8,261</td><td class="forecast">7,690</td><td class="forecast">7,128</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="forecast">8.91%</td><td class="forecast">8.98%</td><td class="forecast">8.79%</td><td class="forecast">8.72%</td></tr>
+<tr><td>MAU</td><td class="forecast">1,782,049</td><td class="forecast">1,815,516</td><td class="forecast">1,730,058</td><td class="forecast">1,614,476</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">159,523</td><td class="forecast">163,709</td><td class="forecast">153,306</td><td class="forecast">141,968</td></tr>
+<tr><td>Total Lead</td><td class="forecast">762,049</td><td class="forecast">786,432</td><td class="forecast">731,365</td><td class="forecast">672,565</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2b. Paid Search / Digital (Growth) <span class="tag tag-fixed">Growth tự forecast (FC3)</span></h3>
+<p class="note">Không dùng model power-law tự fit nữa — dùng thẳng forecast bottom-up của Growth (file "FC2 H2 - Growth - FC3", App+Web combined, 2026-09-18). Thấp hơn nhiều so với model tự fit trước đó, phản ánh đúng regime CP mới (xem tab Problem Reframe).</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="forecast">38,869</td><td class="forecast">39,044</td><td class="forecast">32,987</td><td class="forecast">18,135</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">2,562</td><td class="forecast">2,624</td><td class="forecast">2,422</td><td class="forecast">2,069</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="forecast">6.59%</td><td class="forecast">6.72%</td><td class="forecast">7.34%</td><td class="forecast">11.41%</td></tr>
+<tr><td>MAU</td><td class="forecast">669,663</td><td class="forecast">664,595</td><td class="forecast">555,742</td><td class="forecast">291,932</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">47,077</td><td class="forecast">47,957</td><td class="forecast">44,029</td><td class="forecast">36,762</td></tr>
+<tr><td>Total Lead</td><td class="forecast">258,050</td><td class="forecast">261,199</td><td class="forecast">238,536</td><td class="forecast">194,613</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2c. CRM (Growth — push/email/ZNS/Braze) <span class="tag tag-fixed">Growth tự forecast</span></h3>
+<p class="note">Số Growth team tự tính (không qua model power-law của deck) — cùng định nghĩa channel với mục 2c tab Actual.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="forecast">31,914</td><td class="forecast">30,528</td><td class="forecast">29,358</td><td class="forecast">24,761</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">5,938</td><td class="forecast">5,763</td><td class="forecast">5,614</td><td class="forecast">5,006</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="forecast">18.61%</td><td class="forecast">18.88%</td><td class="forecast">19.12%</td><td class="forecast">20.22%</td></tr>
+<tr><td>MAU</td><td class="forecast">549,820</td><td class="forecast">519,758</td><td class="forecast">494,652</td><td class="forecast">398,579</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">109,216</td><td class="forecast">105,363</td><td class="forecast">102,095</td><td class="forecast">88,958</td></tr>
+<tr><td>Total Lead</td><td class="forecast">598,484</td><td class="forecast">573,896</td><td class="forecast">553,166</td><td class="forecast">470,953</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2d. Direct <span class="tag tag-draft">MỚI TÁCH · TB 3 tháng + uplift seeding Q4</span></h3>
+<p class="note">Baseline = TB Jun-Aug (222,819 DAU — không fit trend vì DAU 8 tháng dao động mạnh, dễ overfit nhiễu từ chỉ 3 điểm). <b>Total Lead cộng thêm uplift seeding Q4 cho PTY + JOB</b> (case study 2,606đ/lead, xem tab Problem Reframe) — chuyển từ mục Others sang đây vì hiệu ứng seeding thực chất tác động lên Direct traffic (Growth xác nhận: seeding social từ 10/8 kéo Direct traffic PTY rental tăng mạnh, không phải Others), Q4 sẽ lặp lại cách làm này cho cả PTY và JOB.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="forecast">222,819</td><td class="forecast">222,819</td><td class="forecast">222,819</td><td class="forecast">222,819</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">29,606</td><td class="forecast">29,606</td><td class="forecast">29,606</td><td class="forecast">29,606</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="forecast">13.29%</td><td class="forecast">13.29%</td><td class="forecast">13.29%</td><td class="forecast">13.29%</td></tr>
+<tr><td>MAU</td><td class="forecast">2,973,047</td><td class="forecast">2,973,047</td><td class="forecast">2,973,047</td><td class="forecast">2,973,047</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">428,001</td><td class="forecast">428,001</td><td class="forecast">428,001</td><td class="forecast">428,001</td></tr>
+<tr><td>Total Lead</td><td class="forecast">2,669,407</td><td class="forecast">2,680,919</td><td class="forecast">2,688,594</td><td class="forecast">2,720,234</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2e. Others (Others + Referral + Social) <span class="tag tag-draft">REVISED · baseline tháng 6, không còn uplift</span></h3>
+<p class="note">Baseline = <b>tháng 6</b> (trước campaign spike, %DwL 26.48% — hợp lý hơn TB Jun-Aug từng dùng, vốn trộn cả giai đoạn spike ra %DwL 45.75% phi thực tế). Giữ flat, <b>không còn cộng uplift seeding</b> — đã chuyển sang mục Direct (2d) vì đúng bản chất hơn.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr><td>DAU</td><td class="forecast">19,927</td><td class="forecast">19,927</td><td class="forecast">19,927</td><td class="forecast">19,927</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">5,276</td><td class="forecast">5,276</td><td class="forecast">5,276</td><td class="forecast">5,276</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="forecast">26.48%</td><td class="forecast">26.48%</td><td class="forecast">26.48%</td><td class="forecast">26.48%</td></tr>
+<tr><td>MAU</td><td class="forecast">255,794</td><td class="forecast">255,794</td><td class="forecast">255,794</td><td class="forecast">255,794</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">85,811</td><td class="forecast">85,811</td><td class="forecast">85,811</td><td class="forecast">85,811</td></tr>
+<tr><td>Total Lead</td><td class="forecast">504,038</td><td class="forecast">504,038</td><td class="forecast">504,038</td><td class="forecast">504,038</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>3. Tóm tắt theo Vertical</h2>
+<p class="note">Digital: dùng đúng số Growth tự forecast theo từng vertical (file FC3). SEO/CRM/Direct/Others: chưa có forecast riêng theo vertical, ước tính bằng tỷ trọng lịch sử (BQ actual Apr-Jul). Do Growth's Digital theo vertical dùng tỷ lệ chuyển đổi riêng từng vertical (không ép khớp Digital company-wide — xem 📎 file gốc), <b>tổng 4 vertical cộng lại thấp hơn "Toàn CT" khoảng 3%</b> — chênh lệch nằm ở cách Growth tính Digital, không phải lỗi cộng.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Vertical</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
+<tbody>
+<tr class="key"><td>Toàn CT (ALL verticals)</td><td class="forecast hero">4,792,028</td><td class="forecast hero">4,806,484</td><td class="forecast hero">4,715,699</td><td class="forecast hero">4,562,403</td><td class="forecast hero">18,876,614</td></tr>
+<tr><td>&nbsp;&nbsp;GDS</td><td class="forecast">1,706,223</td><td class="forecast">1,711,301</td><td class="forecast">1,684,285</td><td class="forecast">1,626,881</td><td class="forecast">6,728,690</td></tr>
+<tr><td>&nbsp;&nbsp;PTY</td><td class="forecast">1,148,111</td><td class="forecast">1,154,125</td><td class="forecast">1,126,843</td><td class="forecast">1,089,870</td><td class="forecast">4,518,949</td></tr>
+<tr><td>&nbsp;&nbsp;VEH</td><td class="forecast">904,601</td><td class="forecast">906,633</td><td class="forecast">892,939</td><td class="forecast">871,008</td><td class="forecast">3,575,181</td></tr>
+<tr><td>&nbsp;&nbsp;JOB</td><td class="forecast">877,250</td><td class="forecast">874,042</td><td class="forecast">853,617</td><td class="forecast">826,702</td><td class="forecast">3,431,611</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Chỉ PTY có model/validation sâu hơn (xem tab Problem Reframe); GDS/VEH/JOB vẫn chủ yếu là ước tính theo tỷ trọng (trừ phần Digital đã dùng số thật).</p>
+
+<h2>4. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
+<p class="note">PTY ở đây = Digital theo đúng số Growth forecast riêng cho PTY (file FC3) + phần SEO/CRM/Direct/Others theo tỷ trọng lịch sử — chính xác hơn mục 3 (vốn áp tỷ trọng đều cho cả Digital). Chia theo tỷ lệ let/sell của vertical. <span class="target">Chữ nghiêng xám</span> = mức vertical team cần (target), không phải forecast.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
+<tbody>
+<tr class="key"><td>MKT forecast</td><td class="forecast hero">1,148,111</td><td class="forecast hero">1,154,125</td><td class="forecast hero">1,126,843</td><td class="forecast hero">1,089,870</td><td class="forecast hero">4,518,949</td></tr>
+<tr><td>Target vertical</td><td class="target">1,382,343</td><td class="target">1,349,934</td><td class="target">1,361,353</td><td class="target">1,414,350</td><td class="target">5,507,980</td></tr>
+<tr><td>Hụt bao nhiêu %</td><td style="color:var(--bad)">−20.4%</td><td style="color:var(--bad)">−17.0%</td><td style="color:var(--bad)">−20.8%</td><td style="color:var(--bad)">−29.8%</td><td style="color:var(--bad)">−21.9%</td></tr>
+<tr><td>&nbsp;&nbsp;— Let, forecast</td><td class="forecast">798,970</td><td class="forecast">807,080</td><td class="forecast">812,905</td><td class="forecast">752,664</td><td class="forecast">3,171,619</td></tr>
+<tr><td>&nbsp;&nbsp;— Let, target</td><td class="target">962,010</td><td class="target">944,055</td><td class="target">982,027</td><td class="target">976,755</td><td class="target">3,864,847</td></tr>
+<tr><td>&nbsp;&nbsp;— Sell, forecast</td><td class="forecast">349,141</td><td class="forecast">347,045</td><td class="forecast">313,938</td><td class="forecast">337,206</td><td class="forecast">1,347,330</td></tr>
+<tr><td>&nbsp;&nbsp;— Sell, target</td><td class="target">420,333</td><td class="target">405,879</td><td class="target">379,326</td><td class="target">437,595</td><td class="target">1,643,133</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note"><b>Gap PTY lớn hơn mọi lần tính trước đó trong dự án này</b> — hụt 17.0-29.8% mỗi tháng, cộng dồn <b>−21.9%</b> (so với −13.0% bản trước dùng model tự fit, −7.2% bản có CRM chưa refit Digital, −17.6% bản gốc chưa có CRM). Lý do: Growth tự báo Digital thấp hơn hẳn model tự fit của deck (phản ánh đúng CP tăng thật đang xảy ra — xem "Rủi ro CP" tab Problem Reframe). <b>Đây là số đáng tin nhất tới hiện tại vì dùng thẳng forecast gốc của Growth, không qua ước tính.</b> Chi tiết → tab Problem Reframe.</p>
+
+</div>
+
+<!-- ================= TAB: PROBLEM REFRAME & LOGIC ================= -->
+<div id="tab-reframe" class="tab-panel">
+
+<div class="kt-box">
+<div class="kt-title">🔑 Key takeaways</div>
+<ul class="kt-list">
+<li class="risk"><b>Digital giờ dùng thẳng forecast gốc của Growth (file FC3, T9-18)</b> — không qua model tự fit của deck nữa. Số Growth tự báo thấp hơn nhiều so với mọi model deck từng dùng, vì đã phản ánh đúng CP tăng thật đang xảy ra (xem rủi ro bên dưới). Gap PTY vs demand-expect <b>lớn hơn mọi lần tính trước đó trong dự án này</b>: <span class="kt-num bad">−17.0% đến −29.8%</span> mỗi tháng, cộng dồn <span class="kt-num bad">−21.9%</span>. Đây là số tin cậy nhất tới hiện tại (dùng thẳng số Growth, không qua ước tính) — mọi kết luận "gap gần đóng"/"gap ~13%" trước đó trong session này đều đã bị số này thay thế.</li>
+<li class="good">Đã <b>reallocate lại lịch Digital budget</b> (mục 3, tab Problem Reframe) để khớp demand curve PTY — gần như miễn phí, vẫn giữ nguyên hướng áp dụng dù Digital giờ lấy thẳng số Growth (budget reallocation là input của Growth, không phải của model deck).</li>
+<li class="risk">Tháng 12 vẫn là điểm nóng nhất: hụt gần 30%, và JOB (kênh được kỳ vọng bù đắp thêm) đang có xu hướng <b>giảm tự nhiên −29%</b> vào Dec — rủi ro kép.</li>
+<li class="risk"><b>Direct/Others chưa có model dự báo riêng cho phần baseline</b> — Direct dùng TB 3 tháng gần nhất + cộng uplift seeding Q4 (case study có cơ sở); Others dùng baseline tháng 6 (trước campaign spike), giữ flat. Độ tin cậy thấp hơn Digital/SEO/CRM. Xem mục "Driver logic" bên dưới.</li>
+<li class="risk"><b>Nguyên nhân gốc của gap lớn:</b> CP Digital PTY đang tăng thật (đổi campaign Google từ giữa T8) + dịch mix Let→Sell (đắt hơn) — Growth's Plan Sep chỉ ra <b>93,785 lead</b> cho riêng phần DwL, thấp hơn FC2 (180,408) tới <b>48%</b>. File FC3 mới nhất (dùng ở mục 2b) đã cập nhật đầy đủ regime CP mới này cho toàn bộ Digital, không chỉ riêng DwL — xem chi tiết ở phần "Digital" bên dưới.</li>
+</ul>
+</div>
+
+<h2>0. Bối cảnh: MKT Investment vs Demand (T1–T8)</h2>
+<p class="note">Từ file FC2.5 Budget, chỉ lấy phần <b>Demand</b> (loại Supply — hỗ trợ bên bán, không trực tiếp ra DAU/Lead). Trong Demand, tách riêng <b>Digital</b> vì đây là lever duy nhất tune được theo tháng.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Metric</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody>
+<tr class="key"><td>Demand Budget (tỷ VND)</td><td class="hero">1.26</td><td class="hero">1.46</td><td class="hero">2.14</td><td class="hero">1.96</td><td class="hero">2.03</td><td class="hero">2.54</td><td class="hero">4.09</td><td class="hero">4.28</td></tr>
+<tr><td>&nbsp;&nbsp;— Digital (lever linh động)</td><td>0.88</td><td>0.60</td><td>1.61</td><td>1.44</td><td>1.52</td><td>1.82</td><td>2.24</td><td>2.24</td></tr>
+<tr><td>&nbsp;&nbsp;— Brand + SEO (cố định/foundation)</td><td class="forecast">0.38</td><td class="forecast">0.86</td><td class="forecast">0.53</td><td class="forecast">0.52</td><td class="forecast">0.51</td><td class="forecast">0.72</td><td class="forecast hero">1.85</td><td class="forecast hero">2.04</td></tr>
+<tr class="key"><td>Hiệu suất: Lead / tỷ VND Demand</td><td class="hero">3,417</td><td>2,165</td><td>2,794</td><td>2,825</td><td>2,652</td><td>1,858</td><td class="hero" style="color:var(--bad)">1,182</td><td class="hero" style="color:var(--bad)">1,178</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout warn">
+<b>📌 Budget Jul–Aug tăng vọt là do Brand/SEO, không phải Digital</b>
+<p class="note" style="margin-top:6px">Digital tăng đều <span class="kt-num">0.88→2.24 tỷ</span>; Brand+SEO nhảy <span class="kt-num bad">0.51→2.04 tỷ (+300%)</span> — đúng 2 campaign Thổ Địa/Back to school (tab Actual). Ý nghĩa: demand uplift Jul-Aug không tune được qua Digital hàng tháng. Brand/SEO Sep-Dec vẫn ở mức 0.84–1.45 tỷ (cao hơn baseline, thấp hơn đỉnh) — demand không tụt hẳn về baseline thuần digital.</p>
+</div>
+
+<p class="note">Số forecast đầy đủ → xem tab <b>"Forecast (Sep–Dec)"</b>. Tóm tắt logic: SEO giữ nguyên · Digital &amp; CRM dùng số Growth tự forecast trực tiếp (file FC3) · Direct/Others tạm dùng baseline gần nhất, Others cộng thêm uplift mùa vụ/campaign Oct–Dec.</p>
+
+<details class="vnote">
+<summary>📎 Validation notes — sanity-check forecast &amp; cost-efficiency (click để xem)</summary>
+<div class="vnote-body">
+
+<h4>1) Tổng ngân sách không giải thích được tổng DAU/Lead công ty</h4>
+<p>Khớp tổng ngân sách Demand với tổng DAU/Lead trên 8 tháng thực tế — mức khớp chỉ 10–14%, gần như vô nghĩa (đúng logic: Others theo mùa vụ chứ không theo tiền chi, SEO cố định). Nên phải kiểm tra theo từng source riêng, không dùng 1 công thức chung. Dùng làm phép thử độ nhạy (vì thiếu số Brand/SEO Sep–Dec chi tiết) — forecast hiện tại lệch 0–6% so với 3 kịch bản, không tháng nào bất thường.</p>
+
+<h4>2) Digital: model power-law tự fit — giờ chỉ để cross-check, KHÔNG còn là số chính thức</h4>
+<p>Số Digital chính thức (mục 2b tab Forecast) giờ lấy thẳng từ file FC3 của Growth, không qua model này nữa. Model power-law (refit trên actual Jan-Aug đã sửa, mức khớp 63-91% tuỳ metric) giữ lại dưới đây chỉ để đối chiếu tham khảo.</p>
+<div class="scroll"><table>
+<thead><tr><th></th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
+<tbody><tr><td>CP/Lead actual (đ)</td><td>2,973</td><td>2,700</td><td>2,338</td><td>2,062</td><td>2,099</td><td>3,422</td><td>3,953</td><td>4,405</td></tr></tbody>
+</table></div>
+<div class="scroll" style="margin-top:6px"><table>
+<thead><tr><th></th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr><td>CP/Lead — model tự fit (đ, không dùng nữa)</td><td>2,930</td><td>2,875</td><td>2,828</td><td>2,629</td></tr>
+<tr><td>CP/Lead — ngụ ý từ số Growth FC3 (đ, dùng budget đã reallocate)</td><td>5,850</td><td>5,360</td><td>5,492</td><td>5,035</td></tr>
+</tbody>
+</table></div>
+<p><b>Quan trọng:</b> CP/Lead ngụ ý từ số Growth (5,035–5,850đ) <b>cao hơn hẳn khoảng đã từng xảy ra thật ở Jan–Aug (2,062–4,405đ)</b> — tức là forecast giờ đang <b>ngoại suy ra vùng chưa từng có</b>, không còn nằm trong vùng đã biết như claim trước đây (dựa trên model tự fit). Đây là bằng chứng số khác xác nhận CP Digital đang bước vào regime mới, cao hơn hẳn 8 tháng data hiện có — hợp lý với rủi ro CP đã nêu, nhưng cũng có nghĩa <b>độ chắc chắn của forecast Digital thấp hơn trước</b> (ngoại suy, không phải nội suy).</p>
+
+<h4>3) Reallocate Digital budget theo demand PTY</h4>
+<p>Ngân sách PTY-Digital (2.45 tỷ Sep–Dec) trước đây dồn Sep/Oct, bỏ đói Dec — đã dàn đều lại theo demand curve PTY (xem mục 3 dưới), áp dụng độc lập với việc Digital giờ lấy số Growth hay model tự fit (đây là quyết định phân bổ ngân sách của Growth, không phải cách deck tính Lead).</p>
+<p><b>Cân nhắc nhưng không dùng — thêm budget Digital lấp hết gap PTY:</b> với CP/Lead hiện đã cao hơn nhiều (~5,000-5,850đ theo Growth), chi phí thêm ngân sách Digital để lấp gap còn đắt hơn ước tính trước đây — càng củng cố ưu tiên seeding (~2,606đ/lead) nếu cần thêm ngân sách.</p>
+
+</div>
+</details>
+
+<h2>Driver logic theo từng source</h2>
+<p class="note" style="margin-top:0">Mỗi source có 1 cơ chế khác nhau — không dùng chung 1 công thức:</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Source</th><th>Driver chính</th><th>Cách forecast</th><th>Độ tin cậy</th></tr></thead>
+<tbody>
+<tr><td>SEO</td><td>Tích luỹ dài hạn, không có lever ngắn hạn</td><td>Giữ nguyên PDF gốc</td><td style="color:var(--good)">Cao</td></tr>
+<tr><td>Digital</td><td>Ngân sách + CP thị trường — Growth quản lý trực tiếp</td><td>Growth tự forecast trực tiếp (file FC3, không qua model power-law nữa)</td><td style="color:var(--good)">Cao (nguồn cấp trực tiếp)</td></tr>
+<tr><td>CRM</td><td>Push/email/ZNS/Braze campaign, Growth chủ động lên lịch</td><td>Growth tự forecast trực tiếp (không qua model power-law)</td><td style="color:var(--good)">Cao (nguồn cấp trực tiếp)</td></tr>
+<tr><td>Direct</td><td>Organic/brand traffic + occasion seeding (social) — Growth chủ động seeding theo mùa vụ</td><td>Baseline TB 3 tháng + cộng uplift seeding Q4 (dưới)</td><td style="color:var(--warn)">Trung bình — baseline chưa có model, phần uplift có case study</td></tr>
+<tr><td>Others</td><td>Mùa vụ/campaign nhẹ, KHÔNG theo ngân sách</td><td>Baseline tháng 6 (trước spike), giữ flat</td><td style="color:var(--warn)">Thấp hơn</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>CRM <span class="tag tag-fixed">Growth tự forecast</span></h3>
+<p class="note">Kênh <code>Growth (CRM)</code> trong <code>daumaulead_mkt_rp</code> — theo pipeline Dataform gốc (table owner xác nhận): <code>medium IN ('push_note','push_noti','pushnote','noti','journeys','braze','growth_social')</code> HOẶC <code>channelGrouping='Growth'</code>. Braze/journeys gửi được cả push lẫn in-app, không tách theo kênh gửi ở field này — <b>không thuần out-app</b>. Actual Jan-Aug lấy trực tiếp từ BQ; Forecast Sep-Dec dùng số Growth team tự tính (không qua model power-law của deck). Số ra → tab Actual mục 2c, tab Forecast mục 2c.</p>
+
+<h3>Digital <span class="tag tag-fixed">Growth tự forecast (FC3)</span></h3>
+<p class="note">Không còn dùng model power-law của deck — dùng thẳng forecast bottom-up của Growth (file "FC2 H2 - Growth - FC3", 2026-09-18), đã có breakdown theo vertical riêng cho PTY/JOB/VEH/GDS (dùng ở mục "Zoom in PTY"). Model power-law cũ giữ lại trong 📎 Validation notes chỉ để tham khảo/cross-check, không còn là số chính thức. Số ra → tab Forecast, mục 2b.</p>
+
+<div class="callout warn">
+<b>✓ Rủi ro CP Digital tăng — đã được phản ánh vào forecast (mục 2b) qua file FC3 của Growth</b>
+<p class="note" style="margin-top:6px">Nguyên nhân gốc (đã xác nhận): (1) CP tăng từ giữa T8 do đổi cách chạy campaign Google (mở target-CPA, đánh đổi hiệu suất lấy volume); (2) dịch ngân sách Let→Sell (58/42 thay vì 70/30) — Sell vốn đắt hơn Let ~2.4 lần. Ví dụ cụ thể: FC2 (tháng 7) từng kỳ vọng riêng phần Google Ads lead-gen (DwL) của PTY đạt 180,408 lead từ 350tr ngân sách Sep — Plan thực tế theo CP mới chỉ ra 93,785 lead (−48%). Growth đang cân nhắc cắt/chuyển dòng Sell Apartment (44.1tr, CP/Lead cao nhất) sang initiative khác (retarget in-app, test TikTok).</p>
+<p class="note"><b>Đã xử lý:</b> deck không còn tự fit model nữa — dùng thẳng file FC3 của Growth (mục 2b), đã tính đủ regime CP mới này cho toàn bộ Digital company-wide, không chỉ riêng DwL PTY. Gap PTY tính lại theo số này lớn hơn hẳn mọi lần trước (−21.9% cộng dồn) — chính là hệ quả trực tiếp của rủi ro CP này.</p>
+<p class="note"><b>Còn mở:</b> Growth đang tính lại theo hướng khác — app growth cũng tạo ra demand nhưng khó gán đúng vertical (không như DwL), sẽ đưa ra 1 số demand chung kèm đề xuất shift cost. Khi có số này, cần đối chiếu lại và có thể phải đổi cách attribute Digital theo vertical (khác cách file FC3 hiện đang làm).</p>
+</div>
+
+<h3>Direct <span class="tag tag-draft">occasion uplift, budget-constrained</span></h3>
+<p class="note">Case Aug (PTY rental): seeding social bắt đầu 10/8 (ngay khi có kết quả thi ĐH) tạo lift-up rõ rệt cho <b>Direct traffic</b> — 220tr seeding → 84,424 lead → hiệu suất <b>2,606đ/lead</b>. Growth xác nhận: năm nay hiệu ứng mạnh hơn hẳn năm ngoái (cùng thời điểm nhưng không chủ động seeding) nhờ đúng cách làm — nên Q4 sẽ chủ động lặp lại cho <b>cả PTY và JOB</b>. Áp lên budget seeding thật trong FC2.5:</p>
+<ul>
+<li><b>Oct:</b> PTY seeding 30tr → +11,512 lead</li>
+<li><b>Nov:</b> PTY seeding 20tr → +7,675 lead</li>
+<li><b>Dec:</b> JOB seeding 82.45tr (lặp lại cách làm PTY, lần đầu áp cho JOB, mùa F&amp;B) → +31,640 lead — <span style="color:var(--warn)">độ tin cậy trung bình</span> (kế hoạch chủ động, không còn thuần suy đoán, nhưng JOB chưa từng chạy thật nên hiệu suất thực tế có thể khác 2,606đ/lead). JOB đang giảm tự nhiên cuối năm (Oct −6.6%, Nov −19.4%, Dec −29.2%) — hiểu là "đỡ đà giảm", không phải cộng thêm lên nền cũ.</li>
+</ul>
+<p class="note">Muốn lấp <b>hết</b> gap vertical expect cần seeding Oct ~260tr (x8.7), Nov ~331tr (x16.5) — số tham khảo cho budget-ask. Số ra → tab Forecast, mục 2d (chuyển từ Others sang Direct — đúng bản chất traffic bị tác động). Others (2e) giữ baseline tháng 6 (trước spike), không còn cộng uplift.</p>
+
+<h2>Forecast theo Vertical: PTY cần bao nhiêu, MKT đang hụt bao nhiêu?</h2>
+<p class="note" style="margin-top:0">PTY = Digital theo đúng số Growth forecast riêng cho vertical (file FC3) + phần còn lại theo tỷ trọng lịch sử ~24.6% (số forecast xem tab Forecast T9-T12, mục 3-4).</p>
+<div class="callout bad">
+<b>⚠ Gap lớn hơn mọi lần tính trước — Digital giờ dùng thẳng số Growth tự forecast, không qua ước tính</b>
+<p class="note" style="margin-top:6px">Lịch sử các bản trước trong dự án này đều dùng model tự fit hoặc tự ước tính cho Digital, ra kết luận khác nhau (gap từ "gần đóng" tới "~13%"). Bản này dùng thẳng forecast bottom-up của Growth (file FC3) — không qua ước tính nào — nên đáng tin nhất. Gap PTY thật sự lớn hơn mọi con số trước đó, phản ánh đúng việc CP Digital đang tăng (xem callout "Digital" bên trên).</p>
+</div>
+<div class="gap-tracker" id="gap-tracker">
+  <div class="gap-card">
+    <div class="gm">Sep <span class="pill risk">AT RISK</span></div>
+    <div class="gap-pct risk">Hụt 20.4%</div>
+    <div class="bar-track"><div class="bar-fill risk" style="width:68%"></div></div>
+    <div class="gap-sub">MKT forecast ~1.15M lead, PTY cần ~1.38M — <b>thiếu ~234k lead</b></div>
+  </div>
+  <div class="gap-card">
+    <div class="gm">Oct <span class="pill risk">AT RISK</span></div>
+    <div class="gap-pct risk">Hụt 17.0%</div>
+    <div class="bar-track"><div class="bar-fill risk" style="width:57%"></div></div>
+    <div class="gap-sub">MKT forecast ~1.15M lead, PTY cần ~1.35M — <b>thiếu ~196k lead</b></div>
+  </div>
+  <div class="gap-card">
+    <div class="gm">Nov <span class="pill risk">AT RISK</span></div>
+    <div class="gap-pct risk">Hụt 20.8%</div>
+    <div class="bar-track"><div class="bar-fill risk" style="width:70%"></div></div>
+    <div class="gap-sub">MKT forecast ~1.13M lead, PTY cần ~1.36M — <b>thiếu ~234k lead</b></div>
+  </div>
+  <div class="gap-card">
+    <div class="gm">Dec <span class="pill risk">AT RISK</span></div>
+    <div class="gap-pct risk">Hụt 29.8%</div>
+    <div class="bar-track"><div class="bar-fill risk" style="width:100%"></div></div>
+    <div class="gap-sub">MKT forecast ~1.09M lead, PTY cần ~1.41M — <b>thiếu ~324k lead</b> (điểm nóng nhất)</div>
+  </div>
+</div>
+<p class="note">"Hụt X%" = MKT forecast hiện tại đang thấp hơn X% so với mức PTY team tính là cần (theo file demand-expect từ vertical, dựa trên bài toán supply&amp;revenue). Cộng dồn Sep-Dec: hụt 21.9%. Xem phần "Others"/"Digital" ở trên (cách tính) và mục 3 dưới đây (cách reallocate Digital).</p>
+
+<details class="vnote">
+<summary>📎 Số gốc PTY team gửi — "PTY Est DAU w Lead break by ad type" (click để xem)</summary>
+<div class="vnote-body">
+<div class="scroll"><table>
+<thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr class="key"><td>DAU w Lead — Total</td><td>11,705</td><td>12,060</td><td>11,468</td><td>10,752</td></tr>
+<tr><td>&nbsp;&nbsp;— let (rental)</td><td>9,509</td><td>8,569</td><td>8,842</td><td>8,839</td></tr>
+<tr><td>&nbsp;&nbsp;— sell (for sale)</td><td>3,818</td><td>4,092</td><td>3,807</td><td>4,336</td></tr>
+<tr class="key"><td>Total Lead</td><td class="hero">1,382,343</td><td class="hero">1,349,934</td><td class="hero">1,361,353</td><td class="hero">1,414,350</td></tr>
+<tr><td>&nbsp;&nbsp;— let (rental), 69–72%</td><td>962,010</td><td>944,055</td><td>982,027</td><td>976,755</td></tr>
+<tr><td>&nbsp;&nbsp;— sell (for sale), 28–31%</td><td>420,333</td><td>405,879</td><td>379,326</td><td>437,595</td></tr>
+</tbody>
+</table></div>
+<p>Cột Jan–Aug (actual) là số PTY team tính từ bài toán supply&amp;revenue, đã validate khớp BigQuery actual ≤6%. Cột Sep–Dec (expect) lấy nền từ forecast MKT bản FC2 (tháng 7, trước khi cắt budget) — xem callout phía trên để hiểu vì sao số này khác forecast MKT hiện tại. Gap Tracker phía trên = so sánh dòng "Total Lead" ở đây với forecast MKT hiện tại (đã cập nhật theo budget FC2.5) quy theo tỷ trọng PTY.</p>
+</div>
+</details>
+
+<h3>Zoom in PTY theo Let/Sell (tab Forecast, mục 4) — lưu ý</h3>
+<ul>
+<li>Total Lead: chia theo đúng % let/sell vertical đưa ra từng tháng (69–72% / 28–31%) — 2 phần cộng khớp tổng vì 1 lead chỉ thuộc 1 loại tin.</li>
+<li># DAU w/Lead: 2 phần <b>không</b> cộng khớp tổng thật (1 user có thể để lead ở cả tin cho thuê lẫn tin bán cùng ngày) — bảng đã chia lại tỷ lệ để ra số cộng khớp, coi là ước tính tham khảo, kém chính xác hơn Total Lead.</li>
+<li>Cả 2 đều là <b>chia theo tỷ lệ</b>, không phải model riêng — nếu MKT phân bổ khác cho let/sell (VD push T10-11 nhắm sell), tỷ lệ thực tế sẽ lệch khỏi bảng.</li>
+</ul>
+
+<h2>3. Digital budget mới &amp; cách revise forecast</h2>
+<p class="note">Growth gửi bảng budget theo activity/vertical ngày 2026-09-11. Cộng lại theo tháng:</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Total Digital Budget</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+<tbody>
+<tr><td>Budget cũ (FC2-Growth v2)</td><td>2,450,000,000</td><td>2,050,000,000</td><td>1,400,000,000</td><td>650,000,000</td></tr>
+<tr><td>Budget mới, Growth gửi</td><td>1,650,000,000</td><td>1,600,000,000</td><td>1,300,000,000</td><td>650,000,000</td></tr>
+<tr class="key"><td>Sau reallocate PTY (áp dụng cho forecast)</td><td class="hero">1,510,000,000</td><td class="hero">1,400,000,000</td><td class="hero">1,310,000,000</td><td class="hero">980,000,000</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Cùng tổng 5.20 tỷ, chỉ dàn lại riêng phần PTY bên trong (0.75/0.80/0.60/0.30 → 0.61/0.60/0.61/0.63 tỷ) theo demand curve PTY thay vì để Dec thấp nhất — <b>miễn phí</b>, không đổi budget vertical khác.</p>
+
+<div class="callout warn">
+<b>⚠ Cần Growth confirm trước khi chốt</b>
+<ul style="margin:6px 0 0">
+<li>Tỷ trọng activity "DwL"/"app growth" có thể đổi khác Jan–Aug — cả 2 đều hướng tới Total Lead, nên Growth có thể chủ động dịch mix sang hướng hiệu quả hơn tại thời điểm đó.</li>
+<li>App-growth user có tỷ lệ tạo lead &amp; retention tốt hơn dài hạn so với DwL (chủ yếu web, one-off) — Growth có thể ưu tiên app-growth vì lý do này dù ngắn hạn DwL rẻ hơn.</li>
+</ul>
+</div>
+
+<div class="callout good">
+<b>✓ Đã áp dụng: reallocate Digital budget theo demand PTY — gần như miễn phí</b>
+<p class="note" style="margin-top:6px">Tổng Lead cả kỳ gần như không đổi (+0.8%) nhưng <b>Dec Digital Lead +36%</b> so với không reallocate (đã tính lại theo model refit). Nếu cần thêm ngân sách lấp gap, ưu tiên seeding (~2,606đ/lead) thay vì Digital (đã đắt hơn nhiều — chi tiết ở 📎 Validation notes).</p>
+</div>
+
+</div>
+
+<div class="foot">
+Built 2026-09-18 (v9: rebuild toàn bộ Actual tab từ BQ + đồng bộ cấu trúc 5-nguồn SEO/Digital/CRM/Direct/Others cho cả 2 tab + Digital &amp; CRM dùng thẳng forecast Growth (file FC3) thay vì model tự fit + tính lại vertical share + Gap Tracker) · Nguồn: BigQuery <code>daumaulead_mkt_rp</code> + file "2026 MKT Plan &amp; Budget - FC2.5" + "PTY Est DAU w Lead break by ad type" + "FC2 H2 - Growth - FC3" (Growth, 2026-09-18), confidential.
+</div>
+
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var chip = document.getElementById('theme-chip');
+  var STORAGE_KEY = 'dau-mau-lead-forecast-theme';
+  function apply(mode){
+    if(mode === 'light' || mode === 'dark'){ root.setAttribute('data-theme', mode); }
+    else { root.removeAttribute('data-theme'); }
+    chip.querySelectorAll('button').forEach(function(b){
+      b.classList.toggle('active', b.dataset.theme === mode);
+    });
+  }
+  var saved = 'system';
+  try { saved = localStorage.getItem(STORAGE_KEY) || 'system'; } catch(e){}
+  apply(saved);
+  chip.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var mode = btn.dataset.theme;
+      apply(mode);
+      try { localStorage.setItem(STORAGE_KEY, mode); } catch(e){}
+    });
+  });
+})();
+
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
