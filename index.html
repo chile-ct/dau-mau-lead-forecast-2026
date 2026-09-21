@@ -82,6 +82,13 @@
   .stat-sub{font-size:11px;color:var(--muted);margin-top:2px}
 
   .scroll{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--panel)}
+  .fixed-table{border:1px solid var(--border);border-radius:10px;background:var(--panel);overflow:hidden}
+  .fixed-table table{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed}
+  .fixed-table th,.fixed-table td{padding:10px 12px;text-align:left;white-space:normal;word-wrap:break-word;vertical-align:top;border-bottom:1px solid var(--border)}
+  .fixed-table thead th{background:var(--panel2);color:var(--muted);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.02em}
+  .fixed-table tbody tr:last-child td{border-bottom:none}
+  .fixed-table tbody tr:hover td{background:rgba(94,177,255,.06)}
+  .fixed-table td:first-child{font-weight:700;color:var(--accent)}
   table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:820px}
   th,td{padding:7px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--border)}
   th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--panel);z-index:1;font-weight:600}
@@ -565,61 +572,44 @@
 <p class="note">Số forecast đầy đủ → xem tab <b>"Forecast (Sep–Dec)"</b>. Tóm tắt logic: SEO giữ nguyên · Digital &amp; CRM dùng bản Growth tự forecast mới nhất (2026-09-21) · Direct/Others dùng seasonal ratio YoY 2025, Direct cộng thêm uplift seeding Q4.</p>
 
 <h2>Driver logic theo từng source</h2>
-<p class="note" style="margin-top:0">Mỗi source có 1 cơ chế khác nhau — không dùng chung 1 công thức. Bảng tổng quan, chi tiết → chọn tab bên dưới.</p>
-<div class="scroll">
+<p class="note" style="margin-top:0">Mỗi source có 1 cơ chế khác nhau — không dùng chung 1 công thức.</p>
+<div class="fixed-table">
 <table>
+<colgroup><col style="width:8%"><col style="width:30%"><col style="width:47%"><col style="width:15%"></colgroup>
 <thead><tr><th>Source</th><th>Driver chính</th><th>Cách forecast</th><th>Độ tin cậy</th></tr></thead>
 <tbody>
-<tr><td>SEO</td><td>Tích luỹ dài hạn, không có lever ngắn hạn</td><td>Giữ nguyên PDF gốc</td><td style="color:var(--good)">Cao</td></tr>
-<tr><td>Digital</td><td>Ngân sách + CP thị trường — Growth quản lý trực tiếp</td><td>Growth tự forecast trực tiếp (bản update 2026-09-21, không qua model power-law của deck)</td><td style="color:var(--good)">Cao (nguồn cấp trực tiếp)</td></tr>
-<tr><td>CRM</td><td>Push/email/ZNS/Braze campaign, Growth chủ động lên lịch</td><td>Growth tự forecast trực tiếp (không qua model power-law)</td><td style="color:var(--good)">Cao (nguồn cấp trực tiếp)</td></tr>
-<tr><td>Direct</td><td>Organic/brand traffic + occasion seeding (social) + market search demand — riêng theo vertical</td><td>Baseline riêng vertical × seasonal ratio YoY 2025 × hệ số market trend (GSC) + uplift seeding (PTY-Let, JOB)</td><td style="color:var(--warn)">Trung bình — có market trend cross-check, phần uplift có case study (PTY)</td></tr>
-<tr><td>Others</td><td>Mùa vụ/campaign nhẹ + market search demand — riêng theo vertical</td><td>Baseline riêng vertical × seasonal ratio YoY 2025 × hệ số market trend (GSC)</td><td style="color:var(--warn)">Thấp hơn — seasonal-naive, không có ngân sách riêng</td></tr>
+<tr>
+  <td>SEO</td>
+  <td>Tích luỹ dài hạn, không có lever ngắn hạn</td>
+  <td>Giữ nguyên số từ PDF kế hoạch gốc, không qua model nào — không có lever ngân sách ngắn hạn tác động được trong Sep-Dec.</td>
+  <td style="color:var(--good)">Cao nhất trong 5 nguồn — không phụ thuộc giả định nào</td>
+</tr>
+<tr>
+  <td>Digital</td>
+  <td>Ngân sách + CP thị trường — Growth quản lý trực tiếp</td>
+  <td>Dùng thẳng bản Growth tự forecast (2026-09-21), kèm breakdown theo vertical, không qua model power-law của deck. CP/Lead ngụ ý (4,106/3,617/3,801/3,376đ, Sep-Dec) nằm trong khoảng Actual Jan-Aug (2,062-4,405đ) — nội suy, không ngoại suy. Dec thấp do ngân sách Dec bị cắt mạnh (645tr, −55% so với Nov), không phải do CP tăng.</td>
+  <td style="color:var(--good)">Cao — nguồn cấp trực tiếp</td>
+</tr>
+<tr>
+  <td>CRM</td>
+  <td>Push/email/ZNS/Braze campaign, Growth chủ động lên lịch</td>
+  <td>Growth tự forecast trực tiếp, không qua model power-law. Kênh <code>Growth (CRM)</code>: <code>medium IN ('push_note','push_noti','pushnote','noti','journeys','braze','growth_social')</code> HOẶC <code>channelGrouping='Growth'</code> — Braze/journeys gửi cả push lẫn in-app, không thuần out-app.</td>
+  <td style="color:var(--good)">Cao — nguồn cấp trực tiếp</td>
+</tr>
+<tr>
+  <td>Direct</td>
+  <td>Organic/brand traffic + occasion seeding (social) + market search demand — riêng theo vertical</td>
+  <td>3 lớp riêng từng vertical (PTY/JOB/VEH/GDS): (1) <b>Trend</b> — baseline TB Jun-Aug 2026 × seasonal ratio YoY 2025 của chính vertical. (2) <b>Market search trend (Google Search Console)</b> — hệ số theo momentum search demand gần nhất (Jun-Aug 2026 so với Jan-Apr 2026, giảm ảnh hưởng còn 50%): PTY 1.070, JOB 1.024, GDS 1.030, <b>VEH 0.903</b> (duy nhất search demand tiếp tục giảm). (3) <b>Seeding đúng target</b> — case study Aug (PTY rental, 220tr → 84,424 lead → 2,606đ/lead) áp vào phần <b>Let của PTY</b> (Sep 30tr/Oct-Dec 20tr/tháng → +11,512/+7,675 lead) và toàn phần <b>JOB</b> (82.45tr/tháng → +31,640 lead/tháng), theo đúng ngân sách "Creative outreach" file FC2.5. GDS/VEH cũng có ngân sách seeding riêng nhưng không tính vào uplift — hiệu suất 2,606đ/lead chỉ đo được từ case study PTY.</td>
+  <td style="color:var(--warn)">Trung bình — có market trend cross-check, phần uplift có case study (PTY)</td>
+</tr>
+<tr>
+  <td>Others</td>
+  <td>Mùa vụ/campaign nhẹ + market search demand — riêng theo vertical</td>
+  <td>Cùng logic 3 lớp như Direct, không có uplift: baseline riêng vertical (tháng 6/2026 × seasonal ratio YoY 2025 riêng vertical) × hệ số market search trend (GSC, giống Direct). Không có ngân sách/campaign riêng cho nguồn này.</td>
+  <td style="color:var(--warn)">Thấp hơn — seasonal-naive, không có ngân sách riêng</td>
+</tr>
 </tbody>
 </table>
-</div>
-
-<div class="subtabs" data-group="driver">
-  <button class="subtab-btn active" data-subtab="seo">SEO</button>
-  <button class="subtab-btn" data-subtab="digital">Digital</button>
-  <button class="subtab-btn" data-subtab="crm">CRM</button>
-  <button class="subtab-btn" data-subtab="direct">Direct</button>
-  <button class="subtab-btn" data-subtab="others">Others</button>
-</div>
-
-<div id="subtab-driver-seo" class="subtab-panel active" data-group="driver">
-<h3>SEO <span class="tag tag-fixed">FIXED</span></h3>
-<p class="note">Tích luỹ dài hạn, không có lever ngân sách ngắn hạn tác động được trong Sep-Dec — giữ nguyên số từ PDF kế hoạch gốc, không qua model nào. Độ tin cậy cao nhất trong 5 nguồn vì không phụ thuộc giả định nào. Số ra → tab Actual/Forecast mục 2a.</p>
-</div>
-
-<div id="subtab-driver-digital" class="subtab-panel" data-group="driver">
-<h3>Digital <span class="tag tag-fixed">Growth tự forecast (bản update 2026-09-21)</span></h3>
-<p class="note">Dùng thẳng bản Growth tự forecast mới nhất (2026-09-21), kèm breakdown theo vertical (PTY/JOB/VEH/GDS, xem 📎 mục 2b tab Forecast). Số ra → tab Forecast, mục 2b.</p>
-<div class="callout good">
-<b>✓ CP/Lead ngụ ý nằm trong khoảng Actual Jan-Aug đã quan sát</b>
-<p class="note" style="margin-top:6px">CP/Lead ngụ ý từ ngân sách thật (4,106/3,617/3,801/3,376đ, Sep-Dec) nằm trong khoảng Actual Jan-Aug (2,062-4,405đ). Dec thấp do ngân sách Dec bị cắt mạnh (645tr, −55% so với Nov, đã confirm), không phải do CP tăng.</p>
-</div>
-</div>
-
-<div id="subtab-driver-crm" class="subtab-panel" data-group="driver">
-<h3>CRM <span class="tag tag-fixed">Growth tự forecast</span></h3>
-<p class="note">Kênh <code>Growth (CRM)</code> trong <code>daumaulead_mkt_rp</code> — theo pipeline Dataform gốc (table owner xác nhận): <code>medium IN ('push_note','push_noti','pushnote','noti','journeys','braze','growth_social')</code> HOẶC <code>channelGrouping='Growth'</code>. Braze/journeys gửi được cả push lẫn in-app, không tách theo kênh gửi ở field này — <b>không thuần out-app</b>. Actual Jan-Aug lấy trực tiếp từ BQ; Forecast Sep-Dec dùng số Growth team tự tính (không qua model power-law của deck). Số ra → tab Actual mục 2c, tab Forecast mục 2c.</p>
-</div>
-
-<div id="subtab-driver-direct" class="subtab-panel" data-group="driver">
-<h3>Direct <span class="tag tag-draft">forecast riêng theo vertical</span></h3>
-<p class="note">Mỗi vertical (PTY/JOB/VEH/GDS) có baseline + seasonal ratio riêng (không còn dùng 1 baseline company-wide dàn qua tỷ trọng lịch sử) — 3 lớp:</p>
-<ul>
-<li><b>Trend riêng vertical:</b> baseline = TB Jun-Aug 2026 của chính vertical đó × seasonal ratio YoY 2025 (Sep-Dec 2025 / TB Jun-Aug 2025) của cùng vertical.</li>
-<li><b>Market search trend (Google Search Console):</b> hệ số điều chỉnh theo momentum search demand gần nhất (Jun-Aug 2026 so với Jan-Apr 2026, đã giảm nhẹ ảnh hưởng còn 50%) — PTY 1.070, JOB 1.024, GDS 1.030, <b>VEH 0.903</b> (duy nhất vertical search demand tiếp tục giảm).</li>
-<li><b>Seeding leverage — đúng target:</b> case study Aug (PTY rental, 220tr seeding → 84,424 lead → 2,606đ/lead) áp vào <b>phần Let của PTY</b> (không phải toàn bộ PTY) và toàn phần JOB, theo đúng ngân sách "Creative outreach" file FC2.5: PTY Sep 30tr/Oct-Dec 20tr/tháng → +11,512/+7,675 lead; JOB 82.45tr/tháng → +31,640 lead/tháng.</li>
-</ul>
-<p class="note">GDS và VEH cũng có ngân sách seeding riêng trong file FC2.5 nhưng không tính vào uplift — hiệu suất 2,606đ/lead chỉ đo được từ case study PTY, chưa có cơ sở áp cho 2 vertical này.</p>
-</div>
-
-<div id="subtab-driver-others" class="subtab-panel" data-group="driver">
-<h3>Others <span class="tag tag-draft">forecast riêng theo vertical</span></h3>
-<p class="note">Cùng logic 3 lớp như Direct, không có uplift: baseline riêng vertical (tháng 6/2026 × seasonal ratio YoY 2025 riêng vertical) × hệ số market search trend (GSC, giống Direct). Không có ngân sách/campaign riêng cho nguồn này.</p>
 </div>
 
 </div>
