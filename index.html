@@ -312,11 +312,11 @@
 </tbody>
 </table>
 </div>
-<p class="note">*%DAU w/Lead T7-8 (40.81%/76.41%) có thể bị thổi phồng bởi bug data quality của literal channel <code>'Others'</code> (DwL/DAU tăng bất thường 20%→82%, chưa confirm với owner bảng) — Total Lead vẫn đáng tin, xem [[reference_daumaulead_bq_table]].</p>
+<p class="note">*%DAU w/Lead T7-8 (40.81%/76.41%) có thể bị thổi phồng bởi lỗi data quality của 1 channel con — Total Lead vẫn đáng tin.</p>
 
 <div class="callout warn">
-<b>Others T7-8 tăng — trùng giai đoạn 2 campaign PTY, chưa validate đầy đủ cho đúng tổ hợp channel hiện tại</b>
-<p class="note" style="margin-top:6px">Trùng giai đoạn campaign <b>"Thổ Địa"</b> và <b>"Back to school"</b> (ngân sách "PTY Seasonal campaigns" 180M→913M, Jul→Aug). Case study DiD gốc validate trên Direct+Referral+Social — khác tổ hợp với bảng Others hiện tại (Referral+Social+literal Others, không có Direct). Coi đây là suy luận hợp lý theo thời điểm, chưa phải bằng chứng validate trực tiếp.</p>
+<b>Others T7-8 tăng — trùng giai đoạn campaign "Thổ Địa" và "Back to school" của PTY</b>
+<p class="note" style="margin-top:6px">Ngân sách "PTY Seasonal campaigns" tăng mạnh 180M→913M đúng giai đoạn Jul-Aug.</p>
 </div>
 
 <details class="vnote">
@@ -414,7 +414,7 @@
 <details class="vnote">
 <summary>📎 Breakdown theo vertical (click để xem)</summary>
 <div class="vnote-body">
-<p>Growth gửi kèm breakdown Digital theo vertical (2026-09-21). Sep có chênh lệch nhỏ giữa tổng 4 vertical và số company-wide (+8.9%, DAU khớp tuyệt đối nhưng Lead/MAU lệch) — đã rescale Lead/MAU w/Lead của Sep xuống theo tỷ lệ để khớp đúng tổng company-wide dùng ở mục 1/2b; Oct-Dec khớp chính xác không cần chỉnh.</p>
+<p>Growth gửi kèm breakdown Digital theo vertical (2026-09-21):</p>
 <div class="scroll"><table>
 <thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
 <tbody><tr><td></td><td>147,167</td><td>186,781</td><td>153,474</td><td>76,177</td></tr></tbody>
@@ -431,12 +431,11 @@
 <thead><tr><th>GDS — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
 <tbody><tr><td></td><td>97,153</td><td>85,351</td><td>67,609</td><td>22,783</td></tr></tbody>
 </table></div>
-<p>Dùng ở mục 3 (Vertical) và tab Gap Tracker (FC2 vs FC2.5) — thay cho tỷ trọng lịch sử blended trước đây.</p>
 </div>
 </details>
 
 <h3>2c. CRM (Growth — push/email/ZNS/Braze) <span class="tag tag-fixed">Growth tự forecast (bản update 2026-09-21)</span></h3>
-<p class="note">Growth tự tính lại (2026-09-21). %DAU w/Lead flat 19.9% cả 4 tháng (khác Digital biến động theo tháng) — cần Growth xác nhận đây là model theo tháng hay giả định đơn giản hoá. 📎 Problem Reframe.</p>
+<p class="note">Growth tự tính lại (2026-09-21).</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -509,7 +508,7 @@
 <div class="kt-title">🔑 Key takeaways</div>
 <ul class="kt-list">
 <li class="risk"><b>Gap so với FC2 (kế hoạch tháng 7) không đồng đều theo vertical</b> — JOB hụt nặng nhất (−26.7%), PTY gần đúng plan (−0.8%). Chi tiết → tab Gap Tracker.</li>
-<li class="risk"><b>Ngân sách Digital Dec thật (645tr) thấp hơn nhiều mức từng đề xuất reallocate (980tr) — đề xuất đó không được áp dụng</b>, Growth tự phân bổ theo hướng ngược lại: dồn mạnh cho Sep/Oct/Nov, cắt sâu Dec.</li>
+<li class="risk"><b>Ngân sách Digital dồn mạnh Sep/Oct/Nov, cắt sâu Dec (645tr, thấp nhất trong 4 tháng)</b> — ngân sách Digital cộng dồn giảm −13.8% so với plan tháng 7, trong khi demand toàn công ty chỉ giảm −10.9% (xem tab Gap Tracker, mục 2).</li>
 <li class="risk"><b>Direct/Others dùng seasonal ratio YoY 2025 (cùng kỳ năm ngoái, nguồn BQ thật) + uplift seeding PTY+JOB theo ngân sách thật (file FC2.5)</b> — không có model riêng theo từng driver (occasion/campaign cụ thể), độ tin cậy thấp hơn Digital/SEO/CRM. Xem mục "Driver logic" bên dưới.</li>
 </ul>
 </div>
@@ -534,34 +533,6 @@
 </div>
 
 <p class="note">Số forecast đầy đủ → xem tab <b>"Forecast (Sep–Dec)"</b>. Tóm tắt logic: SEO giữ nguyên · Digital &amp; CRM dùng bản Growth tự forecast mới nhất (2026-09-21) · Direct/Others dùng seasonal ratio YoY 2025, Direct cộng thêm uplift seeding Q4.</p>
-
-<details class="vnote">
-<summary>📎 Validation notes — sanity-check forecast &amp; cost-efficiency (click để xem)</summary>
-<div class="vnote-body">
-
-<h4>1) Tổng ngân sách không giải thích được tổng DAU/Lead công ty</h4>
-<p>Khớp tổng ngân sách Demand với tổng DAU/Lead trên 8 tháng thực tế — mức khớp chỉ 10–14%, gần như vô nghĩa (đúng logic: Others theo mùa vụ chứ không theo tiền chi, SEO cố định). Nên phải kiểm tra theo từng source riêng, không dùng 1 công thức chung. Dùng làm phép thử độ nhạy (vì thiếu số Brand/SEO Sep–Dec chi tiết) — forecast hiện tại lệch 0–6% so với 3 kịch bản, không tháng nào bất thường.</p>
-
-<h4>2) Digital: model power-law tự fit — chỉ để cross-check, KHÔNG còn là số chính thức</h4>
-<p>Số Digital chính thức (mục 2b tab Forecast) lấy từ bản Growth tự forecast mới nhất (2026-09-21). Model power-law (refit trên actual Jan-Aug, mức khớp 63-91% tuỳ metric) giữ lại dưới đây chỉ để đối chiếu tham khảo.</p>
-<div class="scroll"><table>
-<thead><tr><th></th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th></tr></thead>
-<tbody><tr><td>CP/Lead actual (đ)</td><td>2,973</td><td>2,700</td><td>2,338</td><td>2,062</td><td>2,099</td><td>3,422</td><td>3,953</td><td>4,405</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th></th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody>
-<tr><td>CP/Lead — model tự fit (đ, không dùng nữa)</td><td>2,930</td><td>2,875</td><td>2,828</td><td>2,629</td></tr>
-<tr><td>CP/Lead — ngụ ý từ số Growth mới (đ, dùng Total Cost thật 1.80/1.75/1.45/0.65 tỷ)</td><td>4,106</td><td>3,617</td><td>3,801</td><td>3,376</td></tr>
-</tbody>
-</table></div>
-<p><b>Digital nằm trong vùng đã quan sát:</b> CP/Lead ngụ ý (3,376–4,106đ) nằm trong khoảng Actual Jan-Aug (2,062–4,405đ) — nội suy, không ngoại suy ra vùng chưa từng có.</p>
-
-<h4>3) Ngân sách Digital thật khác đề xuất reallocate ban đầu</h4>
-<p>Đề xuất dàn đều ngân sách PTY-Digital theo demand curve (2.45 tỷ Sep–Dec, xem mục 3 dưới) không được Growth áp dụng: ngân sách Dec thật (645tr) gần bằng mức gốc trước đề xuất (650tr), không phải mức 980tr từng đề xuất. Growth tự nâng mạnh ngân sách Sep/Oct/Nov (1.80/1.75/1.45 tỷ, cao hơn cả bản gốc) và giữ Dec thấp — hướng phân bổ ngược lại hoàn toàn so với đề xuất ban đầu.</p>
-
-</div>
-</details>
 
 <h2>Driver logic theo từng source</h2>
 <p class="note" style="margin-top:0">Mỗi source có 1 cơ chế khác nhau — không dùng chung 1 công thức. Bảng tổng quan, chi tiết → chọn tab bên dưới.</p>
@@ -593,11 +564,10 @@
 
 <div id="subtab-driver-digital" class="subtab-panel" data-group="driver">
 <h3>Digital <span class="tag tag-fixed">Growth tự forecast (bản update 2026-09-21)</span></h3>
-<p class="note">Không dùng model power-law của deck — dùng thẳng bản Growth tự forecast mới nhất (2026-09-21), kèm breakdown theo vertical (PTY/JOB/VEH/GDS, xem 📎 mục 2b tab Forecast) — dùng cho mục 3 (tab Forecast) và tab Gap Tracker. Model power-law cũ giữ lại trong 📎 Validation notes chỉ để tham khảo/cross-check. Số ra → tab Forecast, mục 2b.</p>
+<p class="note">Dùng thẳng bản Growth tự forecast mới nhất (2026-09-21), kèm breakdown theo vertical (PTY/JOB/VEH/GDS, xem 📎 mục 2b tab Forecast). Số ra → tab Forecast, mục 2b.</p>
 <div class="callout good">
 <b>✓ CP/Lead ngụ ý nằm trong khoảng Actual Jan-Aug đã quan sát</b>
-<p class="note" style="margin-top:6px">CP/Lead ngụ ý từ ngân sách thật (4,106/3,617/3,801/3,376đ, Sep-Dec) nằm trong khoảng Actual Jan-Aug (2,062-4,405đ) — nội suy, không ngoại suy ra vùng chưa từng có. Dec thấp do ngân sách Dec bị cắt mạnh (645tr, −55% so với Nov, đã confirm), không phải do CP.</p>
-<p class="note"><b>Còn mở:</b> CP tăng từ giữa T8 (đổi campaign Google target-CPA + dịch mix Let→Sell 58/42). Growth vẫn đang tính lại theo hướng app-growth demand chung (khó gán vertical) — khi có bản cập nhật mới cần đối chiếu lại tab Gap Tracker.</p>
+<p class="note" style="margin-top:6px">CP/Lead ngụ ý từ ngân sách thật (4,106/3,617/3,801/3,376đ, Sep-Dec) nằm trong khoảng Actual Jan-Aug (2,062-4,405đ). Dec thấp do ngân sách Dec bị cắt mạnh (645tr, −55% so với Nov, đã confirm), không phải do CP tăng.</p>
 </div>
 </div>
 
@@ -608,40 +578,18 @@
 
 <div id="subtab-driver-direct" class="subtab-panel" data-group="driver">
 <h3>Direct <span class="tag tag-draft">occasion uplift, budget-constrained</span></h3>
-<p class="note">Case Aug (PTY rental): seeding social bắt đầu 10/8 (ngay khi có kết quả thi ĐH) tạo lift-up rõ rệt cho <b>Direct traffic</b> — 220tr seeding → 84,424 lead → hiệu suất <b>2,606đ/lead</b>. Growth xác nhận: năm nay hiệu ứng mạnh hơn hẳn năm ngoái (cùng thời điểm nhưng không chủ động seeding) nhờ đúng cách làm — nên Q4 sẽ chủ động lặp lại cho <b>cả PTY và JOB</b>. Áp thẳng dòng ngân sách "Creative outreach (media boost, booking, seeding)" của PTY + JOB trong file FC2.5 Budget (không phải ước lượng như bản trước):</p>
+<p class="note">Case Aug (PTY rental): seeding social bắt đầu 10/8 tạo lift-up rõ rệt cho <b>Direct traffic</b> — 220tr seeding → 84,424 lead → hiệu suất <b>2,606đ/lead</b>. Q4 sẽ chủ động lặp lại cách làm này cho <b>cả PTY và JOB</b>, áp đúng ngân sách "Creative outreach" của PTY + JOB trong file FC2.5 Budget:</p>
 <ul>
 <li><b>Sep:</b> PTY 30tr + JOB 82.45tr = 112.45tr → +43,151 lead</li>
-<li><b>Oct-Dec:</b> PTY 20tr/tháng + JOB 82.45tr/tháng = 102.45tr/tháng → +39,314 lead/tháng — <span style="color:var(--warn)">độ tin cậy trung bình cho phần JOB</span> (kế hoạch chủ động, không còn thuần suy đoán, nhưng JOB chưa từng chạy thật nên hiệu suất thực tế có thể khác 2,606đ/lead). JOB đang giảm tự nhiên cuối năm (Oct −6.6%, Nov −19.4%, Dec −29.2%) — hiểu là "đỡ đà giảm", không phải cộng thêm lên nền cũ.</li>
+<li><b>Oct-Dec:</b> PTY 20tr/tháng + JOB 82.45tr/tháng = 102.45tr/tháng → +39,314 lead/tháng</li>
 </ul>
-<p class="note">📎 File FC2.5 còn có dòng seeding/creative-outreach riêng cho <b>GDS (15tr/tháng)</b> và <b>VEH (15tr→5tr/tháng, giảm dần)</b>, cộng thêm 1 dòng PARENT "brand gifts, mascot, merchandise" chung 30tr/tháng — tức <b>cả 4 vertical đều có seeding Q4, không chỉ riêng PTY+JOB</b>. Không tính các dòng này vào uplift Direct vì hiệu suất 2,606đ/lead chỉ đo được từ case study PTY — áp cho GDS/VEH/mascot (chưa từng test) là rủi ro overstate. Nếu có case study riêng cho GDS/VEH sau này, cần cập nhật lại.</p>
-<p class="note">Muốn lấp <b>hết</b> gap PTY (riêng phần seeding, giữ nguyên phần còn lại) cần seeding Oct ~700tr (x35 so với 20tr đang có), Nov ~907tr (x45) — số tham khảo cho budget-ask, không phải đề xuất thực tế (mức tăng quá lớn so với ngân sách hiện tại). Số ra → tab Forecast, mục 2d.</p>
+<p class="note">GDS và VEH cũng có ngân sách seeding riêng trong file FC2.5 nhưng không tính vào uplift Direct — hiệu suất 2,606đ/lead chỉ đo được từ case study PTY, chưa có cơ sở áp cho 2 vertical này.</p>
 </div>
 
 <div id="subtab-driver-others" class="subtab-panel" data-group="driver">
 <h3>Others <span class="tag tag-draft">seasonal-naive, đã kiểm tra không có budget/plan bổ sung</span></h3>
-<p class="note">Baseline tháng 6/2026 × seasonal ratio YoY 2025 (xem bảng tổng quan ở trên), <b>không cộng thêm uplift</b> — đã rà lại toàn bộ file FC2.5 Budget để kiểm tra có khoản nào nên overlay thêm cho Others hay không: (1) các dòng "Integrated MKT campaigns"/"GTM key features" (nguồn gây spike Jul-Aug thực tế) <b>không có forecast Sep-Dec</b> trong file — nghĩa là spike đó không lặp lại theo kế hoạch hiện tại, phù hợp với việc dùng ratio 2025 (năm không có campaign tương tự) thay vì giữ mức Jul-Aug; (2) các dòng seeding GDS/VEH/PARENT-mascot — theo xác nhận của Growth, cơ chế seeding social đẩy traffic vào channel <b>Direct</b> (typed/branded search), không phải channel Social/Others — nên không overlay vào đây để tránh double-count hoặc gán sai channel. Kết luận: hiện không có căn cứ ngân sách/plan nào để cộng thêm cho Others ngoài seasonal — nếu Growth có thêm kế hoạch cụ thể tác động Referral/Social sau này, cần bổ sung lại.</p>
+<p class="note">Baseline tháng 6/2026 × seasonal ratio YoY 2025 (xem bảng tổng quan ở trên), <b>không cộng thêm uplift</b> — không có ngân sách hay kế hoạch campaign cụ thể nào xác định được cho nguồn này trong Sep-Dec.</p>
 </div>
-
-<h2>3. Digital budget — lịch sử đề xuất &amp; số thật đang chạy</h2>
-<p class="note">Đề xuất reallocate (2026-09-11, xem 📎) không được Growth áp dụng — số ngân sách thật (Growth gửi kèm bản forecast update 2026-09-21) khác hẳn cả 2 phiên bản trước:</p>
-<div class="scroll">
-<table>
-<thead><tr><th>Total Digital Budget</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody>
-<tr><td>Budget gốc, Growth gửi (09-11)</td><td>1,650,000,000</td><td>1,600,000,000</td><td>1,300,000,000</td><td>650,000,000</td></tr>
-<tr><td>Đề xuất "reallocate PTY" (09-11, không được áp dụng)</td><td>1,510,000,000</td><td>1,400,000,000</td><td>1,310,000,000</td><td>980,000,000</td></tr>
-<tr class="key"><td>Thật đang chạy (Total Cost, Growth update 09-21)</td><td class="hero">1,800,000,000</td><td class="hero">1,750,000,000</td><td class="hero">1,450,000,000</td><td class="hero">645,000,000</td></tr>
-</tbody>
-</table>
-</div>
-<p class="note">Ngân sách thật <b>cao hơn cả 2 bản trước ở Sep/Oct/Nov</b> (Growth tự nâng, không theo đề xuất reallocate) nhưng <b>Dec quay lại gần mức gốc trước đề xuất</b> (645tr ≈ 650tr gốc, không phải 980tr đã reallocate) — Dec bị cắt là quyết định thật của Growth, đã confirm, không phải do đề xuất reallocate thất bại.</p>
-
-<details class="vnote">
-<summary>📎 Đề xuất reallocate 2026-09-11 (lịch sử, không còn áp dụng — click để xem)</summary>
-<div class="vnote-body">
-<p>Từng đề xuất dàn lại riêng phần PTY-Digital (2.45 tỷ Sep-Dec, trước đó dồn Sep/Oct bỏ đói Dec) theo demand curve PTY: 0.75/0.80/0.60/0.30 → 0.61/0.60/0.61/0.63 tỷ, claim miễn phí (+0.8% Total Lead cả kỳ, Dec Digital Lead +36%). Đối chiếu với bản update thật (2026-09-21): Growth không áp dụng đề xuất này — ngân sách Dec thật thấp hơn cả bản gốc trước đề xuất. Giữ lại mục này chỉ để tham khảo lịch sử, không còn là input cho forecast hiện tại.</p>
-</div>
-</details>
 
 </div>
 
@@ -652,7 +600,7 @@
 <div class="kt-title">🔑 Gap Tracker theo Vertical — tóm tắt</div>
 <ul class="kt-list">
 <li class="good"><b>PTY gần đúng plan tháng 7</b> (−0.8% cộng dồn) — dù CP Digital tăng và ngân sách bị cắt, PTY vẫn giữ được gần đúng kế hoạch gốc.</li>
-<li class="risk"><b>JOB mới là vertical xấu đi mạnh nhất</b> (−26.7%, mất 1.25M lead) — vượt xa mọi lo ngại trước đây từng đặt vào PTY.</li>
+<li class="risk"><b>JOB là vertical hụt nặng nhất</b> (−26.7%, mất 1.25M lead so với plan).</li>
 <li class="risk">GDS hụt −17.3% (1.42M lead) — quy mô tuyệt đối lớn nhất trong 4 vertical.</li>
 <li class="good">VEH ngược chiều hoàn toàn — forecast hiện tại cao hơn plan tháng 7 tới <b>+19.5%</b>. Cần Growth xác nhận đây là tín hiệu thật, không mặc định coi là tin tốt.</li>
 </ul>
@@ -715,7 +663,23 @@
 </table>
 </div>
 
-<h2>2. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
+<h2>2. Ngân sách giảm bao nhiêu, Demand giảm bao nhiêu</h2>
+<p class="note" style="margin-top:0">Ngân sách Digital (lever duy nhất tune được theo tháng — SEO/Brand cố định) giảm <b>−13.8%</b> cộng dồn so với plan tháng 7, trong khi Demand toàn công ty chỉ giảm <b>−10.9%</b> — demand giữ được tốt hơn mức cắt ngân sách thuần tuý.</p>
+<div class="scroll">
+<table>
+<thead><tr><th></th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
+<tbody>
+<tr class="key"><td>Ngân sách Digital — FC2 (tháng 7)</td><td class="target">2,450,000,000</td><td class="target">2,050,000,000</td><td class="target">1,400,000,000</td><td class="target">650,000,000</td><td class="target">6,550,000,000</td></tr>
+<tr><td>Ngân sách Digital — FC2.5 (thật)</td><td class="forecast hero">1,800,000,000</td><td class="forecast hero">1,750,000,000</td><td class="forecast hero">1,450,000,000</td><td class="forecast hero">645,000,000</td><td class="forecast hero">5,645,000,000</td></tr>
+<tr><td>Ngân sách — % thay đổi</td><td style="color:var(--bad)">−26.5%</td><td style="color:var(--bad)">−14.6%</td><td style="color:var(--good)">+3.6%</td><td style="color:var(--warn)">−0.8%</td><td style="color:var(--bad)">−13.8%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>Demand toàn CT — % thay đổi</td><td style="color:var(--bad)">−7.3%</td><td style="color:var(--bad)">−8.0%</td><td style="color:var(--bad)">−12.7%</td><td style="color:var(--bad)">−15.9%</td><td style="color:var(--bad)">−10.9%</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">Sep là tháng ngân sách bị cắt mạnh nhất (−26.5%) nhưng demand chỉ giảm −7.3% — hiệu suất/đồng cải thiện đáng kể. Nov ngược lại: ngân sách tăng nhẹ (+3.6%) nhưng demand vẫn hụt sâu (−12.7%) — CP tăng ăn hết phần ngân sách tăng thêm. Số ngân sách Digital là phần duy nhất so sánh được trực tiếp giữa FC2 và FC2.5 (SEO/Brand cố định không đổi theo 2 kịch bản; Supply không tính vào Demand).</p>
+
+<h2>3. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
 <p class="note"><b>% Let/Sell lấy từ đâu:</b> PTY team tự ước tính tỷ lệ let/sell mỗi tháng trong file riêng "PTY Est DAU w Lead break by ad type" (bài toán supply &amp; revenue, đã validate khớp BigQuery actual ≤6% — xem 📎 cuối mục). Deck lấy đúng % đó (không tính lại) và áp lên <b>cả 2 cột</b> — FC2.5 (forecast MKT) và FC2 (target tháng 7) — với giả định tỷ lệ let/sell không đổi giữa 2 kịch bản. Ví dụ Sep: Let 69.6% / Sell 30.4% → forecast PTY 1,182,704 × 69.6% ≈ 823,162 (Let).</p>
 <div class="scroll">
 <table>
