@@ -420,7 +420,7 @@
 <thead><tr><th>GDS — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
 <tbody><tr><td></td><td>97,153</td><td>85,351</td><td>67,609</td><td>22,783</td></tr></tbody>
 </table></div>
-<p>Dùng ở mục 3 (Vertical) và mục 4 (Zoom in PTY) — thay cho tỷ trọng lịch sử blended trước đây.</p>
+<p>Dùng ở mục 3 (Vertical), mục 4 (Gap Tracker) và mục 5 (Zoom in PTY) — thay cho tỷ trọng lịch sử blended trước đây.</p>
 </div>
 </details>
 
@@ -487,25 +487,54 @@
 </tbody>
 </table>
 </div>
-<p class="note">Digital giờ dùng số vertical thật (thay tỷ trọng blended) — GDS vẫn là vertical lớn nhất nhưng đã giảm so với ước tính blended trước đó, phản ánh đúng thực tế hơn. Chỉ PTY (mục 4) có model let/sell sâu hơn.</p>
+<p class="note">Digital giờ dùng số vertical thật (thay tỷ trọng blended) — GDS vẫn là vertical lớn nhất nhưng đã giảm so với ước tính blended trước đó, phản ánh đúng thực tế hơn. Gap Tracker theo cả 4 vertical (so với FC2) → mục 4; chỉ PTY (mục 5) có model let/sell sâu hơn.</p>
 
-<h2>4. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
-<p class="note">PTY ở đây = Digital theo đúng số Growth forecast riêng cho PTY (2026-09-21) + phần SEO/CRM/Direct/Others theo tỷ trọng lịch sử — chính xác hơn mục 3 (vốn áp tỷ trọng đều cho cả Digital). Chia theo tỷ lệ let/sell của vertical. <span class="target">Chữ nghiêng xám</span> = mức vertical team cần (target), không phải forecast.</p>
+<h2>4. Gap Tracker theo Vertical — MKT forecast (FC2.5) vs FC2 (tháng 7, trước khi cắt budget)</h2>
+<p class="note">FC2 = forecast gốc vertical team làm tháng 7, trước khi ngân sách bị cắt. FC2.5 = forecast MKT hiện tại (mục 1-3), đã phản ánh đúng budget/CP thật đang chạy. Gap = mức MKT đang hụt/vượt so với plan gốc — không đồng đều giữa 4 vertical.</p>
+<div class="scroll">
+<table>
+<thead><tr><th>Vertical</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
+<tbody>
+<tr class="key"><td>Toàn CT — MKT forecast (FC2.5)</td><td class="forecast hero">4,703,381</td><td class="forecast hero">4,786,103</td><td class="forecast hero">4,368,092</td><td class="forecast hero">4,064,692</td><td class="forecast hero">17,922,268</td></tr>
+<tr><td>Toàn CT — FC2 (tháng 7)</td><td class="target">5,076,138</td><td class="target">5,204,059</td><td class="target">5,003,599</td><td class="target">4,832,399</td><td class="target">20,116,195</td></tr>
+<tr><td>Toàn CT — Gap</td><td style="color:var(--bad)">−7.3%</td><td style="color:var(--bad)">−8.0%</td><td style="color:var(--bad)">−12.7%</td><td style="color:var(--bad)">−15.9%</td><td style="color:var(--bad)">−10.9%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>PTY — forecast</td><td class="forecast">1,182,704</td><td class="forecast">1,231,360</td><td class="forecast">1,121,436</td><td class="forecast">1,016,696</td><td class="forecast">4,552,196</td></tr>
+<tr><td>PTY — FC2</td><td class="target">1,186,954</td><td class="target">1,213,055</td><td class="target">1,138,157</td><td class="target">1,050,410</td><td class="target">4,588,576</td></tr>
+<tr><td>PTY — Gap</td><td style="color:var(--good)">−0.4%</td><td style="color:var(--good)">+1.5%</td><td style="color:var(--good)">−1.5%</td><td style="color:var(--warn)">−3.2%</td><td style="color:var(--good)">−0.8%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>JOB — forecast</td><td class="forecast">901,028</td><td class="forecast">937,653</td><td class="forecast">831,565</td><td class="forecast">754,352</td><td class="forecast">3,424,598</td></tr>
+<tr><td>JOB — FC2</td><td class="target">1,150,038</td><td class="target">1,202,619</td><td class="target">1,162,008</td><td class="target">1,156,912</td><td class="target">4,671,577</td></tr>
+<tr><td>JOB — Gap</td><td style="color:var(--bad)">−21.7%</td><td style="color:var(--bad)">−22.0%</td><td style="color:var(--bad)">−28.4%</td><td style="color:var(--bad)">−34.8%</td><td style="color:var(--bad)">−26.7%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>GDS — forecast</td><td class="forecast">1,792,056</td><td class="forecast">1,795,053</td><td class="forecast">1,651,908</td><td class="forecast">1,562,167</td><td class="forecast">6,801,184</td></tr>
+<tr><td>GDS — FC2</td><td class="target">2,061,891</td><td class="target">2,101,590</td><td class="target">2,037,057</td><td class="target">2,024,565</td><td class="target">8,225,103</td></tr>
+<tr><td>GDS — Gap</td><td style="color:var(--bad)">−13.1%</td><td style="color:var(--bad)">−14.6%</td><td style="color:var(--bad)">−18.9%</td><td style="color:var(--bad)">−22.8%</td><td style="color:var(--bad)">−17.3%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>VEH — forecast</td><td class="forecast">827,593</td><td class="forecast">822,038</td><td class="forecast">763,183</td><td class="forecast">731,475</td><td class="forecast">3,144,289</td></tr>
+<tr><td>VEH — FC2</td><td class="target">677,255</td><td class="target">686,795</td><td class="target">666,376</td><td class="target">600,512</td><td class="target">2,630,938</td></tr>
+<tr><td>VEH — Gap</td><td style="color:var(--good)">+22.2%</td><td style="color:var(--good)">+19.7%</td><td style="color:var(--good)">+14.5%</td><td style="color:var(--good)">+21.8%</td><td style="color:var(--good)">+19.5%</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note"><b>Narrative đảo ngược so với trước</b> — PTY (từng là tâm điểm gap −17.4% khi so với 1 file target riêng) thực ra gần đúng plan tháng 7 (−0.8%). <b>JOB mới là vertical xấu đi mạnh nhất</b> (−26.7%, mất 1.25M lead so với plan), theo sau là GDS (−17.3%, mất 1.42M lead — quy mô tuyệt đối lớn nhất). VEH ngược chiều hoàn toàn, forecast hiện tại cao hơn plan tháng 7 tới +19.5% — cần xác minh đây là tín hiệu tích cực thật hay model đang overstate VEH (📎 Problem Reframe).</p>
+
+<h2>5. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
+<p class="note">Chia PTY (mục 4) theo tỷ lệ let/sell vertical đưa ra (69–72% Let / 28–31% Sell, áp cho cả forecast và FC2). <span class="target">Chữ nghiêng xám</span> = FC2 tháng 7, không phải forecast.</p>
 <div class="scroll">
 <table>
 <thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
 <tbody>
 <tr class="key"><td>MKT forecast</td><td class="forecast hero">1,182,704</td><td class="forecast hero">1,231,360</td><td class="forecast hero">1,121,436</td><td class="forecast hero">1,016,696</td><td class="forecast hero">4,552,196</td></tr>
-<tr><td>Target vertical</td><td class="target">1,382,343</td><td class="target">1,349,934</td><td class="target">1,361,353</td><td class="target">1,414,350</td><td class="target">5,507,980</td></tr>
-<tr><td>Hụt bao nhiêu %</td><td style="color:var(--bad)">−14.4%</td><td style="color:var(--bad)">−8.8%</td><td style="color:var(--bad)">−17.6%</td><td style="color:var(--bad)">−28.1%</td><td style="color:var(--bad)">−17.4%</td></tr>
-<tr><td>&nbsp;&nbsp;— Let, forecast</td><td class="forecast">823,044</td><td class="forecast">861,090</td><td class="forecast">809,004</td><td class="forecast">702,130</td><td class="forecast">3,195,268</td></tr>
-<tr><td>&nbsp;&nbsp;— Let, target</td><td class="target">962,010</td><td class="target">944,055</td><td class="target">982,027</td><td class="target">976,755</td><td class="target">3,864,847</td></tr>
-<tr><td>&nbsp;&nbsp;— Sell, forecast</td><td class="forecast">359,661</td><td class="forecast">370,269</td><td class="forecast">312,431</td><td class="forecast">314,566</td><td class="forecast">1,356,928</td></tr>
-<tr><td>&nbsp;&nbsp;— Sell, target</td><td class="target">420,333</td><td class="target">405,879</td><td class="target">379,326</td><td class="target">437,595</td><td class="target">1,643,133</td></tr>
+<tr><td>FC2 (tháng 7)</td><td class="target">1,186,954</td><td class="target">1,213,055</td><td class="target">1,138,157</td><td class="target">1,050,410</td><td class="target">4,588,576</td></tr>
+<tr><td>&nbsp;&nbsp;— Let, forecast</td><td class="forecast">823,162</td><td class="forecast">860,721</td><td class="forecast">808,555</td><td class="forecast">702,537</td><td class="forecast">3,194,975</td></tr>
+<tr><td>&nbsp;&nbsp;— Let, FC2</td><td class="target">826,120</td><td class="target">847,925</td><td class="target">820,611</td><td class="target">725,833</td><td class="target">3,220,490</td></tr>
+<tr><td>&nbsp;&nbsp;— Sell, forecast</td><td class="forecast">359,542</td><td class="forecast">370,639</td><td class="forecast">312,881</td><td class="forecast">314,159</td><td class="forecast">1,357,221</td></tr>
+<tr><td>&nbsp;&nbsp;— Sell, FC2</td><td class="target">360,834</td><td class="target">365,130</td><td class="target">317,546</td><td class="target">324,577</td><td class="target">1,368,086</td></tr>
 </tbody>
 </table>
 </div>
-<p class="note">Hụt 8.8-28.1% mỗi tháng, cộng dồn <b>−17.4%</b> — cải thiện thêm so với mục 3 (−21.0%, dùng tỷ trọng blended cho Digital) nhờ PTY nhận Digital budget thật cao hơn tỷ trọng lịch sử ước tính. Đây là số chính xác nhất hiện có cho PTY (📎 Problem Reframe).</p>
+<p class="note">PTY gần đúng plan cả ở Let lẫn Sell — không có lệch mix đáng kể giữa 2 loại tin.</p>
 
 </div>
 
@@ -515,11 +544,11 @@
 <div class="kt-box">
 <div class="kt-title">🔑 Key takeaways</div>
 <ul class="kt-list">
-<li class="good"><b>Growth tự cập nhật lại Digital & CRM, kèm breakdown theo vertical (2026-09-21, collaborator trực tiếp trên repo)</b> — Digital tăng mạnh Sep-Nov (+72% cộng dồn 3 tháng, Dec gần như không đổi), CRM tăng +8%. Gap PTY (dùng đúng Digital PTY thật, mục 4) <b>cải thiện đáng kể</b>: <span class="kt-num bad">−8.8% đến −28.1%</span> mỗi tháng, cộng dồn <span class="kt-num bad">−17.4%</span>. <b>Rủi ro:</b> Growth sửa forecast tới 72% chỉ trong 3 ngày — bản thân đây là dấu hiệu forecast chưa ổn định, cần hỏi rõ nguyên nhân trước khi coi là số chốt.</li>
+<li class="risk"><b>So với FC2 (kế hoạch gốc tháng 7, trước khi cắt budget): PTY gần đúng plan (−0.8%), nhưng JOB hụt nặng nhất (−26.7%, mất 1.25M lead)</b> — đảo ngược hẳn narrative "PTY là vấn đề chính" của các bản trước. GDS cũng hụt đáng kể (−17.3%, 1.42M lead — quy mô tuyệt đối lớn nhất). VEH ngược chiều, forecast cao hơn FC2 tới +19.5% — cần Growth xác nhận đây là tín hiệu thật.</li>
+<li class="good">Growth tự cập nhật lại Digital & CRM, kèm breakdown theo vertical (2026-09-21) — Digital tăng mạnh Sep-Nov (+72% cộng dồn 3 tháng, Dec gần như không đổi), CRM tăng +8%. <b>Rủi ro:</b> Growth sửa forecast tới 72% chỉ trong 3 ngày — bản thân đây là dấu hiệu forecast chưa ổn định, cần hỏi rõ nguyên nhân trước khi coi là số chốt.</li>
 <li class="risk"><b>Ngân sách Digital Dec thật (645tr) thấp hơn nhiều mức từng đề xuất reallocate (980tr) — đề xuất đó không được áp dụng</b>, Growth tự phân bổ theo hướng ngược lại: dồn mạnh cho Sep/Oct/Nov, cắt sâu Dec.</li>
-<li class="risk">Tháng 12 vẫn là điểm nóng nhất: hụt hơn 30%, ngân sách Digital Dec bị cắt mạnh nhất (645tr, −55% so với Nov) và JOB (kênh được kỳ vọng bù đắp thêm) đang có xu hướng <b>giảm tự nhiên −29%</b> vào Dec — rủi ro kép.</li>
+<li class="risk">Tháng 12 vẫn là điểm nóng nhất cho toàn công ty: hụt −15.9% so với FC2, ngân sách Digital Dec bị cắt mạnh nhất (645tr, −55% so với Nov) và JOB đang có xu hướng <b>giảm tự nhiên −29%</b> vào Dec — rủi ro kép.</li>
 <li class="risk"><b>Direct/Others dùng seasonal ratio YoY 2025 (cùng kỳ năm ngoái, nguồn BQ thật) + uplift seeding PTY+JOB theo ngân sách thật (file FC2.5)</b> — không có model riêng theo từng driver (occasion/campaign cụ thể), độ tin cậy thấp hơn Digital/SEO/CRM. Xem mục "Driver logic" bên dưới.</li>
-<li class="risk"><b>Vertical breakdown (mục 3-4) giảm độ chính xác tạm thời</b> — bản update Digital/CRM mới của Growth chỉ có số company-wide, chưa kèm breakdown theo vertical như file FC3 cũ, nên PTY/GDS/VEH/JOB giờ đều dùng chung 1 tỷ trọng lịch sử blended thay vì Digital dùng số thật riêng từng vertical. Cần Growth gửi breakdown mới để khôi phục độ chính xác.</li>
 </ul>
 </div>
 
@@ -591,14 +620,14 @@
 <p class="note">Kênh <code>Growth (CRM)</code> trong <code>daumaulead_mkt_rp</code> — theo pipeline Dataform gốc (table owner xác nhận): <code>medium IN ('push_note','push_noti','pushnote','noti','journeys','braze','growth_social')</code> HOẶC <code>channelGrouping='Growth'</code>. Braze/journeys gửi được cả push lẫn in-app, không tách theo kênh gửi ở field này — <b>không thuần out-app</b>. Actual Jan-Aug lấy trực tiếp từ BQ; Forecast Sep-Dec dùng số Growth team tự tính (không qua model power-law của deck). Số ra → tab Actual mục 2c, tab Forecast mục 2c.</p>
 
 <h3>Digital <span class="tag tag-fixed">Growth tự forecast (bản update 2026-09-21)</span></h3>
-<p class="note">Không dùng model power-law của deck — dùng thẳng bản Growth tự forecast mới nhất (2026-09-21, thay file FC3 cũ 2026-09-18). Bản mới <b>chưa kèm breakdown theo vertical</b> (khác FC3 cũ) — mục "Zoom in PTY" tạm dùng tỷ trọng lịch sử cho tới khi có breakdown mới. Model power-law cũ giữ lại trong 📎 Validation notes chỉ để tham khảo/cross-check. Số ra → tab Forecast, mục 2b.</p>
+<p class="note">Không dùng model power-law của deck — dùng thẳng bản Growth tự forecast mới nhất (2026-09-21), kèm breakdown theo vertical (PTY/JOB/VEH/GDS, xem 📎 mục 2b tab Forecast) — dùng cho mục 3-4. Model power-law cũ giữ lại trong 📎 Validation notes chỉ để tham khảo/cross-check. Số ra → tab Forecast, mục 2b.</p>
 
 <div class="callout good">
 <b>✓ Digital tăng đáng kể trong bản update mới — khớp sát self-fit độc lập, CP/Lead ngụ ý về lại vùng đã quan sát</b>
 <p class="note" style="margin-top:6px">So với FC3 cũ (258k/261k/239k/195k), bản mới (438k/484k/381k/191k) tăng mạnh Sep-Nov (+72% cộng dồn 3 tháng, khớp sát self-fit độc lập tính từ budget+trend YoY, chênh 0.5-21%); Dec gần như không đổi. CP/Lead ngụ ý từ ngân sách thật (4,106/3,617/3,801/3,376đ) giờ nằm trong khoảng Jan-Aug đã quan sát (2,062-4,405đ) — không còn ngoại suy ra vùng chưa từng có.</p>
 <p class="note"><b>Dec vẫn thấp</b> — không phải do CP mà do ngân sách Dec bị cắt mạnh (645tr, −55% so với Nov, đã confirm). Gap PTY tính lại theo số này (kèm breakdown vertical thật) <b>cải thiện đáng kể</b> — còn −17.4% cộng dồn.</p>
 <p class="note"><b>Rủi ro cần lưu ý:</b> Growth tự sửa forecast Digital tăng 72% (Sep-Nov) chỉ trong 3 ngày (09-18 → 09-21) — bản thân biên độ sửa này là dấu hiệu forecast Digital của Growth <b>chưa ổn định</b>, không nên coi bản mới là "chốt cuối cùng" chỉ vì mới hơn hoặc khớp self-fit hơn. Nên hỏi Growth: điều gì thay đổi giữa 2 bản (campaign mới confirm, hay chỉ là điều chỉnh ước lượng)?</p>
-<p class="note"><b>Còn mở:</b> nguyên nhân CP tăng từ giữa T8 (đổi campaign Google target-CPA + dịch mix Let→Sell 58/42) vẫn đúng hướng nhưng không còn là lý do chính khiến gap lớn — ngân sách Dec bị cắt mới là driver chính giờ đây. Growth vẫn đang tính lại theo hướng app-growth demand chung (khó gán vertical) — khi có breakdown mới cần đối chiếu lại mục "Zoom in PTY".</p>
+<p class="note"><b>Còn mở:</b> nguyên nhân CP tăng từ giữa T8 (đổi campaign Google target-CPA + dịch mix Let→Sell 58/42) vẫn đúng hướng nhưng không còn là lý do chính khiến gap lớn — ngân sách Dec bị cắt mới là driver chính giờ đây. Growth vẫn đang tính lại theo hướng app-growth demand chung (khó gán vertical) — khi có bản cập nhật mới cần đối chiếu lại toàn bộ Gap Tracker theo vertical.</p>
 </div>
 
 <h3>Direct <span class="tag tag-draft">occasion uplift, budget-constrained</span></h3>
@@ -613,42 +642,42 @@
 <h3>Others <span class="tag tag-draft">seasonal-naive, đã kiểm tra không có budget/plan bổ sung</span></h3>
 <p class="note">Baseline tháng 6/2026 × seasonal ratio YoY 2025 (xem bảng Driver logic ở trên), <b>không cộng thêm uplift</b> — đã rà lại toàn bộ file FC2.5 Budget để kiểm tra có khoản nào nên overlay thêm cho Others hay không: (1) các dòng "Integrated MKT campaigns"/"GTM key features" (nguồn gây spike Jul-Aug thực tế) <b>không có forecast Sep-Dec</b> trong file — nghĩa là spike đó không lặp lại theo kế hoạch hiện tại, phù hợp với việc dùng ratio 2025 (năm không có campaign tương tự) thay vì giữ mức Jul-Aug; (2) các dòng seeding GDS/VEH/PARENT-mascot — theo xác nhận của Growth, cơ chế seeding social đẩy traffic vào channel <b>Direct</b> (typed/branded search), không phải channel Social/Others — nên không overlay vào đây để tránh double-count hoặc gán sai channel. Kết luận: hiện không có căn cứ ngân sách/plan nào để cộng thêm cho Others ngoài seasonal — nếu Growth có thêm kế hoạch cụ thể tác động Referral/Social sau này, cần bổ sung lại.</p>
 
-<h2>Forecast theo Vertical: PTY cần bao nhiêu, MKT đang hụt bao nhiêu?</h2>
-<p class="note" style="margin-top:0">PTY = tỷ trọng lịch sử blended ~24.6% áp cho Tổng công ty (số forecast xem tab Forecast T9-T12, mục 3-4) — tạm thời không tách riêng Digital theo vertical vì bản update mới của Growth chưa kèm breakdown.</p>
-<div class="callout good">
-<b>✓ Gap PTY cải thiện đáng kể — Growth tự nâng forecast Digital & CRM, khớp sát self-fit độc lập</b>
-<p class="note" style="margin-top:6px">Bản update mới nhất của Growth (2026-09-21) cho Digital+CRM cao hơn hẳn bản trước, kèm breakdown theo vertical (thay tỷ trọng blended) — gap PTY giảm xuống <b>−17.4% cộng dồn</b>, số đáng tin nhất tới hiện tại. Lưu ý: Growth sửa forecast Digital biên độ lớn (+72% Sep-Nov) chỉ trong vài ngày — nên xác nhận thêm với Growth trước khi coi đây là số chốt cuối cùng (xem phần "Digital" ở dưới).</p>
+<h2>Gap Tracker theo Vertical: FC2.5 (forecast hiện tại) vs FC2 (tháng 7, trước khi cắt budget)</h2>
+<p class="note" style="margin-top:0">Digital theo đúng breakdown vertical Growth gửi (2026-09-21); SEO/CRM/Direct/Others theo tỷ trọng lịch sử ~24.6% PTY. So với FC2 — plan gốc vertical team làm tháng 7, trước khi ngân sách bị cắt (số forecast đầy đủ → tab Forecast, mục 4).</p>
+<div class="callout warn">
+<b>⚠ Narrative đảo ngược: PTY gần đúng plan, JOB mới là vertical xấu đi mạnh nhất</b>
+<p class="note" style="margin-top:6px">So với FC2 tháng 7: <b>PTY chỉ hụt −0.8% cộng dồn</b> (gần như đi đúng kế hoạch, dù CP Digital tăng và budget bị cắt). <b>JOB hụt −26.7%</b> (mất 1.25M lead) — vertical xấu đi mạnh nhất, vượt xa mọi lo ngại trước đây về PTY. GDS hụt −17.3% (1.42M lead, quy mô tuyệt đối lớn nhất). VEH ngược chiều hoàn toàn — forecast hiện tại <b>cao hơn</b> FC2 tới +19.5%, cần xác minh với Growth đây là tín hiệu thật hay model đang overstate.</p>
 </div>
 <div class="gap-tracker" id="gap-tracker">
   <div class="gap-card">
-    <div class="gm">Sep <span class="pill watch">WATCH</span></div>
-    <div class="gap-pct watch">Hụt 14.4%</div>
-    <div class="bar-track"><div class="bar-fill watch" style="width:48%"></div></div>
-    <div class="gap-sub">MKT forecast ~1.18M lead, PTY cần ~1.38M — <b>thiếu ~200k lead</b></div>
+    <div class="gm">PTY <span class="pill ok">OK</span></div>
+    <div class="gap-pct ok">Hụt 0.8%</div>
+    <div class="bar-track"><div class="bar-fill ok" style="width:3%"></div></div>
+    <div class="gap-sub">Forecast 4.55M, FC2 4.59M — <b>gần đúng plan</b></div>
   </div>
   <div class="gap-card">
-    <div class="gm">Oct <span class="pill watch">WATCH</span></div>
-    <div class="gap-pct watch">Hụt 8.8%</div>
-    <div class="bar-track"><div class="bar-fill watch" style="width:29%"></div></div>
-    <div class="gap-sub">MKT forecast ~1.23M lead, PTY cần ~1.35M — <b>thiếu ~119k lead</b></div>
+    <div class="gm">JOB <span class="pill risk">AT RISK</span></div>
+    <div class="gap-pct risk">Hụt 26.7%</div>
+    <div class="bar-track"><div class="bar-fill risk" style="width:89%"></div></div>
+    <div class="gap-sub">Forecast 3.42M, FC2 4.67M — <b>thiếu 1.25M lead</b> (xấu nhất)</div>
   </div>
   <div class="gap-card">
-    <div class="gm">Nov <span class="pill watch">WATCH</span></div>
-    <div class="gap-pct watch">Hụt 17.6%</div>
-    <div class="bar-track"><div class="bar-fill watch" style="width:59%"></div></div>
-    <div class="gap-sub">MKT forecast ~1.12M lead, PTY cần ~1.36M — <b>thiếu ~240k lead</b></div>
+    <div class="gm">GDS <span class="pill risk">AT RISK</span></div>
+    <div class="gap-pct risk">Hụt 17.3%</div>
+    <div class="bar-track"><div class="bar-fill risk" style="width:58%"></div></div>
+    <div class="gap-sub">Forecast 6.80M, FC2 8.23M — <b>thiếu 1.42M lead</b> (quy mô lớn nhất)</div>
   </div>
   <div class="gap-card">
-    <div class="gm">Dec <span class="pill risk">AT RISK</span></div>
-    <div class="gap-pct risk">Hụt 28.1%</div>
-    <div class="bar-track"><div class="bar-fill risk" style="width:94%"></div></div>
-    <div class="gap-sub">MKT forecast ~1.02M lead, PTY cần ~1.41M — <b>thiếu ~398k lead</b> (điểm nóng nhất)</div>
+    <div class="gm">VEH <span class="pill ok">VƯỢT PLAN</span></div>
+    <div class="gap-pct ok">+19.5%</div>
+    <div class="bar-track"><div class="bar-fill ok" style="width:65%"></div></div>
+    <div class="gap-sub">Forecast 3.14M, FC2 2.63M — <b>cao hơn plan 513k lead</b></div>
   </div>
 </div>
-<p class="note">"Hụt X%" = MKT forecast hiện tại đang thấp hơn X% so với mức PTY team tính là cần (theo file demand-expect từ vertical, dựa trên bài toán supply&amp;revenue). Cộng dồn Sep-Dec: hụt 17.4%. Xem phần "Direct"/"Others"/"Digital" ở trên (cách tính) và mục 3 dưới đây (ngân sách Digital thật).</p>
+<p class="note">"Hụt X%" = forecast hiện tại (FC2.5) thấp hơn X% so với FC2 (tháng 7, trước cắt budget). Toàn công ty hụt −10.9% cộng dồn. Chi tiết theo tháng → tab Forecast, mục 4.</p>
 
 <details class="vnote">
-<summary>📎 Số gốc PTY team gửi — "PTY Est DAU w Lead break by ad type" (click để xem)</summary>
+<summary>📎 PTY: breakdown Let/Sell — "PTY Est DAU w Lead break by ad type" (click để xem)</summary>
 <div class="vnote-body">
 <div class="scroll"><table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -656,16 +685,16 @@
 <tr class="key"><td>DAU w Lead — Total</td><td>11,705</td><td>12,060</td><td>11,468</td><td>10,752</td></tr>
 <tr><td>&nbsp;&nbsp;— let (rental)</td><td>9,509</td><td>8,569</td><td>8,842</td><td>8,839</td></tr>
 <tr><td>&nbsp;&nbsp;— sell (for sale)</td><td>3,818</td><td>4,092</td><td>3,807</td><td>4,336</td></tr>
-<tr class="key"><td>Total Lead</td><td class="hero">1,382,343</td><td class="hero">1,349,934</td><td class="hero">1,361,353</td><td class="hero">1,414,350</td></tr>
+<tr class="key"><td>Total Lead (bản estimate riêng, khác FC2 nhẹ)</td><td class="hero">1,382,343</td><td class="hero">1,349,934</td><td class="hero">1,361,353</td><td class="hero">1,414,350</td></tr>
 <tr><td>&nbsp;&nbsp;— let (rental), 69–72%</td><td>962,010</td><td>944,055</td><td>982,027</td><td>976,755</td></tr>
 <tr><td>&nbsp;&nbsp;— sell (for sale), 28–31%</td><td>420,333</td><td>405,879</td><td>379,326</td><td>437,595</td></tr>
 </tbody>
 </table></div>
-<p>Cột Jan–Aug (actual) là số PTY team tính từ bài toán supply&amp;revenue, đã validate khớp BigQuery actual ≤6%. Cột Sep–Dec (expect) lấy nền từ forecast MKT bản FC2 (tháng 7, trước khi cắt budget) — xem callout phía trên để hiểu vì sao số này khác forecast MKT hiện tại. Gap Tracker phía trên = so sánh dòng "Total Lead" ở đây với forecast MKT hiện tại (đã cập nhật theo budget FC2.5) quy theo tỷ trọng PTY.</p>
+<p>File riêng của PTY team (bài toán supply&amp;revenue, đã validate khớp BigQuery actual ≤6%), Total Lead sát nhưng không trùng khít FC2 tháng 7 (~1-4% khác biệt, cùng nguồn gốc nhưng derive khác cách). Deck dùng % let/sell (69-72%/28-31%) từ file này để chia nhỏ PTY (mục 5, tab Forecast) — không dùng Total Lead riêng của file này làm target nữa, đã thay bằng FC2 để nhất quán với 3 vertical còn lại.</p>
 </div>
 </details>
 
-<h3>Zoom in PTY theo Let/Sell (tab Forecast, mục 4) — lưu ý</h3>
+<h3>Zoom in PTY theo Let/Sell (tab Forecast, mục 5) — lưu ý</h3>
 <ul>
 <li>Total Lead: chia theo đúng % let/sell vertical đưa ra từng tháng (69–72% / 28–31%) — 2 phần cộng khớp tổng vì 1 lead chỉ thuộc 1 loại tin.</li>
 <li># DAU w/Lead: 2 phần <b>không</b> cộng khớp tổng thật (1 user có thể để lead ở cả tin cho thuê lẫn tin bán cùng ngày) — bảng đã chia lại tỷ lệ để ra số cộng khớp, coi là ước tính tham khảo, kém chính xác hơn Total Lead.</li>
@@ -696,7 +725,7 @@
 </div>
 
 <div class="foot">
-Cập nhật lần cuối: 2026-09-21 · Nguồn: BigQuery <code>daumaulead_mkt_rp</code> + file "2026 MKT Plan &amp; Budget - FC2.5" + "PTY Est DAU w Lead break by ad type" + bản Growth tự forecast Digital &amp; CRM (2026-09-21), confidential.
+Cập nhật lần cuối: 2026-09-21 · Nguồn: BigQuery <code>daumaulead_mkt_rp</code> + file "2026 MKT Plan &amp; Budget - FC2.5" + bản Growth tự forecast Digital &amp; CRM kèm breakdown vertical (2026-09-21) + file FC2 2026 (vertical team, tháng 7 — baseline Gap Tracker mục 4) + "PTY Est DAU w Lead break by ad type" (let/sell split, mục 5), confidential.
 </div>
 
 </div>
