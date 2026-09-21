@@ -498,9 +498,7 @@
 </tbody>
 </table>
 </div>
-<p class="note">Digital giờ dùng số vertical thật (thay tỷ trọng blended) — GDS vẫn là vertical lớn nhất nhưng đã giảm so với ước tính blended trước đó, phản ánh đúng thực tế hơn. So với FC2 (tháng 7) theo cả 4 vertical → tab <b>"Gap Tracker: FC2 vs FC2.5"</b>.</p>
-
-<p class="note">So sánh forecast (mục 1-3) với FC2 tháng 7 (plan gốc, trước khi cắt budget), theo 4 vertical + PTY let/sell → xem tab <b>"Gap Tracker: FC2 vs FC2.5"</b>.</p>
+<p class="note">Digital dùng số vertical thật (thay tỷ trọng blended) — GDS là vertical lớn nhất. So với FC2 tháng 7 (plan gốc, trước khi cắt budget), theo cả 4 vertical + PTY let/sell → xem tab <b>"Gap Tracker: FC2 vs FC2.5"</b>.</p>
 
 </div>
 
@@ -718,13 +716,14 @@
 </div>
 
 <h2>2. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
-<p class="note">Chia PTY (mục 1) theo tỷ lệ let/sell vertical đưa ra (69–72% Let / 28–31% Sell, áp cho cả FC2.5 và FC2). <span class="target">Chữ nghiêng xám</span> = FC2 tháng 7, không phải forecast.</p>
+<p class="note"><b>% Let/Sell lấy từ đâu:</b> PTY team tự ước tính tỷ lệ let/sell mỗi tháng trong file riêng "PTY Est DAU w Lead break by ad type" (bài toán supply &amp; revenue, đã validate khớp BigQuery actual ≤6% — xem 📎 cuối mục). Deck lấy đúng % đó (không tính lại) và áp lên <b>cả 2 cột</b> — FC2.5 (forecast MKT) và FC2 (target tháng 7) — với giả định tỷ lệ let/sell không đổi giữa 2 kịch bản. Ví dụ Sep: Let 69.6% / Sell 30.4% → forecast PTY 1,182,704 × 69.6% ≈ 823,162 (Let).</p>
 <div class="scroll">
 <table>
 <thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
 <tbody>
 <tr class="key"><td>FC2.5 (forecast)</td><td class="forecast hero">1,182,704</td><td class="forecast hero">1,231,360</td><td class="forecast hero">1,121,436</td><td class="forecast hero">1,016,696</td><td class="forecast hero">4,552,196</td></tr>
 <tr><td>FC2 (tháng 7)</td><td class="target">1,186,954</td><td class="target">1,213,055</td><td class="target">1,138,157</td><td class="target">1,050,410</td><td class="target">4,588,576</td></tr>
+<tr><td>% Let (cho thuê)</td><td colspan="4" style="text-align:center;color:var(--muted)">69.6% (Sep) · 69.9% (Oct) · 72.1% (Nov) · 69.1% (Dec)</td><td></td></tr>
 <tr><td>&nbsp;&nbsp;— Let, FC2.5</td><td class="forecast">823,162</td><td class="forecast">860,721</td><td class="forecast">808,555</td><td class="forecast">702,537</td><td class="forecast">3,194,975</td></tr>
 <tr><td>&nbsp;&nbsp;— Let, FC2</td><td class="target">826,120</td><td class="target">847,925</td><td class="target">820,611</td><td class="target">725,833</td><td class="target">3,220,490</td></tr>
 <tr><td>&nbsp;&nbsp;— Sell, FC2.5</td><td class="forecast">359,542</td><td class="forecast">370,639</td><td class="forecast">312,881</td><td class="forecast">314,159</td><td class="forecast">1,357,221</td></tr>
@@ -734,13 +733,13 @@
 </div>
 <p class="note">PTY gần đúng plan cả ở Let lẫn Sell — không có lệch mix đáng kể giữa 2 loại tin.</p>
 <ul>
-<li>Total Lead: chia theo đúng % let/sell vertical đưa ra từng tháng (69–72% / 28–31%) — 2 phần cộng khớp tổng vì 1 lead chỉ thuộc 1 loại tin.</li>
-<li># DAU w/Lead: 2 phần <b>không</b> cộng khớp tổng thật (1 user có thể để lead ở cả tin cho thuê lẫn tin bán cùng ngày) — bảng đã chia lại tỷ lệ để ra số cộng khớp, coi là ước tính tham khảo, kém chính xác hơn Total Lead.</li>
-<li>Cả 2 đều là <b>chia theo tỷ lệ</b>, không phải model riêng — nếu MKT phân bổ khác cho let/sell (VD push T10-11 nhắm sell), tỷ lệ thực tế sẽ lệch khỏi bảng.</li>
+<li>Total Lead ở trên: chia đúng theo % Let/Sell mỗi tháng — 2 phần cộng khớp tổng vì 1 lead chỉ thuộc 1 loại tin (cho thuê hoặc bán, không cả 2).</li>
+<li># DAU w/Lead (không hiện ở bảng trên, xem 📎): 2 phần <b>không</b> cộng khớp tổng thật, vì 1 user có thể xem cả tin cho thuê lẫn tin bán cùng ngày — chỉ dùng tham khảo, kém chính xác hơn Total Lead.</li>
+<li>Giả định "chia theo tỷ lệ cố định" — nếu MKT chủ động lệch hướng cho let/sell trong thực tế (VD đẩy mạnh Sell tháng 10-11), tỷ lệ thật sẽ khác bảng này.</li>
 </ul>
 
 <details class="vnote">
-<summary>📎 PTY: nguồn breakdown Let/Sell — "PTY Est DAU w Lead break by ad type" (click để xem)</summary>
+<summary>📎 PTY: file gốc "PTY Est DAU w Lead break by ad type" (click để xem)</summary>
 <div class="vnote-body">
 <div class="scroll"><table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -753,7 +752,7 @@
 <tr><td>&nbsp;&nbsp;— sell (for sale), 28–31%</td><td>420,333</td><td>405,879</td><td>379,326</td><td>437,595</td></tr>
 </tbody>
 </table></div>
-<p>File riêng của PTY team (bài toán supply&amp;revenue, đã validate khớp BigQuery actual ≤6%), Total Lead sát nhưng không trùng khít FC2 tháng 7 (~1-4% khác biệt, cùng nguồn gốc nhưng derive khác cách). Deck dùng % let/sell (69-72%/28-31%) từ file này để chia nhỏ PTY (mục 2) — không dùng Total Lead riêng của file này làm target nữa, đã thay bằng FC2 để nhất quán với 3 vertical còn lại.</p>
+<p>File riêng của PTY team, Total Lead sát nhưng không trùng khít FC2 tháng 7 (~1-4% khác biệt, cùng nguồn gốc nhưng derive khác cách) — nên deck không dùng Total Lead của file này làm target nữa (đã thay bằng FC2 để nhất quán với 3 vertical còn lại), chỉ lấy đúng % let/sell (cột "69–72%"/"28–31%" ở 2 dòng cuối bảng trên) để áp vào mục 2.</p>
 </div>
 </details>
 
