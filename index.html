@@ -109,9 +109,13 @@
     padding:5px 12px;border-radius:20px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
   .popover-btn:hover{background:var(--panel3)}
   .popover-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:60;background:var(--panel);border:1px solid var(--border);
-    border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.4);padding:12px 14px;min-width:300px}
+    border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.4);padding:14px 16px;width:max-content;min-width:260px}
   .popover:hover .popover-panel,.popover:focus-within .popover-panel,.popover.pinned .popover-panel{display:block}
-  .popover-panel table{min-width:0}
+  .popover-panel table{min-width:0;border-collapse:collapse}
+  .popover-panel th,.popover-panel td{padding:6px 12px;font-size:12px;white-space:nowrap;border-bottom:none}
+  .popover-panel thead th{background:transparent;border-bottom:1px solid var(--border);padding-bottom:8px}
+  .popover-panel tbody tr:not(:last-child) td{border-bottom:1px solid var(--border)}
+  .popover-panel td:first-child,.popover-panel th:first-child{position:static;text-align:left;font-weight:700;color:var(--accent);padding-right:16px}
 
   .callout{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px}
   .callout.warn{border-left-color:var(--warn)}
@@ -778,20 +782,17 @@
 <table>
 <thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
 <tbody>
-<tr class="group"><td colspan="6">TOÀN BỘ PTY</td></tr>
-<tr><td>FC2.5 (forecast)</td><td class="forecast hero">1,201,054</td><td class="forecast hero">1,238,057</td><td class="forecast hero">1,101,801</td><td class="forecast hero">975,366</td><td class="forecast hero">4,516,278</td></tr>
-<tr><td>FC2 (tháng 7)</td><td class="target">1,186,954</td><td class="target">1,213,055</td><td class="target">1,138,157</td><td class="target">1,050,410</td><td class="target">4,588,576</td></tr>
-<tr><td>% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
+<tr class="key"><td>TOÀN BỘ PTY — FC2.5 (forecast)</td><td class="forecast hero">1,201,054</td><td class="forecast hero">1,238,057</td><td class="forecast hero">1,101,801</td><td class="forecast hero">975,366</td><td class="forecast hero">4,516,278</td></tr>
+<tr><td>&nbsp;&nbsp;FC2 (tháng 7)</td><td class="target">1,186,954</td><td class="target">1,213,055</td><td class="target">1,138,157</td><td class="target">1,050,410</td><td class="target">4,588,576</td></tr>
+<tr><td>&nbsp;&nbsp;% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
 
-<tr class="group"><td colspan="6">LET / CHO THUÊ — 69.6% Sep · 69.9% Oct · 72.1% Nov · 69.1% Dec</td></tr>
-<tr><td>FC2.5 (forecast)</td><td class="forecast">835,934</td><td class="forecast">865,402</td><td class="forecast">794,399</td><td class="forecast">673,978</td><td class="forecast">3,169,713</td></tr>
-<tr><td>FC2 (tháng 7)</td><td class="target">826,120</td><td class="target">847,925</td><td class="target">820,611</td><td class="target">725,833</td><td class="target">3,220,490</td></tr>
-<tr><td>% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
+<tr class="key"><td>LET/cho thuê (69.6% Sep · 69.9% Oct · 72.1% Nov · 69.1% Dec) — FC2.5</td><td class="forecast">835,934</td><td class="forecast">865,402</td><td class="forecast">794,399</td><td class="forecast">673,978</td><td class="forecast">3,169,713</td></tr>
+<tr><td>&nbsp;&nbsp;FC2 (tháng 7)</td><td class="target">826,120</td><td class="target">847,925</td><td class="target">820,611</td><td class="target">725,833</td><td class="target">3,220,490</td></tr>
+<tr><td>&nbsp;&nbsp;% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
 
-<tr class="group"><td colspan="6">SELL / BÁN — phần còn lại (28.4-30.9%)</td></tr>
-<tr><td>FC2.5 (forecast)</td><td class="forecast">365,120</td><td class="forecast">372,655</td><td class="forecast">307,402</td><td class="forecast">301,388</td><td class="forecast">1,346,565</td></tr>
-<tr><td>FC2 (tháng 7)</td><td class="target">360,834</td><td class="target">365,130</td><td class="target">317,546</td><td class="target">324,577</td><td class="target">1,368,086</td></tr>
-<tr><td>% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
+<tr class="key"><td>SELL/bán (phần còn lại, 28.4-30.9%) — FC2.5</td><td class="forecast">365,120</td><td class="forecast">372,655</td><td class="forecast">307,402</td><td class="forecast">301,388</td><td class="forecast">1,346,565</td></tr>
+<tr><td>&nbsp;&nbsp;FC2 (tháng 7)</td><td class="target">360,834</td><td class="target">365,130</td><td class="target">317,546</td><td class="target">324,577</td><td class="target">1,368,086</td></tr>
+<tr><td>&nbsp;&nbsp;% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
 </tbody>
 </table>
 </div>
