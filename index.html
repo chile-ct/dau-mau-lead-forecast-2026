@@ -672,7 +672,14 @@
 <div class="kt-title">🔑 Gap Tracker — tóm tắt</div>
 <ul class="kt-list">
 <li class="risk"><b>Riêng T9-T12: Toàn bộ ngân sách MKT giảm −18.2% so với FC2 (12.28 tỷ → 10.04 tỷ), nhưng Demand toàn công ty chỉ giảm −10.8% so với FC2</b> — demand hụt ít hơn nhiều so với mức ngân sách bị cắt. Số verify trực tiếp từ Google Sheet gốc "2026 MKT Plan & Budget" (Digital/Growth 6.55 tỷ + Brand/Vertical/SEO 5.73 tỷ, cộng theo từng activity/team/tháng, tab FC2 vs FC2.5).</li>
-<li class="good"><b>Vì sao demand hụt ít hơn nhiều so với ngân sách bị cắt (−10.8% so với −18.2%):</b> (1) SEO giữ nguyên đúng plan gốc về output ở 3/4 vertical (PTY/VEH/GDS) dù ngân sách team SEO cũng bị cắt — model SEO không co giãn theo ngân sách như Digital; (2) Direct có uplift seeding thật, ngân sách "Creative outreach" không bị cắt (PTY-Let + JOB); (3) bản Growth mới nhất (2026-09-22) cho thấy hiệu suất Digital+CRM cải thiện — CP/Lead Digital Dec chỉ còn 2,894đ (rẻ nhất 4 tháng, so với 4,113đ Sep) dù ngân sách Dec bị cắt sâu nhất. 3 yếu tố này là phần lớn lý do demand giữ được tốt hơn ngân sách, không phải vì demand toàn công ty "miễn nhiễm" với cắt ngân sách.</li>
+<li class="good"><b>Vì sao demand hụt ít hơn nhiều so với ngân sách bị cắt (−10.8% so với −18.2%):</b>
+  <ul style="margin:8px 0 2px;padding-left:18px;font-size:13px;font-weight:400">
+    <li><b>SEO giữ nguyên đúng plan gốc</b> về output ở 3/4 vertical (PTY/VEH/GDS), dù ngân sách team SEO cũng bị cắt — model SEO không co giãn theo ngân sách như Digital.</li>
+    <li><b>Direct có uplift seeding thật</b>, ngân sách "Creative outreach" không bị cắt (PTY-Let + JOB).</li>
+    <li><b>Hiệu suất Digital/CRM cải thiện</b> theo bản Growth mới nhất (2026-09-22) — CP/Lead Digital Dec chỉ còn 2,894đ (rẻ nhất 4 tháng, so với 4,113đ Sep) dù ngân sách Dec bị cắt sâu nhất.</li>
+  </ul>
+  3 yếu tố này là phần lớn lý do demand giữ được tốt hơn ngân sách, không phải vì demand toàn công ty "miễn nhiễm" với cắt ngân sách.
+</li>
 </ul>
 </div>
 
@@ -706,6 +713,12 @@
 </div>
 <p class="note">"Hụt X%" = FC2.5 thấp hơn X% so với FC2 (tháng 7, trước cắt budget). Toàn công ty hụt −10.8% cộng dồn.</p>
 
+<div class="subtabs" data-group="gapdetail">
+  <button class="subtab-btn active" data-subtab="demand">Demand (Total Lead)</button>
+  <button class="subtab-btn" data-subtab="budget">Ngân sách Digital</button>
+</div>
+
+<div id="subtab-gapdetail-demand" class="subtab-panel active" data-group="gapdetail">
 <div class="scroll">
 <table>
 <thead><tr><th>Vertical</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
@@ -732,23 +745,40 @@
 </tbody>
 </table>
 </div>
+</div>
 
-<h2>2. Ngân sách giảm bao nhiêu, Demand giảm bao nhiêu</h2>
-<p class="note" style="margin-top:0">Toàn bộ ngân sách MKT (Digital/Growth + Brand/Vertical/SEO) giảm <b>−18.2%</b> cộng dồn T9-T12 so với plan tháng 7 (12.28 tỷ → 10.04 tỷ), trong khi Demand toàn công ty chỉ giảm <b>−10.8%</b> — demand giữ được tốt hơn nhiều so với mức cắt ngân sách. Bảng dưới đây zoom riêng vào <b>Digital</b> (lever duy nhất tune được theo tháng) vì đây là phần có số liệu chi tiết theo tháng rõ nhất để phân tích hiệu suất/đồng.</p>
+<div id="subtab-gapdetail-budget" class="subtab-panel" data-group="gapdetail">
+<p class="note" style="margin-top:0">Chỉ có breakdown theo vertical cho <b>ngân sách Digital</b> (Growth cấp) — SEO/Brand không tách được theo vertical cho cả 2 kịch bản FC2 và FC2.5, nên không đưa vào đây (khác với số Toàn bộ ngân sách MKT ở box đầu tab, vốn là số company-wide).</p>
 <div class="scroll">
 <table>
-<thead><tr><th>Ngân sách Digital (tỷ VND)</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
+<thead><tr><th>Vertical (tỷ VND)</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
 <tbody>
-<tr class="key"><td>FC2 (tháng 7)</td><td class="target">2.45</td><td class="target">2.05</td><td class="target">1.40</td><td class="target">0.65</td><td class="target">6.55</td></tr>
-<tr><td>FC2.5 (thật)</td><td class="forecast hero">1.80</td><td class="forecast hero">1.75</td><td class="forecast hero">1.45</td><td class="forecast hero">0.65</td><td class="forecast hero">5.65</td></tr>
-<tr><td>% thay đổi</td><td style="color:var(--bad)">−26.5%</td><td style="color:var(--bad)">−14.6%</td><td style="color:var(--good)">+3.6%</td><td style="color:var(--warn)">−0.8%</td><td style="color:var(--bad)">−13.8%</td></tr>
-<tr><td>Demand toàn CT — % thay đổi</td><td style="color:var(--bad)">−8.3%</td><td style="color:var(--bad)">−8.0%</td><td style="color:var(--bad)">−12.3%</td><td style="color:var(--bad)">−15.0%</td><td style="color:var(--bad)">−10.8%</td></tr>
+<tr class="key"><td>Toàn CT — FC2.5</td><td class="forecast hero">1.80</td><td class="forecast hero">1.75</td><td class="forecast hero">1.45</td><td class="forecast hero">0.645</td><td class="forecast hero">5.65</td></tr>
+<tr><td>Toàn CT — FC2</td><td class="target">2.45</td><td class="target">2.05</td><td class="target">1.40</td><td class="target">0.65</td><td class="target">6.55</td></tr>
+<tr><td>Toàn CT — Gap</td><td style="color:var(--bad)">−26.5%</td><td style="color:var(--bad)">−14.6%</td><td style="color:var(--good)">+3.6%</td><td style="color:var(--warn)">−0.8%</td><td style="color:var(--bad)">−13.8%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>PTY — FC2.5</td><td class="forecast">0.75</td><td class="forecast">0.80</td><td class="forecast">0.70</td><td class="forecast">0.345</td><td class="forecast">2.60</td></tr>
+<tr><td>PTY — FC2</td><td class="target">0.80</td><td class="target">0.70</td><td class="target">0.35</td><td class="target">0.15</td><td class="target">2.00</td></tr>
+<tr><td>PTY — Gap</td><td style="color:var(--bad)">−6.2%</td><td style="color:var(--good)">+14.3%</td><td style="color:var(--good)">+100%</td><td style="color:var(--good)">+130%</td><td style="color:var(--good)">+29.8%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>JOB — FC2.5</td><td class="forecast">0.60</td><td class="forecast">0.55</td><td class="forecast">0.40</td><td class="forecast">0.20</td><td class="forecast">1.75</td></tr>
+<tr><td>JOB — FC2</td><td class="target">0.55</td><td class="target">0.45</td><td class="target">0.35</td><td class="target">0.20</td><td class="target">1.55</td></tr>
+<tr><td>JOB — Gap</td><td style="color:var(--good)">+9.1%</td><td style="color:var(--good)">+22.2%</td><td style="color:var(--good)">+14.3%</td><td style="color:var(--warn)">0%</td><td style="color:var(--good)">+12.9%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>GDS — FC2.5</td><td class="forecast">0.35</td><td class="forecast">0.35</td><td class="forecast">0.30</td><td class="forecast">0.10</td><td class="forecast">1.10</td></tr>
+<tr><td>GDS — FC2</td><td class="target">0.75</td><td class="target">0.55</td><td class="target">0.40</td><td class="target">0.20</td><td class="target">1.90</td></tr>
+<tr><td>GDS — Gap</td><td style="color:var(--bad)">−53.3%</td><td style="color:var(--bad)">−36.4%</td><td style="color:var(--bad)">−25.0%</td><td style="color:var(--bad)">−50.0%</td><td style="color:var(--bad)">−42.1%</td></tr>
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>VEH — FC2.5</td><td class="forecast">0.10</td><td class="forecast">0.05</td><td class="forecast">0.05</td><td class="forecast">0.00</td><td class="forecast">0.20</td></tr>
+<tr><td>VEH — FC2</td><td class="target">0.35</td><td class="target">0.35</td><td class="target">0.30</td><td class="target">0.10</td><td class="target">1.10</td></tr>
+<tr><td>VEH — Gap</td><td style="color:var(--bad)">−71.4%</td><td style="color:var(--bad)">−85.7%</td><td style="color:var(--bad)">−83.3%</td><td style="color:var(--bad)">−100%</td><td style="color:var(--bad)">−81.8%</td></tr>
 </tbody>
 </table>
 </div>
-<p class="note">Sep là tháng ngân sách Digital bị cắt mạnh nhất (−26.5%) nhưng demand chỉ giảm −8.3% — hiệu suất/đồng cải thiện đáng kể. Nov ngược lại: ngân sách Digital tăng nhẹ (+3.6%) nhưng demand vẫn hụt sâu (−12.3%) — CP tăng ăn hết phần ngân sách tăng thêm. Digital là phần ngân sách có nhiều số liệu tháng nhất để phân tích CP/hiệu suất, nhưng số <b>−18.2%</b> toàn bộ MKT (kt-box đầu tab) mới là con số đại diện đúng cho toàn bộ ngân sách bị cắt.</p>
+<p class="note">Nhìn chéo với tab Demand ở trên: ngân sách Digital thật ra bị <b>tái phân bổ mạnh giữa các vertical</b>, không chỉ bị cắt đều — PTY/JOB được tăng thêm nhiều (đặc biệt Nov-Dec), trong khi VEH gần như mất hết (−81.8% cộng dồn) và GDS bị cắt sâu (−42.1%). JOB vẫn hụt demand nặng nhất (−18.6%) dù được TĂNG ngân sách Digital (+12.9%) — củng cố thêm kết luận ở tab Problem Reframe: vấn đề JOB là SEO/organic, không phải thiếu ngân sách Digital. Ngược lại, GDS/VEH hụt demand nhiều một phần do chính ngân sách Digital bị cắt sâu hơn hẳn các vertical khác.</p>
+</div>
 
-<h2>3. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
+<h2>2. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
 <p class="note"><b>% Let/Sell lấy từ đâu:</b> PTY team tự ước tính tỷ lệ let/sell mỗi tháng trong file riêng "PTY Est DAU w Lead break by ad type" (bài toán supply &amp; revenue, đã validate khớp BigQuery actual ≤6% — xem 📎 cuối mục). Deck lấy đúng % đó (không tính lại) và áp lên <b>cả 2 cột</b> — FC2.5 (forecast MKT) và FC2 (target tháng 7) — với giả định tỷ lệ let/sell không đổi giữa 2 kịch bản. Lưu ý: phần uplift seeding của Direct đã cộng riêng vào Let của PTY từ trước khi vào bảng này (xem tab Forecast, 2d).</p>
 <div class="scroll">
 <table>
@@ -766,7 +796,7 @@
 </tbody>
 </table>
 </div>
-<p class="note">Vì % Let/Sell dùng chung 1 tỷ lệ cho cả FC2.5 và FC2 (giả định không đổi giữa 2 kịch bản, xem note trên bảng), % lệch so FC2 của Let và Sell <b>bằng hệ nhau</b> — bằng đúng % lệch của Total Lead (dòng đầu). Sep-Oct nhỉnh hơn so FC2, nhưng Nov-Dec hụt rõ (−3.2%, −7.1%) — cùng pattern hụt về cuối năm đã thấy ở toàn công ty (mục 2), không có lệch mix Let/Sell riêng của PTY.</p>
+<p class="note">Vì % Let/Sell dùng chung 1 tỷ lệ cho cả FC2.5 và FC2 (giả định không đổi giữa 2 kịch bản, xem note trên bảng), % lệch so FC2 của Let và Sell <b>bằng hệ nhau</b> — bằng đúng % lệch của Total Lead (dòng đầu). Sep-Oct nhỉnh hơn so FC2, nhưng Nov-Dec hụt rõ (−3.2%, −7.1%) — cùng pattern hụt về cuối năm đã thấy ở toàn công ty (mục 1 trên), không có lệch mix Let/Sell riêng của PTY.</p>
 <ul>
 <li>Total Lead ở trên: chia đúng theo % Let/Sell mỗi tháng — 2 phần cộng khớp tổng vì 1 lead chỉ thuộc 1 loại tin (cho thuê hoặc bán, không cả 2).</li>
 <li># DAU w/Lead (không hiện ở bảng trên, xem 📎): 2 phần <b>không</b> cộng khớp tổng thật, vì 1 user có thể xem cả tin cho thuê lẫn tin bán cùng ngày — chỉ dùng tham khảo, kém chính xác hơn Total Lead.</li>
@@ -787,7 +817,7 @@
 <tr><td>&nbsp;&nbsp;— sell (for sale), 28–31%</td><td>420,333</td><td>405,879</td><td>379,326</td><td>437,595</td></tr>
 </tbody>
 </table></div>
-<p>File riêng của PTY team, Total Lead sát nhưng không trùng khít FC2 tháng 7 (~1-4% khác biệt, cùng nguồn gốc nhưng derive khác cách) — nên deck không dùng Total Lead của file này làm target nữa (đã thay bằng FC2 để nhất quán với 3 vertical còn lại), chỉ lấy đúng % let/sell (cột "69–72%"/"28–31%" ở 2 dòng cuối bảng trên) để áp vào mục 2.</p>
+<p>File riêng của PTY team, Total Lead sát nhưng không trùng khít FC2 tháng 7 (~1-4% khác biệt, cùng nguồn gốc nhưng derive khác cách) — nên deck không dùng Total Lead của file này làm target nữa (đã thay bằng FC2 để nhất quán với 3 vertical còn lại), chỉ lấy đúng % let/sell (cột "69–72%"/"28–31%" ở 2 dòng cuối bảng trên) để áp vào bảng mục 2 bên trên.</p>
 </div>
 </details>
 
