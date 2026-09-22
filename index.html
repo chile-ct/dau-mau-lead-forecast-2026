@@ -101,6 +101,17 @@
   td.hero{font-weight:800;font-size:13.5px}
   .target{color:var(--muted);font-style:italic;font-weight:500}
   .cell-range{display:block;font-size:10px;font-weight:400;color:var(--muted);white-space:normal;margin-top:2px}
+  tbody tr.group td{background:var(--panel2);color:var(--muted);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:9px 10px}
+
+  /* Popover (click/hover breakdown) */
+  .popover{position:relative;display:inline-block}
+  .popover-btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--accent);font-size:11.5px;font-weight:700;
+    padding:5px 12px;border-radius:20px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+  .popover-btn:hover{background:var(--panel3)}
+  .popover-panel{display:none;position:absolute;top:calc(100% + 6px);left:0;z-index:60;background:var(--panel);border:1px solid var(--border);
+    border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.4);padding:12px 14px;min-width:300px}
+  .popover:hover .popover-panel,.popover:focus-within .popover-panel,.popover.pinned .popover-panel{display:block}
+  .popover-panel table{min-width:0}
 
   .callout{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px}
   .callout.warn{border-left-color:var(--warn)}
@@ -426,6 +437,20 @@
 
 <h3>2b. Paid Search / Digital (Growth) <span class="tag tag-fixed">Growth tự forecast</span></h3>
 <p class="note">Bản Growth tự forecast, kèm breakdown vertical. Dec thấp hơn nhiều do budget Dec bị cắt mạnh. 📎 Problem Reframe.</p>
+<div class="popover">
+  <button class="popover-btn" type="button">📊 Breakdown theo vertical ▾</button>
+  <div class="popover-panel">
+  <table>
+  <thead><tr><th>Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+  <tbody>
+  <tr><td>PTY</td><td>160,083</td><td>186,621</td><td>153,338</td><td>84,617</td></tr>
+  <tr><td>JOB</td><td>176,152</td><td>191,923</td><td>140,572</td><td>91,469</td></tr>
+  <tr><td>VEH</td><td>34,892</td><td>19,598</td><td>19,595</td><td>9,042</td></tr>
+  <tr><td>GDS</td><td>66,681</td><td>85,374</td><td>68,013</td><td>37,754</td></tr>
+  </tbody>
+  </table>
+  </div>
+</div>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -440,31 +465,24 @@
 </table>
 </div>
 
-<details class="vnote">
-<summary>📎 Breakdown theo vertical (click để xem)</summary>
-<div class="vnote-body">
-<p>Breakdown Digital theo vertical:</p>
-<div class="scroll"><table>
-<thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>160,083</td><td>186,621</td><td>153,338</td><td>84,617</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th>JOB — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>176,152</td><td>191,923</td><td>140,572</td><td>91,469</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th>VEH — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>34,892</td><td>19,598</td><td>19,595</td><td>9,042</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th>GDS — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>66,681</td><td>85,374</td><td>68,013</td><td>37,754</td></tr></tbody>
-</table></div>
-</div>
-</details>
-
 <h3>2c. CRM (Growth — push/email/ZNS/Braze) <span class="tag tag-fixed">Growth tự forecast</span></h3>
 <p class="note">Bản Growth tự forecast — <b>lần đầu có breakdown vertical thật</b> (trước đó CRM phải dùng tỷ trọng lịch sử để chia theo vertical). 📎 Problem Reframe.</p>
+<div class="popover">
+  <button class="popover-btn" type="button">📊 Breakdown theo vertical ▾</button>
+  <div class="popover-panel">
+  <p class="note" style="margin:0 0 8px">~50-60K lead/tháng (buyer chưa gán vertical + non-buyer/ungrouped) không gán được cho vertical nào — xem dòng "Chưa gán vertical" ở mục 3.</p>
+  <table>
+  <thead><tr><th>Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
+  <tbody>
+  <tr><td>PTY</td><td>103,549</td><td>126,780</td><td>107,261</td><td>118,199</td></tr>
+  <tr><td>JOB</td><td>92,583</td><td>113,354</td><td>95,902</td><td>105,681</td></tr>
+  <tr><td>VEH</td><td>88,067</td><td>107,824</td><td>91,224</td><td>100,526</td></tr>
+  <tr><td>GDS</td><td>122,503</td><td>149,986</td><td>126,895</td><td>153,818</td></tr>
+  <tr><td>Chưa gán vertical</td><td>50,490</td><td>59,917</td><td>50,628</td><td>56,005</td></tr>
+  </tbody>
+  </table>
+  </div>
+</div>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
@@ -478,33 +496,6 @@
 </tbody>
 </table>
 </div>
-
-<details class="vnote">
-<summary>📎 Breakdown theo vertical (click để xem)</summary>
-<div class="vnote-body">
-<p>~50-60K lead/tháng (buyer chưa gán vertical + non-buyer/ungrouped) không gán được cho vertical nào cụ thể — xem dòng "Chưa gán vertical" ở mục 3.</p>
-<div class="scroll"><table>
-<thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>103,549</td><td>126,780</td><td>107,261</td><td>118,199</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th>JOB — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>92,583</td><td>113,354</td><td>95,902</td><td>105,681</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th>VEH — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>88,067</td><td>107,824</td><td>91,224</td><td>100,526</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th>GDS — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>122,503</td><td>149,986</td><td>126,895</td><td>153,818</td></tr></tbody>
-</table></div>
-<div class="scroll" style="margin-top:6px"><table>
-<thead><tr><th>Chưa gán vertical — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
-<tbody><tr><td></td><td>50,490</td><td>59,917</td><td>50,628</td><td>56,005</td></tr></tbody>
-</table></div>
-</div>
-</details>
 
 <h3>2d. Direct <span class="tag tag-draft">forecast riêng theo vertical (trend + market search trend + seeding)</span></h3>
 <p class="note">Mỗi vertical: baseline riêng (TB Jun-Aug 2026 × seasonal ratio YoY 2025 riêng vertical đó) × hệ số market search trend (Google Search Console) + uplift seeding (PTY vào phần Let, JOB toàn phần). VEH đã hiệu chỉnh giảm theo backtest (xem 📎 Problem Reframe — Driver logic). Chi tiết 📎 Problem Reframe.</p>
@@ -787,15 +778,20 @@
 <table>
 <thead><tr><th>PTY — Total Lead</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
 <tbody>
-<tr class="key"><td>FC2.5 (forecast)</td><td class="forecast hero">1,201,054</td><td class="forecast hero">1,238,057</td><td class="forecast hero">1,101,801</td><td class="forecast hero">975,366</td><td class="forecast hero">4,516,278</td></tr>
+<tr class="group"><td colspan="6">TOÀN BỘ PTY</td></tr>
+<tr><td>FC2.5 (forecast)</td><td class="forecast hero">1,201,054</td><td class="forecast hero">1,238,057</td><td class="forecast hero">1,101,801</td><td class="forecast hero">975,366</td><td class="forecast hero">4,516,278</td></tr>
 <tr><td>FC2 (tháng 7)</td><td class="target">1,186,954</td><td class="target">1,213,055</td><td class="target">1,138,157</td><td class="target">1,050,410</td><td class="target">4,588,576</td></tr>
-<tr><td>% Let (cho thuê)</td><td style="color:var(--muted)">69.6%</td><td style="color:var(--muted)">69.9%</td><td style="color:var(--muted)">72.1%</td><td style="color:var(--muted)">69.1%</td><td></td></tr>
-<tr><td>&nbsp;&nbsp;— Let, FC2.5</td><td class="forecast">835,934</td><td class="forecast">865,402</td><td class="forecast">794,399</td><td class="forecast">673,978</td><td class="forecast">3,169,713</td></tr>
-<tr><td>&nbsp;&nbsp;— Let, FC2</td><td class="target">826,120</td><td class="target">847,925</td><td class="target">820,611</td><td class="target">725,833</td><td class="target">3,220,490</td></tr>
-<tr><td>&nbsp;&nbsp;— Let, % so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
-<tr><td>&nbsp;&nbsp;— Sell, FC2.5</td><td class="forecast">365,120</td><td class="forecast">372,655</td><td class="forecast">307,402</td><td class="forecast">301,388</td><td class="forecast">1,346,565</td></tr>
-<tr><td>&nbsp;&nbsp;— Sell, FC2</td><td class="target">360,834</td><td class="target">365,130</td><td class="target">317,546</td><td class="target">324,577</td><td class="target">1,368,086</td></tr>
-<tr><td>&nbsp;&nbsp;— Sell, % so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
+<tr><td>% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
+
+<tr class="group"><td colspan="6">LET / CHO THUÊ — 69.6% Sep · 69.9% Oct · 72.1% Nov · 69.1% Dec</td></tr>
+<tr><td>FC2.5 (forecast)</td><td class="forecast">835,934</td><td class="forecast">865,402</td><td class="forecast">794,399</td><td class="forecast">673,978</td><td class="forecast">3,169,713</td></tr>
+<tr><td>FC2 (tháng 7)</td><td class="target">826,120</td><td class="target">847,925</td><td class="target">820,611</td><td class="target">725,833</td><td class="target">3,220,490</td></tr>
+<tr><td>% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
+
+<tr class="group"><td colspan="6">SELL / BÁN — phần còn lại (28.4-30.9%)</td></tr>
+<tr><td>FC2.5 (forecast)</td><td class="forecast">365,120</td><td class="forecast">372,655</td><td class="forecast">307,402</td><td class="forecast">301,388</td><td class="forecast">1,346,565</td></tr>
+<tr><td>FC2 (tháng 7)</td><td class="target">360,834</td><td class="target">365,130</td><td class="target">317,546</td><td class="target">324,577</td><td class="target">1,368,086</td></tr>
+<tr><td>% so FC2</td><td style="color:var(--good)">🟢 +1.2%</td><td style="color:var(--good)">🟢 +2.1%</td><td style="color:var(--bad)">🔴 −3.2%</td><td style="color:var(--bad)">🔴 −7.1%</td><td style="color:var(--bad)">🔴 −1.6%</td></tr>
 </tbody>
 </table>
 </div>
@@ -875,6 +871,19 @@ document.querySelectorAll('.subtabs').forEach(function(group){
       document.getElementById('subtab-' + groupId + '-' + btn.dataset.subtab).classList.add('active');
     });
   });
+});
+
+document.querySelectorAll('.popover-btn').forEach(function(btn){
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var pop = btn.closest('.popover');
+    var wasPinned = pop.classList.contains('pinned');
+    document.querySelectorAll('.popover.pinned').forEach(function(p){ p.classList.remove('pinned'); });
+    if(!wasPinned){ pop.classList.add('pinned'); }
+  });
+});
+document.addEventListener('click', function(){
+  document.querySelectorAll('.popover.pinned').forEach(function(p){ p.classList.remove('pinned'); });
 });
 </script>
 
