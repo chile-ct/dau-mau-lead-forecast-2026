@@ -182,7 +182,7 @@
 <div class="topbar">
   <div>
     <h1>DAU / MAU / Lead Forecast 2026 — theo Channel Source</h1>
-    <p class="sub">Actual Jan–Aug lấy trực tiếp từ BigQuery. Forecast Sep–Dec: SEO cố định · Digital &amp; CRM dùng bản Growth tự forecast mới nhất (2026-09-21) · Direct &amp; Others dùng seasonal ratio cùng kỳ 2025, Direct cộng thêm uplift ngân sách seeding PTY+JOB thật (file FC2.5).</p>
+    <p class="sub">Actual Jan–Aug lấy trực tiếp từ BigQuery. Forecast Sep–Dec: SEO cố định (riêng JOB reforecast do mất thị phần organic thật) · Digital &amp; CRM dùng bản Growth tự forecast mới nhất (2026-09-21) · Direct &amp; Others dùng seasonal ratio cùng kỳ 2025, Direct cộng thêm uplift ngân sách seeding PTY+JOB thật (file FC2.5).</p>
   </div>
   <div class="theme-chip" id="theme-chip">
     <button data-theme="light">☀️ Light</button>
@@ -347,22 +347,22 @@
 <div class="stats">
   <div class="stat hl">
     <div class="stat-label">DAU trung bình T9–T12</div>
-    <div class="stat-value">373,179</div>
-    <div class="stat-sub">dao động 335k (Dec) – 402k (Sep)</div>
+    <div class="stat-value">371,542</div>
+    <div class="stat-sub">dao động 335k (Dec) – 401k (Sep)</div>
   </div>
   <div class="stat">
     <div class="stat-label">MAU trung bình T9–T12</div>
-    <div class="stat-value">5,667,555</div>
-    <div class="stat-sub">dao động 4.98M (Dec) – 6.16M (Sep)</div>
+    <div class="stat-value">5,635,172</div>
+    <div class="stat-sub">dao động 4.96M (Dec) – 6.14M (Sep)</div>
   </div>
   <div class="stat hl">
     <div class="stat-label">Total Lead — trung bình/tháng T9–T12</div>
-    <div class="stat-value">4,575,706</div>
-    <div class="stat-sub">cộng dồn 4 tháng 18.3M · Direct/Others forecast riêng theo vertical (trend + market search trend; Direct thêm uplift seeding)</div>
+    <div class="stat-value">4,561,862</div>
+    <div class="stat-sub">cộng dồn 4 tháng 18.2M · Direct/Others forecast riêng theo vertical; JOB SEO cũng reforecast riêng (organic mất thị phần thật)</div>
   </div>
   <div class="stat">
     <div class="stat-label">% DAU w/ Lead trung bình T9–T12</div>
-    <div class="stat-value">13.16%</div>
+    <div class="stat-value">13.17%</div>
     <div class="stat-sub">tăng nhẹ Sep→Dec</div>
   </div>
 </div>
@@ -373,12 +373,12 @@
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
 <tbody>
-<tr class="key"><td>DAU</td><td class="forecast hero">402,164</td><td class="forecast hero">392,308</td><td class="forecast hero">362,963</td><td class="forecast hero">335,279</td></tr>
-<tr><td># DAU w/ Lead</td><td class="forecast">51,533</td><td class="forecast">51,937</td><td class="forecast">47,832</td><td class="forecast">45,065</td></tr>
-<tr><td>% DAU w/ Lead</td><td class="forecast">12.82%</td><td class="forecast">13.24%</td><td class="forecast">13.18%</td><td class="forecast">13.44%</td></tr>
-<tr class="key"><td>MAU</td><td class="forecast hero">6,159,345</td><td class="forecast hero">5,981,741</td><td class="forecast hero">5,550,903</td><td class="forecast hero">4,978,232</td></tr>
-<tr><td>MAU w/ Lead</td><td class="forecast">817,238</td><td class="forecast">824,731</td><td class="forecast">760,440</td><td class="forecast">700,552</td></tr>
-<tr class="key"><td>Total Lead</td><td class="forecast hero">4,809,276</td><td class="forecast hero">4,888,089</td><td class="forecast hero">4,461,927</td><td class="forecast hero">4,143,533</td></tr>
+<tr class="key"><td>DAU</td><td class="forecast hero">401,396</td><td class="forecast hero">389,245</td><td class="forecast hero">360,993</td><td class="forecast hero">334,534</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">51,464</td><td class="forecast">51,662</td><td class="forecast">47,659</td><td class="forecast">45,000</td></tr>
+<tr><td>% DAU w/ Lead</td><td class="forecast">12.82%</td><td class="forecast">13.27%</td><td class="forecast">13.20%</td><td class="forecast">13.45%</td></tr>
+<tr class="key"><td>MAU</td><td class="forecast hero">6,143,975</td><td class="forecast hero">5,921,298</td><td class="forecast hero">5,511,907</td><td class="forecast hero">4,963,509</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">815,861</td><td class="forecast">819,278</td><td class="forecast">756,991</td><td class="forecast">699,257</td></tr>
+<tr class="key"><td>Total Lead</td><td class="forecast hero">4,802,702</td><td class="forecast hero">4,861,903</td><td class="forecast hero">4,445,440</td><td class="forecast hero">4,137,402</td></tr>
 </tbody>
 </table>
 </div>
@@ -387,19 +387,25 @@
 <h2>2. Breakdown theo Source</h2>
 <p class="note">5 nhóm, cùng cấu trúc tab Actual: SEO, Digital, CRM, Direct, Others — cộng khớp Tổng công ty (mục 1).</p>
 
-<h3>2a. SEO / Organic Search <span class="tag tag-fixed">FIXED</span></h3>
+<h3>2a. SEO / Organic Search <span class="tag tag-draft">FIXED cho PTY/VEH/GDS · JOB reforecast theo trend thật</span></h3>
+<p class="note" style="margin-top:0">PTY/VEH/GDS giữ nguyên PDF kế hoạch gốc. <b>JOB reforecast riêng</b>: organic traffic JOB đang mất thị phần thật vào tay đối thủ (Search Console + traffic nội bộ xác nhận), không phải do cầu thị trường giảm — xem callout bên dưới &amp; 📎 Problem Reframe.</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Metric</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th></tr></thead>
 <tbody>
-<tr><td>DAU</td><td class="forecast">90,318</td><td class="forecast">91,951</td><td class="forecast">87,454</td><td class="forecast">81,721</td></tr>
-<tr><td># DAU w/ Lead</td><td class="forecast">8,045</td><td class="forecast">8,261</td><td class="forecast">7,690</td><td class="forecast">7,128</td></tr>
+<tr><td>DAU</td><td class="forecast">89,550</td><td class="forecast">88,888</td><td class="forecast">85,484</td><td class="forecast">80,976</td></tr>
+<tr><td># DAU w/ Lead</td><td class="forecast">7,976</td><td class="forecast">7,986</td><td class="forecast">7,517</td><td class="forecast">7,063</td></tr>
 <tr><td>% DAU w/ Lead</td><td class="forecast">8.91%</td><td class="forecast">8.98%</td><td class="forecast">8.79%</td><td class="forecast">8.72%</td></tr>
-<tr><td>MAU</td><td class="forecast">1,782,049</td><td class="forecast">1,815,516</td><td class="forecast">1,730,058</td><td class="forecast">1,614,476</td></tr>
-<tr><td>MAU w/ Lead</td><td class="forecast">159,523</td><td class="forecast">163,709</td><td class="forecast">153,306</td><td class="forecast">141,968</td></tr>
-<tr><td>Total Lead</td><td class="forecast">762,049</td><td class="forecast">786,432</td><td class="forecast">731,365</td><td class="forecast">672,565</td></tr>
+<tr><td>MAU</td><td class="forecast">1,766,679</td><td class="forecast">1,755,073</td><td class="forecast">1,691,062</td><td class="forecast">1,599,753</td></tr>
+<tr><td>MAU w/ Lead</td><td class="forecast">158,146</td><td class="forecast">158,256</td><td class="forecast">149,857</td><td class="forecast">140,673</td></tr>
+<tr><td>Total Lead</td><td class="forecast">755,475</td><td class="forecast">760,246</td><td class="forecast">714,878</td><td class="forecast">666,434</td></tr>
 </tbody>
 </table>
+</div>
+
+<div class="callout warn">
+<b>📌 JOB: mất thị phần organic search vào Vieclam24h, không phải cầu giảm</b>
+<p class="note" style="margin-top:6px">Term lõi ngành việc làm gần như đi ngang YoY (tuyển dụng +4%, tìm việc làm −1%, việc làm ~0%) — cầu thị trường không sụt. Nhưng traffic organic JOB Q3 vs Q2 −12% (theo pagetype: Tags −21%, JobType −9%, Generic −5%), trong khi Vieclam24h organic Q3 +16% QoQ — JOB đang mất phần thị trường thật, tập trung ở blue-collar (công nhân −23% YoY, bảo vệ −13%, tài xế −12%). Reforecast SEO JOB Sep-Dec dùng baseline Jun-Aug 2026 thật, tiếp tục giảm theo đúng nhịp −12%/quý vào Q4 — không dùng số PDF kế hoạch gốc nữa vì không còn phản ánh đúng thực tế.</p>
 </div>
 
 <h3>2b. Paid Search / Digital (Growth) <span class="tag tag-fixed">Growth tự forecast (bản update 2026-09-21)</span></h3>
@@ -525,10 +531,10 @@
 <table>
 <thead><tr><th>Vertical</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
 <tbody>
-<tr class="key"><td>Toàn CT (ALL verticals)</td><td class="forecast hero">4,809,276</td><td class="forecast hero">4,888,089</td><td class="forecast hero">4,461,927</td><td class="forecast hero">4,143,533</td><td class="forecast hero">18,302,825</td></tr>
+<tr class="key"><td>Toàn CT (ALL verticals)</td><td class="forecast hero">4,802,702</td><td class="forecast hero">4,861,903</td><td class="forecast hero">4,445,440</td><td class="forecast hero">4,137,402</td><td class="forecast hero">18,247,447</td></tr>
 <tr><td>&nbsp;&nbsp;GDS</td><td class="forecast">1,901,507</td><td class="forecast">1,920,128</td><td class="forecast">1,812,453</td><td class="forecast">1,731,167</td><td class="forecast">7,365,255</td></tr>
 <tr><td>&nbsp;&nbsp;PTY</td><td class="forecast">1,214,642</td><td class="forecast">1,247,672</td><td class="forecast">1,106,882</td><td class="forecast">979,781</td><td class="forecast">4,548,977</td></tr>
-<tr><td>&nbsp;&nbsp;JOB</td><td class="forecast">1,041,231</td><td class="forecast">1,067,208</td><td class="forecast">928,263</td><td class="forecast">799,094</td><td class="forecast">3,835,796</td></tr>
+<tr><td>&nbsp;&nbsp;JOB</td><td class="forecast">1,035,674</td><td class="forecast">1,042,121</td><td class="forecast">912,792</td><td class="forecast">793,897</td><td class="forecast">3,784,483</td></tr>
 <tr><td>&nbsp;&nbsp;VEH</td><td class="forecast">651,898</td><td class="forecast">653,081</td><td class="forecast">614,329</td><td class="forecast">633,490</td><td class="forecast">2,552,798</td></tr>
 </tbody>
 </table>
@@ -543,7 +549,8 @@
 <div class="kt-box">
 <div class="kt-title">🔑 Key takeaways</div>
 <ul class="kt-list">
-<li class="risk"><b>Mỗi nguồn có 1 cơ chế forecast riêng, độ tin cậy khác nhau</b> — SEO/Digital/CRM lấy trực tiếp từ team liên quan (độ tin cậy cao); Direct/Others tự tính từ trend + market search trend (Search Console), độ tin cậy thấp hơn vì chưa có model riêng theo từng driver cụ thể (occasion/campaign). Xem bảng "Driver logic" bên dưới.</li>
+<li class="risk"><b>Mỗi nguồn có 1 cơ chế forecast riêng, độ tin cậy khác nhau</b> — Digital/CRM lấy trực tiếp từ team liên quan (độ tin cậy cao); SEO cố định theo plan gốc cho PTY/VEH/GDS nhưng JOB reforecast riêng (xem bullet dưới); Direct/Others tự tính từ trend + market search trend (Search Console), độ tin cậy thấp hơn vì chưa có model riêng theo từng driver cụ thể (occasion/campaign). Xem bảng "Driver logic" bên dưới.</li>
+<li class="risk"><b>JOB đang mất thị phần organic search thật vào Vieclam24h</b> — traffic JOB Q3 vs Q2 −12% QoQ (Tags −21%, blue-collar −11% YoY) trong khi cầu thị trường đi ngang và đối thủ +16% QoQ cùng kỳ. Đây là vấn đề cạnh tranh/SEO, không phải cầu giảm — đã reforecast SEO JOB theo trend thật thay vì số PDF gốc (làm JOB gap vs FC2 xấu thêm, từ −17.9% lên −19.0%). Digital/CRM/Direct hiện không đủ để bù khoảng hụt này — cần action riêng cho SEO/content JOB.</li>
 <li class="risk"><b>Ngân sách Digital Dec thấp nhất trong 4 tháng</b> (645tr) — dồn mạnh cho Sep/Oct/Nov, cắt sâu cuối năm.</li>
 <li class="good"><b>Direct/Others uplift từ seeding áp đúng target</b> — PTY vào phần Let (cho thuê), JOB toàn phần — dựa trên case study Aug (2,606đ/lead) và ngân sách "Creative outreach" thật trong file FC2.5.</li>
 <li class="risk"><b>VEH là vertical duy nhất search demand (Search Console) tiếp tục suy giảm trong 2026</b>, không phục hồi như PTY/JOB/GDS — cần theo dõi riêng.</li>
@@ -569,7 +576,7 @@
 <p class="note" style="margin-top:6px">Digital tăng đều <span class="kt-num">0.88→2.24 tỷ</span>; Brand+SEO nhảy <span class="kt-num bad">0.51→2.04 tỷ (+300%)</span> — đúng 2 campaign Thổ Địa/Back to school (tab Actual). Ý nghĩa: demand uplift Jul-Aug không tune được qua Digital hàng tháng. Brand/SEO Sep-Dec vẫn ở mức 0.84–1.45 tỷ (cao hơn baseline, thấp hơn đỉnh) — demand không tụt hẳn về baseline thuần digital.</p>
 </div>
 
-<p class="note">Số forecast đầy đủ → xem tab <b>"Forecast (Sep–Dec)"</b>. Tóm tắt logic: SEO giữ nguyên · Digital &amp; CRM dùng bản Growth tự forecast mới nhất (2026-09-21) · Direct/Others dùng seasonal ratio YoY 2025, Direct cộng thêm uplift seeding Q4.</p>
+<p class="note">Số forecast đầy đủ → xem tab <b>"Forecast (Sep–Dec)"</b>. Tóm tắt logic: SEO giữ nguyên (riêng JOB reforecast do mất thị phần organic thật, xem bảng Driver logic) · Digital &amp; CRM dùng bản Growth tự forecast mới nhất (2026-09-21) · Direct/Others dùng seasonal ratio YoY 2025, Direct cộng thêm uplift seeding Q4.</p>
 
 <h2>Driver logic theo từng source</h2>
 <p class="note" style="margin-top:0">Mỗi source có 1 cơ chế khác nhau — không dùng chung 1 công thức.</p>
@@ -580,9 +587,9 @@
 <tbody>
 <tr>
   <td>SEO</td>
-  <td>Tích luỹ dài hạn, không có lever ngắn hạn</td>
-  <td>Giữ nguyên số từ PDF kế hoạch gốc, không qua model nào — không có lever ngân sách ngắn hạn tác động được trong Sep-Dec.</td>
-  <td style="color:var(--good)">Cao nhất trong 5 nguồn — không phụ thuộc giả định nào</td>
+  <td>Tích luỹ dài hạn, không có lever ngân sách ngắn hạn — riêng JOB đang mất thị phần organic thật vào đối thủ</td>
+  <td>PTY/VEH/GDS: giữ nguyên số từ PDF kế hoạch gốc, không qua model nào. <b>JOB: reforecast riêng</b> — organic traffic JOB Q3 vs Q2 −12% QoQ (Tags −21%, JobType −9%, blue-collar −11% YoY), trong khi Vieclam24h organic +16% QoQ cùng kỳ và cầu thị trường (search term lõi ngành) gần như đi ngang YoY — xác nhận đây là mất thị phần thật, không phải cầu giảm, nên không dùng số PDF gốc cho JOB nữa. Baseline mới = TB Jun-Aug 2026 thật, tiếp tục giảm theo nhịp −12%/quý vào Q4.</td>
+  <td style="color:var(--good)">Cao nhất (PTY/VEH/GDS) — <span style="color:var(--warn)">JOB: trung bình, dựa trên traffic/Search Console, chưa có model per-pagetype đầy đủ</span></td>
 </tr>
 <tr>
   <td>Digital</td>
@@ -620,7 +627,7 @@
 <div class="kt-box">
 <div class="kt-title">🔑 Gap Tracker — tóm tắt</div>
 <ul class="kt-list">
-<li class="risk"><b>Toàn bộ ngân sách MKT giảm −13.8% so với FC2, Demand toàn công ty giảm −9.0% so với FC2</b> — demand hụt ít hơn mức ngân sách bị cắt (Digital là phần ngân sách duy nhất so sánh trực tiếp được giữa FC2 và FC2.5 — SEO/CRM không có dòng ngân sách riêng biến động theo 2 kịch bản; chi tiết theo tháng và theo vertical ở mục 1-2 bên dưới).</li>
+<li class="risk"><b>Toàn bộ ngân sách MKT giảm −13.8% so với FC2, Demand toàn công ty giảm −9.3% so với FC2</b> — demand hụt ít hơn mức ngân sách bị cắt (Digital là phần ngân sách duy nhất so sánh trực tiếp được giữa FC2 và FC2.5 — SEO/CRM không có dòng ngân sách riêng biến động theo 2 kịch bản; chi tiết theo tháng và theo vertical ở mục 1-2 bên dưới).</li>
 </ul>
 </div>
 
@@ -635,15 +642,15 @@
   </div>
   <div class="gap-card">
     <div class="gm">JOB <span class="pill risk">AT RISK</span></div>
-    <div class="gap-pct risk">Hụt 17.9%</div>
-    <div class="bar-track"><div class="bar-fill risk" style="width:60%"></div></div>
-    <div class="gap-sub">FC2.5 3.84M, FC2 4.67M — <b>thiếu 0.84M lead</b> (xấu nhất theo %)</div>
+    <div class="gap-pct risk">Hụt 19.0%</div>
+    <div class="bar-track"><div class="bar-fill risk" style="width:63%"></div></div>
+    <div class="gap-sub">FC2.5 3.78M, FC2 4.67M — <b>thiếu 0.89M lead</b> (xấu nhất)</div>
   </div>
   <div class="gap-card">
     <div class="gm">GDS <span class="pill risk">AT RISK</span></div>
     <div class="gap-pct risk">Hụt 10.5%</div>
     <div class="bar-track"><div class="bar-fill risk" style="width:35%"></div></div>
-    <div class="gap-sub">FC2.5 7.37M, FC2 8.23M — <b>thiếu 0.86M lead</b> (xấu nhất theo số tuyệt đối)</div>
+    <div class="gap-sub">FC2.5 7.37M, FC2 8.23M — <b>thiếu 0.86M lead</b></div>
   </div>
   <div class="gap-card">
     <div class="gm">VEH <span class="pill watch">WATCH</span></div>
@@ -652,23 +659,23 @@
     <div class="gap-sub">FC2.5 2.55M, FC2 2.63M — search demand tiếp tục giảm</div>
   </div>
 </div>
-<p class="note">"Hụt X%" = FC2.5 thấp hơn X% so với FC2 (tháng 7, trước cắt budget). Toàn công ty hụt −9.0% cộng dồn.</p>
+<p class="note">"Hụt X%" = FC2.5 thấp hơn X% so với FC2 (tháng 7, trước cắt budget). Toàn công ty hụt −9.3% cộng dồn.</p>
 
 <div class="scroll">
 <table>
 <thead><tr><th>Vertical</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
 <tbody>
-<tr class="key"><td>Toàn CT — FC2.5 (forecast)</td><td class="forecast hero">4,809,276</td><td class="forecast hero">4,888,089</td><td class="forecast hero">4,461,927</td><td class="forecast hero">4,143,533</td><td class="forecast hero">18,302,825</td></tr>
+<tr class="key"><td>Toàn CT — FC2.5 (forecast)</td><td class="forecast hero">4,802,702</td><td class="forecast hero">4,861,903</td><td class="forecast hero">4,445,440</td><td class="forecast hero">4,137,402</td><td class="forecast hero">18,247,447</td></tr>
 <tr><td>Toàn CT — FC2 (tháng 7)</td><td class="target">5,076,138</td><td class="target">5,204,059</td><td class="target">5,003,599</td><td class="target">4,832,399</td><td class="target">20,116,195</td></tr>
-<tr><td>Toàn CT — Gap</td><td style="color:var(--bad)">−5.3%</td><td style="color:var(--bad)">−6.1%</td><td style="color:var(--bad)">−10.8%</td><td style="color:var(--bad)">−14.3%</td><td style="color:var(--bad)">−9.0%</td></tr>
+<tr><td>Toàn CT — Gap</td><td style="color:var(--bad)">−5.4%</td><td style="color:var(--bad)">−6.6%</td><td style="color:var(--bad)">−11.2%</td><td style="color:var(--bad)">−14.4%</td><td style="color:var(--bad)">−9.3%</td></tr>
 <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>PTY — FC2.5</td><td class="forecast">1,214,642</td><td class="forecast">1,247,672</td><td class="forecast">1,106,882</td><td class="forecast">979,781</td><td class="forecast">4,548,977</td></tr>
 <tr><td>PTY — FC2</td><td class="target">1,186,954</td><td class="target">1,213,055</td><td class="target">1,138,157</td><td class="target">1,050,410</td><td class="target">4,588,576</td></tr>
 <tr><td>PTY — Gap</td><td style="color:var(--good)">+2.3%</td><td style="color:var(--good)">+2.9%</td><td style="color:var(--warn)">−2.7%</td><td style="color:var(--warn)">−6.7%</td><td style="color:var(--good)">−0.9%</td></tr>
 <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td>JOB — FC2.5</td><td class="forecast">1,041,231</td><td class="forecast">1,067,208</td><td class="forecast">928,263</td><td class="forecast">799,094</td><td class="forecast">3,835,796</td></tr>
+<tr><td>JOB — FC2.5</td><td class="forecast">1,035,674</td><td class="forecast">1,042,121</td><td class="forecast">912,792</td><td class="forecast">793,897</td><td class="forecast">3,784,483</td></tr>
 <tr><td>JOB — FC2</td><td class="target">1,150,038</td><td class="target">1,202,619</td><td class="target">1,162,008</td><td class="target">1,156,912</td><td class="target">4,671,577</td></tr>
-<tr><td>JOB — Gap</td><td style="color:var(--bad)">−9.5%</td><td style="color:var(--bad)">−11.3%</td><td style="color:var(--bad)">−20.1%</td><td style="color:var(--bad)">−30.9%</td><td style="color:var(--bad)">−17.9%</td></tr>
+<tr><td>JOB — Gap</td><td style="color:var(--bad)">−9.9%</td><td style="color:var(--bad)">−13.3%</td><td style="color:var(--bad)">−21.4%</td><td style="color:var(--bad)">−31.4%</td><td style="color:var(--bad)">−19.0%</td></tr>
 <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
 <tr><td>GDS — FC2.5</td><td class="forecast">1,901,507</td><td class="forecast">1,920,128</td><td class="forecast">1,812,453</td><td class="forecast">1,731,167</td><td class="forecast">7,365,255</td></tr>
 <tr><td>GDS — FC2</td><td class="target">2,061,891</td><td class="target">2,101,590</td><td class="target">2,037,057</td><td class="target">2,024,565</td><td class="target">8,225,103</td></tr>
@@ -682,7 +689,7 @@
 </div>
 
 <h2>2. Ngân sách giảm bao nhiêu, Demand giảm bao nhiêu</h2>
-<p class="note" style="margin-top:0">Ngân sách Digital (lever duy nhất tune được theo tháng — SEO/Brand cố định) giảm <b>−13.8%</b> cộng dồn so với plan tháng 7, trong khi Demand toàn công ty chỉ giảm <b>−9.0%</b> — demand giữ được tốt hơn mức cắt ngân sách thuần tuý.</p>
+<p class="note" style="margin-top:0">Ngân sách Digital (lever duy nhất tune được theo tháng — SEO/Brand cố định) giảm <b>−13.8%</b> cộng dồn so với plan tháng 7, trong khi Demand toàn công ty chỉ giảm <b>−9.3%</b> — demand giữ được tốt hơn mức cắt ngân sách thuần tuý.</p>
 <div class="scroll">
 <table>
 <thead><tr><th>Ngân sách Digital (tỷ VND)</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Cộng dồn T9–T12</th></tr></thead>
@@ -690,11 +697,11 @@
 <tr class="key"><td>FC2 (tháng 7)</td><td class="target">2.45</td><td class="target">2.05</td><td class="target">1.40</td><td class="target">0.65</td><td class="target">6.55</td></tr>
 <tr><td>FC2.5 (thật)</td><td class="forecast hero">1.80</td><td class="forecast hero">1.75</td><td class="forecast hero">1.45</td><td class="forecast hero">0.65</td><td class="forecast hero">5.65</td></tr>
 <tr><td>% thay đổi</td><td style="color:var(--bad)">−26.5%</td><td style="color:var(--bad)">−14.6%</td><td style="color:var(--good)">+3.6%</td><td style="color:var(--warn)">−0.8%</td><td style="color:var(--bad)">−13.8%</td></tr>
-<tr><td>Demand toàn CT — % thay đổi</td><td style="color:var(--bad)">−5.3%</td><td style="color:var(--bad)">−6.1%</td><td style="color:var(--bad)">−10.8%</td><td style="color:var(--bad)">−14.3%</td><td style="color:var(--bad)">−9.0%</td></tr>
+<tr><td>Demand toàn CT — % thay đổi</td><td style="color:var(--bad)">−5.4%</td><td style="color:var(--bad)">−6.6%</td><td style="color:var(--bad)">−11.2%</td><td style="color:var(--bad)">−14.4%</td><td style="color:var(--bad)">−9.3%</td></tr>
 </tbody>
 </table>
 </div>
-<p class="note">Sep là tháng ngân sách bị cắt mạnh nhất (−26.5%) nhưng demand chỉ giảm −5.3% — hiệu suất/đồng cải thiện đáng kể. Nov ngược lại: ngân sách tăng nhẹ (+3.6%) nhưng demand vẫn hụt sâu (−10.8%) — CP tăng ăn hết phần ngân sách tăng thêm. Số ngân sách Digital là phần duy nhất so sánh được trực tiếp giữa FC2 và FC2.5 (SEO/Brand cố định không đổi theo 2 kịch bản; Supply không tính vào Demand).</p>
+<p class="note">Sep là tháng ngân sách bị cắt mạnh nhất (−26.5%) nhưng demand chỉ giảm −5.4% — hiệu suất/đồng cải thiện đáng kể. Nov ngược lại: ngân sách tăng nhẹ (+3.6%) nhưng demand vẫn hụt sâu (−11.2%) — CP tăng ăn hết phần ngân sách tăng thêm. Số ngân sách Digital là phần duy nhất so sánh được trực tiếp giữa FC2 và FC2.5 (SEO/Brand cố định không đổi theo 2 kịch bản; Supply không tính vào Demand).</p>
 
 <h2>3. Zoom in PTY: chia theo Let (cho thuê) / Sell (bán)</h2>
 <p class="note"><b>% Let/Sell lấy từ đâu:</b> PTY team tự ước tính tỷ lệ let/sell mỗi tháng trong file riêng "PTY Est DAU w Lead break by ad type" (bài toán supply &amp; revenue, đã validate khớp BigQuery actual ≤6% — xem 📎 cuối mục). Deck lấy đúng % đó (không tính lại) và áp lên <b>cả 2 cột</b> — FC2.5 (forecast MKT) và FC2 (target tháng 7) — với giả định tỷ lệ let/sell không đổi giữa 2 kịch bản. Lưu ý: phần uplift seeding của Direct đã cộng riêng vào Let của PTY từ trước khi vào bảng này (xem tab Forecast, 2d).</p>
